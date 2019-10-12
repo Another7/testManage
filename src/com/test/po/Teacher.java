@@ -15,12 +15,19 @@ public Teacher(Integer t_id, String t_name, String t_pass, String t_email) {
 	this.t_pass = t_pass;
 	this.t_email = t_email;
 }
+
+public Teacher() {
+	super();
+	// TODO Auto-generated constructor stub
+}
+
 public Teacher(String t_name, String t_pass, String t_email) {
 	super();
 	this.t_name = t_name;
 	this.t_pass = t_pass;
 	this.t_email = t_email;
 }
+
 public Teacher(String t_name, String t_email) {
 	super();
 	this.t_name = t_name;

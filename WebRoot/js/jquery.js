@@ -1,3 +1,10 @@
+
+
+
+
+
+
+
 //登录操作
 $(document).ready(function(){
 if(screen.width < 780 && $(window).width() < 780)
@@ -20,7 +27,7 @@ function cliLogin() {
 	var txtUser = $.trim($("#username").val());
 	var txtPwd = $("#password").val();
 	
-	i
+	
 	if ($.trim(txtUser) == "") {
 	
 		Tip('请输入你的手机号/邮箱');
@@ -41,17 +48,20 @@ function cliLogin() {
 		$("#Userpwd").focus();
 		return;
 	}
-	checkUser(user,txtPwd);
+	checkUser(txtUser,txtPwd);
 	return false;
 }
 //验证用户名是否存在
- function checkUser(txtUser,pwd){
-	/*if(username.indexOf("@")!=-1){
-		userType="email";
+ function checkUser(user,pwd){
+	 var userType;
+	 var data;
+	if(user.search("@")!=-1){
+		 
+		data={t_name:"",t_pass:pwd,t_email:user};
 	}else{
-		userType="username";
-	}	*/
-	var data={username:user,password:pwd};
+		data={t_name:user,t_pass:pwd,t_email:""};
+	}	
+	
 	/*1：校验成功
 		0：密码错误
 		-1：用户不存在*/
@@ -59,11 +69,14 @@ function cliLogin() {
 	$.ajax({
 		type:"POST",
 		url:"/testManage/loginExamine.action",
-		data:{"data":JSON.stringify(data)},
+		data:JSON.stringify(data),
+		
+		contentType : "application/json;charset=UTF-8",
 		dataType:'json',
 		success:function(data){
+			alert(data.status_code);
 			alert(data);
-			if(data.result=="1"){
+			if(data.status_code=="1"){
 				alert("登录成功");
 				 window.location.href = "main.html";
 			}else if(data.result=="0"){
