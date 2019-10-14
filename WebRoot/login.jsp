@@ -27,7 +27,6 @@ String socketPath=request.getServerName()+":"+request.getServerPort()+path+"/";
 <!--[if IE]><script src="js/html5.js"></script><![endif]-->
 <title>登录</title>
 </head>
-
 <body class="logobg_style">
   	<div id="large-header" class="large-header login-page">
   		<canvas id="demo-canvas" width="1590" height="711"></canvas>
@@ -69,10 +68,6 @@ String socketPath=request.getServerName()+":"+request.getServerPort()+path+"/";
 				<!-- Implemented in v1.1.4 -->				<div class="form-group">
 					
 				</div>
-
-
-
-	
 			</form>
   			</div>
   			

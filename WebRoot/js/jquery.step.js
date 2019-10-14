@@ -6,36 +6,35 @@
 		});		
 		$("#preBtn").click(function(event) {
 			var yes=step.preStep();
-
 		});
 		$("#applyBtn").click(function(event) {		
 			
-		    var code = $.trim($("#Verification").val());
+		   //验证码（这里不需要） var code = $.trim($("#Verification").val());
 			var phone =/[1][3-9][0-9]{9,9}/;
+			var email=/(^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$)/;
 		  var phones = $.trim($("#phone").val());
 		if ($.trim(phones) == "") {
-			Tip('请填写手机号码！');
+			Tip('请填写邮箱！');
 			$("#phone").focus();
 			return;
 		}
-		if(!phone.exec(phones)){
+		if(!email.exec(phones)){
 
-				Tip('手机输入格式不正确,请从新输入');
-				$("#phones").focus();
+				Tip('邮箱输入格式不正确,请重新输入！');
+				$("#phone").focus();
 			return;
 			}
-		if ($.trim(code) == "") {
+		/*if ($.trim(code) == "") {
 			Tip('动态密码未填写！');
 			$("#Verification").focus();
 			return;
-		}   
-			var yes=step.nextStep();
-			return;	
+		}   */
+		var yes=step.nextStep();
+		return;	
 		});
 		$("#submitBtn").click(function(event) {
 			   var txtconfirm = $.trim($("#confirmpwd").val());
 	           var txtPwd = $("#password").val();
-	
 	          if ($.trim(txtPwd) == "") {
 	
 	         	Tips('请输入你要设置的密码！');
@@ -58,25 +57,35 @@
 		
 	            }		
 			  var yes=step.nextStep();
-				$(function () {  setTimeout("lazyGo();", 1000); });
-                function lazyGo() {
-		         var sec = $("#sec").text();
-		            $("#sec").text(--sec);
-		            if (sec > 0)
-		         	setTimeout("lazyGo();", 1000);
-		            else
-			window.location.href = "article_home.html";
-	}
-	
-			
+			  $(function () { setTimeout("lazyGo();", 1000); });
+             
 			
 		});
+		/* function lazyGo() {
+	         var sec = $("#sec").text();
+	            $("#sec").text(--sec);
+	            if (sec > 0)
+	         	setTimeout("lazyGo();", 1000);
+	            else
+		window.location.href = "login.jsp";
+}*/
+		$("#phone").onfocus=function(){
+			alert();
+			$(".tishi").hide();
+		};
 		$("#goBtn").click(function(event) {
 			var yes=step.goStep(3);
 		});	
 	});
 
-
+function lazyGo() {
+    var sec = $("#sec").text();
+       $("#sec").text(--sec);
+       if (sec > 0)
+    	setTimeout("lazyGo();", 1000);
+       else
+window.location.href = "login.jsp";
+}
 (function (factory) {
     "use strict";
     if (typeof define === 'function') {
