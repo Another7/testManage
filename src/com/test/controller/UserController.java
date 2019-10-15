@@ -24,7 +24,7 @@ public class UserController {
 	private TeacherService teacherService;//测试push
 	
 	//用户注册
-	@RequestMapping(value = "/addTeacher.action",method = RequestMethod.GET)
+	@RequestMapping(value = "/addTeacher.action",method = RequestMethod.POST)
 	@ResponseBody
 	public int addUser(@RequestBody Teacher teacher,HttpSession session){
 		String t_name=teacher.getT_name();
@@ -39,6 +39,19 @@ public class UserController {
 			
 		}
 		return status_code;
+		
+	}
+	//注册校验
+	@RequestMapping(value = "/registerCheck.action",method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String,String> registerCheck(@RequestBody Teacher teacher){
+		
+		Map<String, String> map=new HashMap<String, String>();
+		int result = teacherService.checkUNameOrEmail(teacher);
+			
+		map.put("result",String.valueOf(result));
+		
+		return map;
 		
 	}
 	//登录校验

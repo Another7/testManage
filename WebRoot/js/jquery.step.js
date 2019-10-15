@@ -10,18 +10,18 @@
 		$("#applyBtn").click(function(event) {		
 			
 		   //验证码（这里不需要） var code = $.trim($("#Verification").val());
-			var phone =/[1][3-9][0-9]{9,9}/;
+			//var phone =/[1][3-9][0-9]{9,9}/;
 			var email=/(^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$)/;
-		  var phones = $.trim($("#phone").val());
-		if ($.trim(phones) == "") {
+		  var emails = $.trim($("#email").val());//获取用户输入的邮箱
+		if ($.trim(emails) == "") {
 			Tip('请填写邮箱！');
-			$("#phone").focus();
+			$("#email").focus();
 			return;
 		}
-		if(!email.exec(phones)){
+		if(!email.exec(emails)){
 
 				Tip('邮箱输入格式不正确,请重新输入！');
-				$("#phone").focus();
+				$("#email").focus();
 			return;
 			}
 		/*if ($.trim(code) == "") {
@@ -29,7 +29,10 @@
 			$("#Verification").focus();
 			return;
 		}   */
-		var yes=step.nextStep();
+		//验证邮箱是否已经注册
+		
+		 checkEmail(emails,step);
+		
 		return;	
 		});
 		$("#submitBtn").click(function(event) {
@@ -77,7 +80,32 @@
 			var yes=step.goStep(3);
 		});	
 	});
-
+ function checkEmail(emails,step){//检查邮箱是否已经注册
+	var data={t_name:"",t_email:emails};
+	
+	$.ajax({
+		type:"POST",
+		url:"/testManage/registerCheck.action",
+		data:JSON.stringify(data),
+		
+		contentType : "application/json;charset=UTF-8",
+		dataType:'json',
+		success:function(data){
+			
+			if(data.result=="1"){
+				//用户名或邮箱已经存在
+				Tip('该邮箱已经被注册！请重新输入');
+				
+			}else{
+				//用户名或邮箱不存在,可以进行下一步
+				var yes=step.nextStep();
+				
+			}
+			
+		}
+	});
+	return status;
+}
 function lazyGo() {
     var sec = $("#sec").text();
        $("#sec").text(--sec);

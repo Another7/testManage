@@ -48,5 +48,15 @@ public class TeacherServiceImpl implements TeacherService {
 		}
 		return 1;//ÐÞ¸Ä³É¹¦
 	}
+	
+	public int checkUNameOrEmail(Teacher teacher) {
+	
+		if(teacherDao.checkUNameOrEmail(teacher)!=null) {
+		
+			return 1;
+		}
+		return 0;
+			
+	}
 
 }

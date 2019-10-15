@@ -26,4 +26,18 @@
 		where t_name=#{t_name} or t_email=#{t_email}
 	</update>
 	
+	<!--检查用户名或邮箱是否已经存在  -->
+	<select id="checkUNameOrEmail" parameterType="Teacher" resultType="Integer">
+	select IFNULL(t_id,0)
+	from  teacher
+	where
+	<choose>
+		<when test = "t_name != null and t_name != '' ">
+		   t_name = #{t_name}
+		</when>
+		<otherwise>
+		   t_email = #{t_email}
+		</otherwise>
+	</choose>
+	</select>
 </mapper>

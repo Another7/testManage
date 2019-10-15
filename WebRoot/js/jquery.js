@@ -90,13 +90,13 @@ function cliLogin() {//登录按钮点击事件
 //注册操作
 
 function Sendpwd(sender) {
-	var time=30;
-	var phones = $.trim($("#phone").val());
-	if ($.trim(phones) == "") {
+	/*var time=30;
+	var emails = $.trim($("#email").val());
+	if ($.trim(emails) == "") {
 		Tip('请填写邮箱！');
-		$("#phone").focus();
+		$("#email").focus();
 		return;
-	}
+	}*/
 	/*var code=$(sender);
 		if (validCode) {
 			validCode=false;
