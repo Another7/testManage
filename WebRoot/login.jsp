@@ -42,7 +42,6 @@ String socketPath=request.getServerName()+":"+request.getServerPort()+path+"/";
 						 </div>
 						<input type="text" class="form-control" name="username" id="username" placeholder="用户名/邮箱" autocomplete="off">
 					</div>
-
 				</div>   
   
 				<div class="form-group clearfix">

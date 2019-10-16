@@ -17,7 +17,15 @@
 	
 	<!-- 登录校验 -->
 	<select id="getTeacherByNameOrEmail" parameterType="Teacher" resultType="Teacher">
-		select * from teacher where t_name=#{t_name} or t_email=#{t_email}
+		select * from teacher where 
+		<choose>
+		<when test = "t_name != null and t_name != '' ">
+		   t_name = #{t_name}
+		</when>
+		<otherwise>
+		   t_email = #{t_email}
+		</otherwise>
+	</choose>
 	</select>
 	
 	<!-- 修改密码 -->

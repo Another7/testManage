@@ -26,19 +26,12 @@ public class UserController {
 	//用户注册
 	@RequestMapping(value = "/addTeacher.action",method = RequestMethod.POST)
 	@ResponseBody
-	public int addUser(@RequestBody Teacher teacher,HttpSession session){
-		String t_name=teacher.getT_name();
-		String t_email=teacher.getT_email();
-		String t_pass=teacher.getT_pass();
-	
-		int status_code = teacherService.addTeacher(t_name, t_pass, t_email);
-		//model.addAttribute("status_code",status_code);
-		if(status_code==1)//登录信息校验成功
-		{
-			session.setAttribute("TEACHER_SESSION", teacher);
-			
-		}
-		return status_code;
+	public Map<String,String> addUser(@RequestBody Teacher teacher){
+		Map<String, String> map=new HashMap<String, String>();
+		int result = teacherService.addTeacher(teacher.getT_name(), teacher.getT_pass(), teacher.getT_email());
+		
+		map.put("result",String.valueOf(result));
+		return map;
 		
 	}
 	//注册校验

@@ -58,9 +58,10 @@
 		       $("#txtconfirm").focus();
 		      return;
 		
-	            }		
-			  var yes=step.nextStep();
-			  $(function () { setTimeout("lazyGo();", 1000); });
+	            }
+			  submitRegist(step);
+			
+			
              
 			
 		});
@@ -104,7 +105,31 @@
 			
 		}
 	});
-	return status;
+
+}
+function submitRegist(step){
+	 var emails = $.trim($("#email").val());//获取用户输入的邮箱
+	 var password = $("#password").val();//获取用户输入的密码
+	 var data={t_name:"",t_pass:password,t_email:emails};
+	 $.ajax({
+			type:"POST",
+			url:"/testManage/addTeacher.action",
+			data:JSON.stringify(data),		
+			contentType : "application/json;charset=UTF-8",
+			dataType:'json',
+			success:function(data){
+				
+				if(data.result=="1"){
+					//注册成功
+					var yes=step.nextStep();
+					$(function () { setTimeout("lazyGo();", 1000); });
+				}else{
+					//注册失败
+					alert("注册失败！未知异常")
+					
+				}
+			}
+		});
 }
 function lazyGo() {
     var sec = $("#sec").text();

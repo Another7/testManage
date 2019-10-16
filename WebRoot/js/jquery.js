@@ -67,18 +67,18 @@ function cliLogin() {//登录按钮点击事件
 		contentType : "application/json;charset=UTF-8",
 		dataType:'json',
 		success:function(data){
-			alert(data.status_code);
-			alert(data);
+			//alert(data.status_code);
+			//alert(data);
 			if(data.status_code=="1"){
-				alert("登录成功");
+				//alert("登录成功");
 				 window.location.href = "main.jsp";
 			}else if(data.status_code=="0"){
-				alert("密码错误");
+				//alert("密码错误");
 				Tip('密码输入错误！');
 				$("#Userpwd").focus();
 				return;
 			}else if(data.status_code=="-1"){
-				alert("用户不存在");
+				//alert("用户不存在");
 				Tip('用户不存在！');
 			}else{
 				alert("未知错误！");
