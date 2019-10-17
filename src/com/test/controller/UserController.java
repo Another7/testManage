@@ -1,5 +1,5 @@
 package com.test.controller;
-
+ 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,4 +49,8 @@ public class UserController {
 		model.addAttribute("status_code", status_code);//·µ»Ø×´Ì¬Âë
 //		System.out.println("--updatePwd--"+status_code);
 	}
+	
+
+
+	
 }
