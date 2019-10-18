@@ -1,11 +1,8 @@
 package com.test.controller;
 
-
 import java.util.HashMap;
 import java.util.Map;
 
-
- 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -20,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.test.po.Teacher;
 import com.test.service.TeacherService;
 // Another
-// Polaris 
+// Polaris
 @Controller
 public class UserController {
 	@Autowired
@@ -79,11 +76,7 @@ public class UserController {
 		String t_pass=request.getParameter("t_pass");
 		String t_email=request.getParameter("t_email");
 		int status_code=teacherService.updatePwd(t_name, t_pass, t_email);
-		model.addAttribute("status_code", status_code);//·µ»Ø×´Ì¬Âë
+		model.addAttribute("status_code", status_code);//·µ»Ø×´Ì¬Âë 
 //		System.out.println("--updatePwd--"+status_code);
-	}
-	
-
-
-	
+	} 
 }
