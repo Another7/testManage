@@ -1,8 +1,12 @@
 package com.test.controller;
+<<<<<<< HEAD
 
 import java.util.HashMap;
 import java.util.Map;
 
+=======
+ 
+>>>>>>> branch 'master' of https://github.com/Another7/testManage.git
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -79,4 +83,8 @@ public class UserController {
 		model.addAttribute("status_code", status_code);//·µ»Ø×´Ì¬Âë
 //		System.out.println("--updatePwd--"+status_code);
 	}
+	
+
+
+	
 }
