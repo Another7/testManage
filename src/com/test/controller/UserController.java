@@ -1,12 +1,11 @@
 package com.test.controller;
-<<<<<<< HEAD
+
 
 import java.util.HashMap;
 import java.util.Map;
 
-=======
+
  
->>>>>>> branch 'master' of https://github.com/Another7/testManage.git
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
