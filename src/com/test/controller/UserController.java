@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.test.po.Teacher;
 import com.test.service.TeacherService;
 // Another
-// Polaris
+// Polaris 
 @Controller
 public class UserController {
 	@Autowired
