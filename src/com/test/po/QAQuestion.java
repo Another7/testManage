@@ -3,7 +3,7 @@ package com.test.po;
 /**
  * @description ¼ò´ğÌâ
  * @author zhangyifang
- * @date 2019-6-11
+ * @date 2019-10-11
  */
 public class QAQuestion {
 

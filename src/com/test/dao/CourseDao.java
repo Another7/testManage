@@ -8,7 +8,7 @@ import com.test.po.Course;
 /**
  * @description ¿Î³Ìdao
  * @author zhangyifang
- * @date 2019-6-21
+ * @date 2019-10-21
  */
 public interface CourseDao {
 

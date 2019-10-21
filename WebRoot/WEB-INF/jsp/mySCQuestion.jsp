@@ -36,8 +36,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			 }else{ 
 			  return false; 
 			 } 
-	   	 	
-	   	 
+	   	 		   	 
 	   	 }
    	 /* function updateQuestion(sc_id){
    	 	//alert(sc_id);
@@ -53,8 +52,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	   	 });
    	 
    	 } */
- 	
- 	
+	
  	function search(){
  		var subjectId=$("#choseSubject").val();
  		
@@ -82,8 +80,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	          					str+="</ul>"+
 	          					"<strong>正确答案：</strong>"+res[i].sc_answer+
 	          					"</div></div>";
-	          					
-	            	 	  		
 	         	 	 } 
 		           	 $("#sclist").append(str);
 		          	
@@ -99,8 +95,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  
 </head>
 <body>
-	<%-- <jsp:include page="../jsp/selectTop.jsp" /> --%>
-	
+	<%-- <jsp:include page="../jsp/selectTop.jsp" /> --%>	
 	<hr>
 	<ul class="breadcrumb">
     <li><a href="#">我的试题</a></li>
@@ -114,8 +109,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div id="sclist">
 				
 			</div>
-       
-		
+					
 		<!-- 分页1 -->
 					 <div aria-label="Page navigation " style="text-align: right;"> 
 						<ul  id="page1"></ul>

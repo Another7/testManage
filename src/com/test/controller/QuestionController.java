@@ -171,7 +171,7 @@ public class QuestionController {
 			}
 		return "updateSCQuestion";
 	}	
-	/*这个方法好像没有了，我也忘了*/
+	/*这个方法好像没有用了，我也忘了*/
 	@RequestMapping(value="/getQuestionBySubject.action",method = RequestMethod.GET)
 	public String toQuestionList( HttpServletRequest request,Model model) {
 		System.out.println("toQuestionList");
@@ -264,14 +264,14 @@ public class QuestionController {
 		return list;
 		
 	}
-	/*根据教课书的id所有的章节*/
+	/*根据课程的id所有的章节*/
 	@RequestMapping(value = "/getChapters.action",method = RequestMethod.POST)
 	@ResponseBody
 	public List<ChapterTitle> getChapters(HttpServletRequest request){
 		String c_id=request.getParameter("data");
 		System.out.println("getChapters:"+c_id);
 		
-		List<ChapterTitle> list=chapterService.getChapterByTBid(c_id);
+		List<ChapterTitle> list=chapterService.getChapterByCid(c_id);
 		System.out.println("CourseList:"+list.toString());
 		return list;
 		
@@ -389,7 +389,7 @@ public class QuestionController {
 		return map;
 	}
 	
-/*-----------------------------------------------以下为转发*/
+/*-----------------------------------------------以下为转发------------------------------------*/
 	
 	/*转发到查询单选题页面*/
 	@RequestMapping("/toAllSCQuestion.action")
@@ -430,7 +430,7 @@ public class QuestionController {
 		
 	}
 	
-	/*转发到wo的查询多选题页面*/
+	/*转发到我的查询多选题页面*/
 	@RequestMapping("/toMyMCQuestion.action")
 	public String toMyMCQuestion(HttpServletRequest request,Model model){
 		//System.out.println("toAddSCQuestion");
@@ -456,7 +456,7 @@ public class QuestionController {
 		
 	}
 	
-	/*转发到wo的查询填空页面*/
+	/*转发到我的查询填空页面*/
 	@RequestMapping("/toMyFBQuestion.action")
 	public String toMyFBQuestion(HttpServletRequest request,Model model){
 		//System.out.println("toAddSCQuestion");
@@ -579,7 +579,7 @@ public class QuestionController {
 		
 	}
 	
-	//////////////////////////////////////////////////////////////////////
+
 	
 	
 	
