@@ -22,16 +22,16 @@ import com.test.po.QAQuestion;
 import com.test.po.SCQuestion;
 import com.test.po.Subject;
 import com.test.po.TFQuestion;
-import com.test.po.TextBook;
+import com.test.po.Course;
 import com.test.pojo.SCQuestionData;
-import com.test.pojo.TextBookData;
+import com.test.pojo.CourseData;
 import com.test.service.ChapterService;
 import com.test.service.QuestionService;
 import com.test.service.SubjectService;
-import com.test.service.TextBookService;
+import com.test.service.CourseService;
 
 
-//test
+
 
 
 @Controller
@@ -44,7 +44,7 @@ public class QuestionController {
 	private SubjectService subjectService;
 	
 	@Autowired
-	private TextBookService textBookService;
+	private CourseService CourseService;
 	
 	@Autowired
 	private ChapterService chapterService;
@@ -171,7 +171,7 @@ public class QuestionController {
 			}
 		return "updateSCQuestion";
 	}	
-	/*这个方法好像没有了，我也忘了*/
+	/*这个方法好像没有用了，我也忘了*/
 	@RequestMapping(value="/getQuestionBySubject.action",method = RequestMethod.GET)
 	public String toQuestionList( HttpServletRequest request,Model model) {
 		System.out.println("toQuestionList");
@@ -251,39 +251,39 @@ public class QuestionController {
 		System.out.println("list:"+list.toString());
 		return list;
 	}
-	/*根据科目的id获取该科目下的所有课本列表*/
-	@RequestMapping(value = "/getTextBooks.action",method = RequestMethod.POST)
+	/*根据科目的id获取该科目下的所有课程列表*/
+	@RequestMapping(value = "/getCourses.action",method = RequestMethod.POST)
 	@ResponseBody
-	public List<TextBook> getTextBooks(HttpServletRequest request){
+	public List<Course> getCourses(HttpServletRequest request){
 		String s_id=(String)request.getParameter("data");
 		System.out.println("toAddTestBook:"+s_id);
 		
-		List<TextBook> list=textBookService.getTextBooksBySid(s_id);
-		System.out.println("TextBookList:"+list.toString());
+		List<Course> list=CourseService.getCoursesBySid(s_id);
+		System.out.println("CourseList:"+list.toString());
 		
 		return list;
 		
 	}
-	/*根据教课书的id所有的章节*/
+	/*根据课程的id所有的章节*/
 	@RequestMapping(value = "/getChapters.action",method = RequestMethod.POST)
 	@ResponseBody
 	public List<ChapterTitle> getChapters(HttpServletRequest request){
-		String tb_id=request.getParameter("data");
-		System.out.println("getChapters:"+tb_id);
+		String c_id=request.getParameter("data");
+		System.out.println("getChapters:"+c_id);
 		
-		List<ChapterTitle> list=chapterService.getChapterByTBid(tb_id);
-		System.out.println("TextBookList:"+list.toString());
+		List<ChapterTitle> list=chapterService.getChapterByCid(c_id);
+		System.out.println("CourseList:"+list.toString());
 		return list;
 		
 	}
-	/*添加教科书*/
-	@RequestMapping(value = "/addTextBook.action",method = RequestMethod.POST)
+	/*添加课程*/
+	@RequestMapping(value = "/addCourse.action",method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String,String> addTextBook(@RequestBody TextBookData textBookData){
+	public Map<String,String> addCourse(@RequestBody CourseData CourseData){
 		
-		System.out.println("addTextBook:"+textBookData.toString());
+		System.out.println("addCourse:"+CourseData.toString());
 		Map<String, String> map=new HashMap<String, String>();
-		boolean result=this.textBookService.addTextBookByBookData(textBookData);
+		boolean result=this.CourseService.addCourseByBookData(CourseData);
 		 if(result){
 			map.put("result", "yes");
 		}else{
@@ -389,7 +389,7 @@ public class QuestionController {
 		return map;
 	}
 	
-/*-----------------------------------------------以下为转发*/
+/*-----------------------------------------------以下为转发------------------------------------*/
 	
 	/*转发到查询单选题页面*/
 	@RequestMapping("/toAllSCQuestion.action")
@@ -430,7 +430,7 @@ public class QuestionController {
 		
 	}
 	
-	/*转发到wo的查询多选题页面*/
+	/*转发到我的查询多选题页面*/
 	@RequestMapping("/toMyMCQuestion.action")
 	public String toMyMCQuestion(HttpServletRequest request,Model model){
 		//System.out.println("toAddSCQuestion");
@@ -456,7 +456,7 @@ public class QuestionController {
 		
 	}
 	
-	/*转发到wo的查询填空页面*/
+	/*转发到我的查询填空页面*/
 	@RequestMapping("/toMyFBQuestion.action")
 	public String toMyFBQuestion(HttpServletRequest request,Model model){
 		//System.out.println("toAddSCQuestion");
@@ -579,7 +579,7 @@ public class QuestionController {
 		
 	}
 	
-	//////////////////////////////////////////////////////////////////////
+
 	
 	
 	

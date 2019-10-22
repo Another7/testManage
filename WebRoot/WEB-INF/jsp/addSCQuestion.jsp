@@ -15,36 +15,36 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <script src="js/bootstrap-select.js"></script>
  <link href="css/bootstrap.min.css" rel="stylesheet">
   <script type="text/javascript">
-  		/* 根据所选择的科目，查找该科目下的课本列表，并显示在select里*/
+  		/* 根据所选择的科目，查找该科目下的课程列表，并显示在select里*/
 		function change(id){	    	
     		var code = $("#addSubject").val();
     		//alert(code);
     		$.ajax({
 	       	   method:"post",
-	         	url:"/testManage/getTextBooks.action",
+	         	url:"/testManage/getCourses.action",
 	         	data:{"data":code},
 			 	dataType:'json',
 	       	   	success:function (res) {
 	       	   		if(res.length == 0){
                         //如果一级没有对应的二级 则清空二级并 不往下执行
                        
-                        $("#addTextBook").empty();
-                        $("#addTextBook").selectpicker("refresh");
+                        $("#addCourse").empty();
+                        $("#addCourse").selectpicker("refresh");
                         return ;
                    	 }
                    	// alert(res.length);
 	          		 var str="";
 	           	  	for (var i = 0; i < res.length; i++) {
-	            	 	  str+="<option value='"+res[i].tb_id+"'>"+res[i].tb_name+"</option>";
+	            	 	  str+="<option value='"+res[i].c_id+"'>"+res[i].c_name+"</option>";
 	         	 	 } 
-	           	  $("#addTextBook").append(str);
-	          	  $("#addTextBook").find("option[text='--请选择--']").attr("selected",true);
+	           	  $("#addCourse").append(str);
+	          	  $("#addCourse").find("option[text='--请选择--']").attr("selected",true);
 	          }
 	   	 });
     	}
     	/* 当科目改变时，获取该科目下的章节列表，给对应的下拉框赋值 */
     	function changeBook(id){
-    		var kemu=$("#addTextBook").val();
+    		var kemu=$("#addCourse").val();
     		//alert(kemu);
     		$.ajax({
 	       	   method:"post",
@@ -68,7 +68,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	   	 });
     	}
     	
-    	
+    	/* 当章节改变时，获取该章节下的知识点列表，给对应的下拉框赋值 */
+    	function changeChapter(id){
+    		var chapterId=$("#addChapter").val();
+    		//alert(kemu);
+    		$.ajax({
+	       	   method:"post",
+	         	url:"/testManage/getChapters.action",
+	         	data:{"ct_id":chapterId},
+			 	dataType:'json',
+	       	   	success:function (res) {
+	       	   		if(res.length == 0){
+                        //如果一级没有对应的二级 则清空二级并 不往下执行
+                        $("#addChapter").empty();
+                        return ;
+                   	 }
+                  // 	 alert(res.length);
+	          		 var str="";
+	           	  	for (var i = 0; i < res.length; i++) {
+	            	 	  str+="<option value='"+res[i].kp_name+"'></option>";
+	         	 	 } 
+	           	  $("#point").append(str);
+	          	  $("#point").find("option[text='--请选择--']").attr("selected",true);
+	          }
+	   	 });
+    	}
     		
     	/*用户点击添加选项*/
     	function addXuanXiang(){
@@ -95,10 +119,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		var answer=$("#answer").val();
     		var analysis=$("#analysis").val();	
     		var subject=$("#addSubject").val();
-    		var tb_id=$("#addTextBook").val();
+    		var c_id=$("#addCourse").val();
     		var ct_id=$("#addChapter").val();
     		var point=$("#point").val();
-		   var data={sc_subject:subject,sc_point:point,sc_stem:stem,sc_option:option,sc_answer:answer,sc_analysis:analysis,sc_tb_id:tb_id,sc_ct_id:ct_id};
+		   var data={sc_subject:subject,sc_point:point,sc_stem:stem,sc_option:option,sc_answer:answer,sc_analysis:analysis,sc_c_id:c_id,sc_ct_id:ct_id};
 		   	$.ajax({
 		       	   method:"post",
 		         	url:"/testManage/addSCQuestion.action",
@@ -155,10 +179,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						
 					</div>
 					<div class="form-group">
-						<label class=" col-md-2 control-label">课本</label> 
+						<label class=" col-md-2 control-label">课程</label> 
 						<div class="col-md-8">
 						<!-- 二级下拉框 -->
-						<select id="addTextBook"	class=" form-control " id="addTextBook" name="textbook" onchange="changeBook(this.id)">
+						<select id="addCourse"	class=" form-control " name="Course" onchange="changeBook(this.id)">
 							<option value="">--请选择--</option>
 						</select>
 						</div>
@@ -166,7 +190,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						 <div id ="addChoice" class="btn btn-default btn-md"  data-toggle="modal" data-target="#myModal"  role="button">
 				    		<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 				    	</div>
-				   		添加课本
+				   		添加课程
 				   		
 				   		</div>
 					</div>
@@ -175,7 +199,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<label   for="text" class=" col-md-2 control-label">选择章节</label> 
 						<div class="col-md-8">
 						<!-- 一级下拉框 -->
-						<select id="addChapter"	class=" form-control"  >
+						<select id="addChapter"	class=" form-control" name="chapter" onchange="changeChapter(this.id)" >
 							<option value="">--请选择--</option>
 						</select>
 						</div>
@@ -183,7 +207,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							 
 				    	</div>
 				    </div>
-				
+				 <div class="form-group">
+				    <label for="stem" class="col-md-2 control-label">考查知识点：</label>
+				   
+				     <div class="col-md-8">
+				      <!--  <textarea id="point" class="form-control" rows="2"></textarea> -->
+				       <!-- 一级下拉框 -->
+						<select id="point"	class=" form-control"   >
+							<option value="">--请选择--</option>
+						</select>
+				    </div>
+				    <div class="col-md-2"></div>
+				  </div>
 				  <div class="form-group">
 				    <label for="stem" class="col-md-2 control-label">请填写题目</label>
 				   
@@ -221,9 +256,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				      <input type="text" class="form-control"  placeholder="">
 				    </div>
 				    <div class="col-md-2">
-				    	<a id ="addClick" class="btn btn-default btn-md"   onclick="addXuanXiang()">
+				    	<!-- <a id ="addClick" class="btn btn-default btn-md"   onclick="addXuanXiang()">
 				    		<span class="glyphicon glyphicon-plus" ></span>添加选项
-				    	</a>
+				    	</a> -->
 				    </div>
 				    
 				  </div>
@@ -244,14 +279,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				    </div>
 				    <div class="col-md-2"></div>
 				  </div>
-				   <div class="form-group">
-				    <label for="stem" class="col-md-2 control-label">考查知识点：</label>
-				   
-				     <div class="col-md-8">
-				       <textarea id="point" class="form-control" rows="2"></textarea>
-				    </div>
-				    <div class="col-md-2"></div>
-				  </div>
+				  
 				  <!-- <div class="form-group">
 				    <div class="col-sm-offset-2 col-sm-10">
 				      <div class="checkbox">
@@ -267,14 +295,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				      <a type="" class="btn btn-default" onclick="submitAll()">保存</a>
 				    </div>
 				  </div>
-				  <!-- -----------------------------添加课本的模态框---------------------------------------------- -->
+				  <!-- -----------------------------添加课程的模态框---------------------------------------------- -->
 				   			<div class="modal fade" id="myModal"  tabindex="-1" role="diaog" aria-labelledby="myModalLabel" aria-hidden="true">
 				   				
 				   				<div class="modal-dialog">
 				   					<div class="modal-content">
 				   						<div class="modal-header">
 				   							<button type="button" class="close" data-dismiss="modal"  aria-hidden="true">&times;</button>
-				   							<h5 class="modal-title" id="myModalLabel">添加课本</h5>
+				   							<h5 class="modal-title" id="myModalLabel">添加课程</h5>
 				   						</div>
 				   						<div class="modal-body">
 				   						<form class="form-horizontal" role="form" id="addTB">
@@ -295,7 +323,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 												</div><!-- /form-gromp -->	
 												
 											  <div class="form-group">
-											    <label for="stem" class="col-md-2 control-label">课本名称</label>
+											    <label for="stem" class="col-md-2 control-label">课程名称</label>
 											    <div class="col-md-8">
 											      <input type="text" class="form-control" id="addTBName" placeholder="">
 											    </div>
@@ -335,11 +363,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											    </div>
 											  </div><!-- /form-gromp -->
 											  <script type="text/javascript">
-											  /*用户点击添加课本*/
+											  /*用户点击添加课程*/
 											  function addBook(){	    	
-										    		var tb_s_id = $("#addSubject2").val();
-										    		var tb_name=$("#addTBName").val();
-										    		var tb_chapter_num=$("#addChapterNum").val();
+										    		var c_s_id = $("#addSubject2").val();
+										    		var c_name=$("#addTBName").val();
+										    		var c_chapter_num=$("#addChapterNum").val();
 										    		var str="";
 										    		//children()方法：获取该元素下的直接子集元素
 													//find()方法：获取该元素下的所有子集元素
@@ -347,13 +375,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										    			//alert(this.value);
 										    			str+=this.value+"@@";
 										    		});
-										    		var tb_chapter_headers=str;
+										    		var c_chapter_headers=str;
 										    		//alert(str);
-										    		//alert("tb_s_id:"+tb_s_id+" tb_name:"+tb_name+" tb_chapter_num:"+tb_chapter_num+" tb_chapter_headers:"+tb_chapter_headers);
-										    		var data={tb_name:tb_name,tb_chapter_num:tb_chapter_num,tb_chapter_headers:tb_chapter_headers,tb_s_id:tb_s_id};
+										    		//alert("c_s_id:"+c_s_id+" c_name:"+c_name+" c_chapter_num:"+c_chapter_num+" c_chapter_headers:"+c_chapter_headers);
+										    		var data={c_name:c_name,c_chapter_num:c_chapter_num,c_chapter_headers:c_chapter_headers,c_s_id:c_s_id};
 										    		$.ajax({
 												       	   method:"post",
-												         	url:"/testManage/addTextBook.action",
+												         	url:"/testManage/addCourse.action",
 												         	contentType: 'application/json; charset=UTF-8',
 												         	data:JSON.stringify(data),
 														 	dataType:'json',
@@ -428,7 +456,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				   					</div><!--/ model-content -->
 				   				</div><!--/ model-dialog -->
 				   			</div><!--/ model -->
-				   			<!-- --------------结束---------------添加课本的模态框---------------------------------------------- -->
+				   			<!-- --------------结束---------------添加课程的模态框---------------------------------------------- -->
 				</form>
 			</div>
 		</div>

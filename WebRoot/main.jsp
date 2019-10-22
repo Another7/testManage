@@ -147,12 +147,12 @@
                     <i class="iconfont nav_right">&#xe6a7;</i>
                 </a>
                 <ul class="sub-menu">
-                    <li><a _href="html/grid.html"><i class="iconfont">&#xe6a7;</i><cite>我组的卷</cite></a></li>
-                    <li><a _href="html/welcome2.html"><i class="iconfont">&#xe6a7;</i><cite>收藏的卷</cite></a></li>
+                    <li><a _href="#"><i class="iconfont">&#xe6a7;</i><cite>我组的卷</cite></a></li>
+                    <li><a _href="#"><i class="iconfont">&#xe6a7;</i><cite>收藏的卷</cite></a></li>
                 </ul>
             </li>
                    
-            <li>
+           <%--  <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe69e;</i>
                     <cite>成绩分析</cite>
@@ -166,7 +166,7 @@
                         </a>
                     </li >
                 </ul>
-            </li>
+            </li> --%>
             
             <li>
                 <a href="javascript:;">
