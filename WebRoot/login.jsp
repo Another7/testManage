@@ -63,7 +63,7 @@ String socketPath=request.getServerName()+":"+request.getServerPort()+path+"/";
 						登录
 					</a>
 				</div>
-				<div class=" textright"><a href="registered.html" class="forget">立即注册</a></div>
+				<div class=" textright"><a href="registered.jsp" class="forget">立即注册</a></div>
 				<!-- Implemented in v1.1.4 -->				<div class="form-group">
 					
 				</div>

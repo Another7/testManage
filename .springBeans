@@ -7,9 +7,10 @@
 	</configSuffixes>
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
-		<config>src/applicationContext.xml</config>
 	</configs>
 	<autoconfigs>
+		<config>src/source/applicationContext.xml</config>
+		<config>src/source/springmvc-config.xml</config>
 	</autoconfigs>
 	<configSets>
 	</configSets>
