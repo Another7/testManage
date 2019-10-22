@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.test.dao.SubjectDao">
+
+	
+	<!-- 根据章节id查询知识点-->
+	<select id="getKnowledgePointByCt_id" parameterType="Integer" resultType="KnowledgePoint">
+		select * from knowledge_point where kp_ct_id=#{ct_id}
+	</select>
+
+	<!-- 添加知识点 -->
+	<insert id="addKnowledgePoint" parameterType="KnowledgePoint">
+		insert into knowledge_point (
+			kp_c_id,
+			kp_ct_id,
+			kp_name)
+		 values(
+			#{kp_c_id},
+			#{kp_ct_id},
+			#{kp_name}
+		)
+	</insert>
+	
+	<!-- 删除知识点 -->
+	<delete id="deleteKnowledgePointByKp_id" parameterType="Integer">
+		delete  from knowledge_point where kp_id=#{kp_id}
+	</delete>
+
+</mapper>
