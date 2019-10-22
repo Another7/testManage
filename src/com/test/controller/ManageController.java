@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Test;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,7 +33,7 @@ public class ManageController {
 	//添加知识点
 	@RequestMapping(value = "/addKnowledgePoint",method = RequestMethod.POST)
 	@ResponseBody
-	@Test
+
 	public void addKnowledgePoint(){
 		KnowledgePoint knowledgePoint=new KnowledgePoint(4,70,"test_knowledgepoint");
 //		Map<String, String> map=new HashMap<String, String>();

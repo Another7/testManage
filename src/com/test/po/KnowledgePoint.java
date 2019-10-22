@@ -2,6 +2,10 @@ package com.test.po;
 
 public class KnowledgePoint {
 
+	@Override
+	public String toString() {
+		return "KnowledgePoint [kp_c_id=" + kp_c_id + ", kp_ct_id=" + kp_ct_id + ", kp_name=" + kp_name + "]";
+	}
 	private Integer kp_id;
 	private Integer kp_c_id;
 	private Integer kp_ct_id;
