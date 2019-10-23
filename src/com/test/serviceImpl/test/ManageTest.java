@@ -25,17 +25,10 @@ public class ManageTest {
 	
 	@Test
 	public void addKnowledgePoint(){
-		KnowledgePoint knowledgePoint=new KnowledgePoint(4,71,"test_knowledgepoint");
-		//System.out.println(knowledgePoint.toString());
-//		Map<String, String> map=new HashMap<String, String>();
-	//	knowledgePointService.addKnowledgePoint(knowledgePoint);
-//		map.put("status_code",String.valueOf(status_code));
-//		return map;
-		//System.out.println("---status_code:"+status_code);
-		//System.out.println(knowledgePointDao==null);
-		
-	//	knowledgePointDao.addKnowledgePoint(knowledgePoint);
-		knowledgePointDao.getKnowledgePointByCt_id(70);
+		KnowledgePoint knowledgePoint=new KnowledgePoint(5,71,"test_knowledgepoint");
+	
+		knowledgePointService.addKnowledgePoint(knowledgePoint);
+
 		
 	}
 }
