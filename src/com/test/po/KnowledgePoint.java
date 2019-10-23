@@ -13,6 +13,13 @@ public class KnowledgePoint {
 	
 	
 	
+	public KnowledgePoint(Integer kp_id, Integer kp_c_id, Integer kp_ct_id, String kp_name) {
+		super();
+		this.kp_id = kp_id;
+		this.kp_c_id = kp_c_id;
+		this.kp_ct_id = kp_ct_id;
+		this.kp_name = kp_name;
+	}
 	public KnowledgePoint(Integer kp_c_id, Integer kp_ct_id, String kp_name) {
 		super();
 		this.kp_c_id = kp_c_id;

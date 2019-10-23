@@ -24,9 +24,7 @@ public class KnowledgePointServiceImpl implements KnowledgePointService {
 	@Override
 	public int addKnowledgePoint(KnowledgePoint knowledgePoint) {
 		// TODO Auto-generated method stub
-		System.out.println("----service1----");
 		knowledgePointDao.addKnowledgePoint(knowledgePoint);
-		System.out.println("----service2----");
 		return 1;//Ìí¼Ó³É¹¦
 	}
 
