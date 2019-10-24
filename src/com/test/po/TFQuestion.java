@@ -7,6 +7,18 @@ package com.test.po;
  */
 public class TFQuestion {
 
+	
+	private Integer tf_id;//试题id
+	
+	private Integer tf_subject;//所属科目id;
+	private String tf_point;//涉及到的知识点
+	private String tf_stem;//题干
+	private String tf_answer;//答案
+	private String tf_analysis;//解析
+	private String tf_t_name;//出题人
+	private Integer tf_c_id;//课程编号
+	private Integer tf_ct_id;//章节编号
+	
 	public TFQuestion(Integer tf_id, Integer tf_subject, String tf_point,
 			String tf_stem, String tf_answer, String tf_analysis,
 			String tf_t_name, Integer tf_c_id, Integer tf_ct_id) {
@@ -21,30 +33,20 @@ public class TFQuestion {
 		this.tf_c_id = tf_c_id;
 		this.tf_ct_id = tf_ct_id;
 	}
-	private Integer tf_id;//试题id
 	
-	private Integer tf_subject;//所属科目id;
-	private String tf_point;//涉及到的知识点
-	private String tf_stem;//题干
-	private String tf_answer;//答案
-	private String tf_analysis;//解析
-	private String tf_t_name;//出题人
-	private Integer tf_c_id;//课程编号
-	private Integer tf_ct_id;//章节编号
-	
-	
-	public TFQuestion(Integer tf_subject, String tf_point, String tf_stem,
-			String tf_answer, String tf_analysis, Integer tf_c_id,
-			Integer tf_ct_id) {
+	public TFQuestion(Integer tf_subject, String tf_point, String tf_stem, String tf_answer, String tf_analysis,
+			String tf_t_name, Integer tf_c_id, Integer tf_ct_id) {
 		super();
 		this.tf_subject = tf_subject;
 		this.tf_point = tf_point;
 		this.tf_stem = tf_stem;
 		this.tf_answer = tf_answer;
 		this.tf_analysis = tf_analysis;
+		this.tf_t_name = tf_t_name;
 		this.tf_c_id = tf_c_id;
 		this.tf_ct_id = tf_ct_id;
 	}
+
 	public Integer getTf_id() {
 		return tf_id;
 	}

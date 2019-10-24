@@ -74,7 +74,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		//alert(kemu);
     		$.ajax({
 	       	   method:"post",
-	         	url:"/testManage/getChapters.action",
+	         	url:"/testManage/getKnowledgePointByCt_id.action",
 	         	data:{"ct_id":chapterId},
 			 	dataType:'json',
 	       	   	success:function (res) {
@@ -83,12 +83,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         $("#addChapter").empty();
                         return ;
                    	 }
-                  // 	 alert(res.length);
+                   //	 alert(res.length);
 	          		 var str="";
 	           	  	for (var i = 0; i < res.length; i++) {
-	            	 	  str+="<option value='"+res[i].kp_name+"'></option>";
+	            	 	   str+="<option value='"+res[i].kp_id+"'>"+res[i].kp_name+"</option>";
 	         	 	 } 
+	         	 	// alert(str);
+	         	 	// alert(res[i].kp_name);
 	           	  $("#point").append(str);
+	           	//  alert($("#point")==null);
 	          	  $("#point").find("option[text='--请选择--']").attr("selected",true);
 	          }
 	   	 });
@@ -213,7 +216,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				     <div class="col-md-8">
 				      <!--  <textarea id="point" class="form-control" rows="2"></textarea> -->
 				       <!-- 一级下拉框 -->
-						<select id="point"	class=" form-control"   >
+						<select id="point"	class=" form-control" name="point"  >
 							<option value="">--请选择--</option>
 						</select>
 				    </div>

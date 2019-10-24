@@ -28,7 +28,8 @@ public class ManageTest {
 		KnowledgePoint knowledgePoint=new KnowledgePoint(5,71,"test_knowledgepoint");
 	
 		knowledgePointService.addKnowledgePoint(knowledgePoint);   
-
+		
+		
 		
 	}
 }

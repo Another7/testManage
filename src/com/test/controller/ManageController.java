@@ -22,10 +22,13 @@ public class ManageController {
 	private KnowledgePointService knowledgePointService;
 	
 	//根据章节id查询该章节下的所有知识点
-	@RequestMapping(value = "/getKnowledgePointByCt_id.action",method = RequestMethod.GET)
+	@RequestMapping(value = "/getKnowledgePointByCt_id.action",method = RequestMethod.POST)
 	@ResponseBody
 	public List<KnowledgePoint> getKnowledgePointByCt_id(int ct_id){
-		return knowledgePointService.getKnowledgePointByCt_id(ct_id);
+		System.out.println("getKnowledgePointByCt_id:"+ct_id);
+		List<KnowledgePoint> list=knowledgePointService.getKnowledgePointByCt_id(ct_id); 
+		System.out.println(list.toString());
+		return list;
 	}
 	
 	

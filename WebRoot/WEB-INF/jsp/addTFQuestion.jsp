@@ -67,7 +67,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	          }
 	   	 });
     	}
-    	
+    	/* 当章节改变时，获取该章节下的知识点列表，给对应的下拉框赋值 */
+    	function changeChapter(id){
+    		var chapterId=$("#addChapter").val();
+    		//alert(kemu);
+    		$.ajax({
+	       	   method:"post",
+	         	url:"/testManage/getKnowledgePointByCt_id.action",
+	         	data:{"ct_id":chapterId},
+			 	dataType:'json',
+	       	   	success:function (res) {
+	       	   		if(res.length == 0){
+                        //如果一级没有对应的二级 则清空二级并 不往下执行
+                        $("#addChapter").empty();
+                        return ;
+                   	 }
+                 //  	 alert(res.length);
+	          		 var str="";
+	           	  	for (var i = 0; i < res.length; i++) {
+	            	 	   str+="<option value='"+res[i].kp_id+"'>"+res[i].kp_name+"</option>";
+	         	 	 } 
+	         	 	// alert(str);
+	         	 	// alert(res[i].kp_name);
+	           	  $("#point").append(str);
+	           	 // alert($("#point")==null);
+	          	  $("#point").find("option[text='--请选择--']").attr("selected",true);
+	          }
+	   	 });
+    	}
     	
     		
     	
@@ -84,6 +111,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		var point=$("#point").val();
 		   /* var data={tf_subject:subject,tf_point:point,tf_stem:stem,tf_answer:answer,tf_analysis:analysis,tf_c_id:c_id,tf_ct_id:ct_id}; */
 		   var data={tf_subject:subject,tf_point:point,tf_stem:stem,tf_answer:answer,tf_analysis:analysis,tf_c_id:c_id,tf_ct_id:ct_id};
+		   alert(data.toString());
 		   	$.ajax({
 		       	   method:"post",
 		         	url:"/testManage/addTFQuestion.action",
@@ -157,10 +185,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</div>
 					 
 					<div class="form-group">
-						<label   for="text" class=" col-md-2 control-label">选择章节</label> 
+						<label   for="text" class=" col-md-2 control-label" >选择章节</label> 
 						<div class="col-md-8">
 						<!-- 一级下拉框 -->
-						<select id="addChapter"	class=" form-control"  >
+						<select id="addChapter"	class=" form-control" onchange="changeChapter(this.id)" >
 							<option value="">--请选择--</option>
 						</select>
 						</div>
@@ -168,7 +196,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							 
 				    	</div>
 				    </div>
-				
+				 <div class="form-group">
+				    <label for="stem" class="col-md-2 control-label">考查知识点：</label>
+				   
+				     <div class="col-md-8">
+				      <!--  <textarea id="point" class="form-control" rows="2"></textarea> -->
+				       <!-- 一级下拉框 -->
+						<select id="point"	class=" form-control" name="point"  >
+							<option value="">--请选择--</option>
+						</select>
+				    </div>
+				    <div class="col-md-2"></div>
+				  </div>
 				  <div class="form-group">
 				    <label for="stem" class="col-md-2 control-label">请填写题目</label>
 				   
@@ -205,14 +244,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				    </div>
 				    <div class="col-md-2"></div>
 				  </div>
-				   <div class="form-group">
-				    <label for="stem" class="col-md-2 control-label">考查知识点：</label>
-				   
-				     <div class="col-md-8">
-				       <textarea id="point" class="form-control" rows="2"></textarea>
-				    </div>
-				    <div class="col-md-2"></div>
-				  </div>
+				 
 				  <!-- <div class="form-group">
 				    <div class="col-sm-offset-2 col-sm-10">
 				      <div class="checkbox">
