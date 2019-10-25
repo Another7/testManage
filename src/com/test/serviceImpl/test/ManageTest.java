@@ -1,35 +1,27 @@
 package com.test.serviceImpl.test;
 
 
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import com.test.dao.KnowledgePointDao;
-import com.test.po.KnowledgePoint;
-import com.test.service.KnowledgePointService;
 
-@RunWith(SpringJUnit4ClassRunner.class)	// ²»ÄÜÊÇPowerMockµÈ±ğµÄclass£¬·ñÔòÎŞ·¨Ê¶±ğspringµÄÅäÖÃÎÄ¼ş
-@ContextConfiguration("/source/applicationContext.xml")	// ¶ÁÈ¡springÅäÖÃÎÄ¼ş
+import com.test.dao.ChapterTitleDao;
+import com.test.po.ChapterTitle;
+import com.test.service.ChapterService;
+@RunWith(SpringJUnit4ClassRunner.class)	// ä¸èƒ½æ˜¯PowerMockç­‰åˆ«çš„classï¼Œå¦åˆ™æ— æ³•è¯†åˆ«springçš„é…ç½®æ–‡ä»¶
+@ContextConfiguration("/source/applicationContext.xml")	// è¯»å–springé…ç½®æ–‡ä»¶
 public class ManageTest {
 
 	@Autowired
-	private KnowledgePointService knowledgePointService;
+	private ChapterService chapterService;
 	
 	@Autowired
-	KnowledgePointDao knowledgePointDao;
-	
-	
+	ChapterTitleDao chapterTitleDao;
 	@Test
-	public void addKnowledgePoint(){
-		KnowledgePoint knowledgePoint=new KnowledgePoint(5,71,"test_knowledgepoint");
-	
-		knowledgePointService.addKnowledgePoint(knowledgePoint);   
-		
-		
-		
+	public void delete(){
+		ChapterTitle chapterTitle = new ChapterTitle(84,"update_test",25,15);
+		chapterService.updateChapter(chapterTitle);
 	}
 }

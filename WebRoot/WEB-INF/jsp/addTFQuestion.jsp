@@ -111,7 +111,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		var point=$("#point").val();
 		   /* var data={tf_subject:subject,tf_point:point,tf_stem:stem,tf_answer:answer,tf_analysis:analysis,tf_c_id:c_id,tf_ct_id:ct_id}; */
 		   var data={tf_subject:subject,tf_point:point,tf_stem:stem,tf_answer:answer,tf_analysis:analysis,tf_c_id:c_id,tf_ct_id:ct_id};
-		   alert(data.toString());
+		//   alert(data.toString());
 		   	$.ajax({
 		       	   method:"post",
 		         	url:"/testManage/addTFQuestion.action",

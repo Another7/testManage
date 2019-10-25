@@ -7,6 +7,7 @@ package com.test.po;
  */
 public class QAQuestion {
 
+	
 	private Integer qa_id;//试题id
 	private Integer qa_subject;//所属科目id;
 	private String qa_point;//涉及到的知识点
@@ -41,6 +42,10 @@ public class QAQuestion {
 		this.qa_t_name = qa_t_name;
 		this.qa_c_id = qa_c_id;
 		this.qa_ct_id = qa_ct_id;
+	}
+	public QAQuestion() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 	public Integer getQa_id() {
 		return qa_id;

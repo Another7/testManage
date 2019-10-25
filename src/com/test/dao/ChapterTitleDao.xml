@@ -22,7 +22,20 @@
 	
 	</select>
 
+
+	<!-- 修改章节 -->
+	<update id="updateChapter" parameterType="ChapterTitle">
+		update chapter_title set ct_name=#{ct_name},
+		ct_c_id=#{ct_c_id},
+		ct_num=#{ct_num}
+		where ct_id=#{ct_id}
+	</update>
 	
+	
+	<!-- 删除章节 -->
+	<delete id="deleteChapterByCid" parameterType="Integer">
+		delete  from chapter_title where ct_id=#{ct_id}
+	</delete>
 	
 	
 </mapper>

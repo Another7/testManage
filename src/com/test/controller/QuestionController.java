@@ -348,7 +348,7 @@ public class QuestionController {
 		System.out.println("addTFQuestion:"+tfQuestion.toString());
 		Map<String, String> map=new HashMap<String, String>();
 		int rt=questionService.saveTFQuestion(tfQuestion);
-		System.out.println(rt);
+		//System.out.println(rt);
 		 if(rt>0){
 			map.put("result", "yes");
 		}else{
@@ -377,7 +377,7 @@ public class QuestionController {
 	@ResponseBody
 	public Map<String,String> addQAQuestion(@RequestBody QAQuestion qaQuestion){
 		
-		System.out.println("addMCQuestion:"+qaQuestion.toString());
+		System.out.println("addQAQuestion:"+qaQuestion.toString());
 		Map<String, String> map=new HashMap<String, String>();
 		int rt=questionService.saveQAQuestion(qaQuestion);
 		System.out.println(rt);

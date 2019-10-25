@@ -32,6 +32,11 @@ public class FBQuestion {
 		this.fb_ct_id = fb_ct_id;
 	}
 
+	public FBQuestion() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public Integer getFb_id() {
 		return fb_id;
 	}
