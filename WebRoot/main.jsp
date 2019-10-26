@@ -130,7 +130,15 @@
            <!-- -------------------------------------------------------------- -->
             
             <!-- -------------------------------------------------------------- -->
-            
+            <li>
+                <a href="javascript:;"><i class="iconfont">&#xe705;</i><cite>章节管理</cite><i class="iconfont nav_right">&#xe6a7;</i></a>
+                <ul class="sub-menu">
+                  
+                    
+                    <li><a _href="toKnowledgeManage.action"><i class="iconfont">&#xe6a7;</i><cite>知识点管理</cite></a></li>
+                   <%--  <li><a _href="html/page.html"><i class="iconfont">&#xe6a7;</i><cite>自由组卷</cite></a></li> --%>
+                </ul>
+            </li>
             <li>
                 <a href="javascript:;"><i class="iconfont">&#xe6f6;</i><cite>我要组卷</cite><i class="iconfont nav_right">&#xe6a7;</i></a>
                 <ul class="sub-menu">
@@ -140,6 +148,7 @@
                     <li><a _href="html/page.html"><i class="iconfont">&#xe6a7;</i><cite>自由组卷</cite></a></li>
                 </ul>
             </li>
+            
              <li >
                 <a href="javascript:;">
                     <i class="iconfont">&#xe6b4;</i>

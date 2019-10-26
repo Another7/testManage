@@ -579,7 +579,19 @@ public class QuestionController {
 		
 	}
 	
-
+///////////////////////////////////////////////////////////////////////////////////////////
+	/*转发到知识点管理页面*/
+	@RequestMapping("/toKnowledgeManage.action")
+	public String toKnowledgeManage(HttpServletRequest request,Model model){
+		//System.out.println("toAddSCQuestion");
+		//List<Subject> subjectList=subjectService.getAllSubjects();
+		
+		//将科目类别写入session	
+		//request.getSession().setAttribute("SUBJECTS_SESSION", subjectList);
+		//System.out.println("list:"+subjectList.toString());
+		return "KnowledgePointManage";
+		
+	}
 	
 	
 	
