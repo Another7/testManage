@@ -19,4 +19,6 @@ public interface CourseService {
 	 * 根据CourseData添加Course数据
 	 */
 	public boolean addCourseByBookData(CourseData CourseData);
+	
+	public List<Course> getAllCourses();
 }

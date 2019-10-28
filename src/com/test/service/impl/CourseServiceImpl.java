@@ -69,5 +69,14 @@ public class CourseServiceImpl implements CourseService{
 		
 		return result;
 	}
-
+  
+	@Override
+	public List<Course> getAllCourses() {
+		// TODO Auto-generated method stub
+		List<Course> list=chapterTitleDao.getAllCourses();
+		
+		return list;
+	}
 }
+
+

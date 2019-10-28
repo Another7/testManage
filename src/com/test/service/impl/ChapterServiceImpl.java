@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.test.dao.ChapterTitleDao;
 import com.test.po.ChapterTitle;
+import com.test.po.Course;
 import com.test.service.ChapterService;
 
 @Service
@@ -28,7 +29,10 @@ public class ChapterServiceImpl implements ChapterService {
 		
 		return list;
 	}
-
+	
+	
+	
+	
 	@Override
 	public int deleteChapterByCid(Integer ct_id) {
 		// TODO Auto-generated method stub

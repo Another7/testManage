@@ -3,6 +3,7 @@ package com.test.dao;
 import java.util.List;
 
 import com.test.po.ChapterTitle;
+import com.test.po.Course;
 
 public interface ChapterTitleDao {
 
@@ -14,4 +15,6 @@ public interface ChapterTitleDao {
 	public int deleteChapterByCid(Integer ct_id);
 	//пч╦дуб╫з
 	public int updateChapter(ChapterTitle chapterTitle);
+	public List<Course> getAllCourses();
+	
 }

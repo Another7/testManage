@@ -4,16 +4,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.test.po.ChapterTitle;
+import com.test.po.Course;
 import com.test.po.KnowledgePoint;
 import com.test.service.ChapterService;
+import com.test.service.CourseService;
 import com.test.service.KnowledgePointService;
 
 @Controller
@@ -22,6 +27,10 @@ public class ManageController {
 	@Autowired
 	private KnowledgePointService knowledgePointService;
 	private ChapterService chapterService;
+	
+	@Autowired
+	private CourseService courseService;
+	
 	//根据章节id查询该章节下的所有知识点
 	@RequestMapping(value = "/getKnowledgePointByCt_id.action",method = RequestMethod.POST)
 	@ResponseBody
@@ -78,6 +87,19 @@ public class ManageController {
 		int status_code = chapterService.deleteChapterByCid(ct_id);
 		map.put("status_code",String.valueOf(status_code));
 		return map;
+		
+	}
+	
+	//获取所有的课程列表
+	@RequestMapping(value = "/getAllCourses.action",method = RequestMethod.GET)
+	public String getCourses(HttpServletRequest request,Model model){
+		
+	//	System.out.println(courseService==null);
+		List<Course> courses=courseService.getAllCourses();
+		
+		
+		model.addAttribute("Courses", courses);
+		return "KnowledgePointManage";
 		
 	}
 	

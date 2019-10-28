@@ -21,160 +21,272 @@
 	 <script src="js/jquery.min.js"></script>
  	<script src="js/bootstrap.min.js"></script>
  <link href="css/bootstrap.min.css" rel="stylesheet">
- 
- 
-  <link rel="stylesheet" href="layui/css/layui.css">
-	 <link rel="stylesheet" href="css/font.css">
-	 <link rel="stylesheet" href="css/xadmin.css">
-	 <script type="text/javascript" src="js/xadmin.js"></script>
-	   <script src="layui/layui.js"></script>
-	  
+ <script type="text/javascript">
+ //清空新建课程窗口中的数据
+	function clearCustomer() {
+	    $("#new_customerName").val("");
+	    $("#new_customerFrom").val("")
+	    $("#new_custIndustry").val("")
+	    $("#new_custLevel").val("")
+	    $("#new_linkMan").val("");
+	    $("#new_phone").val("");
+	    $("#new_mobile").val("");
+	    $("#new_zipcode").val("");
+	    $("#new_address").val("");
+	} 
+ </script>
+
+	
 
   </head>
-  
+  <style>
+	/* #page-wrapper {
+	    padding: 0 15px;
+	    min-height: 100%;
+	    background-color: #fff;
+	} */
+	</style>  
+	
   <body>
-    <div class="x-nav">
-      <span class="layui-breadcrumb">
-        <a href="">首页</a>
-        <a href="">演示</a>
-        <a>
-          <cite>导航元素</cite></a>
-      </span>
-      <span class="layui-breadcrumb">
-  <a href="/">首页</a>
-  <a href="/demo/">演示</a>
-  <a><cite>导航元素</cite></a>
-</span>
-      <a class="layui-btn layui-btn-primary layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
-        <i class="layui-icon" style="line-height:38px">ဂ</i></a>
-    </div>
-    <div class="x-body">
-      <div class="layui-row">
-        <form class="layui-form layui-col-md12 x-so">
-          <input class="layui-input" placeholder="开始日" name="start" id="start">
-          <input class="layui-input" placeholder="截止日" name="end" id="end">
-          <input type="text" name="username"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
-          <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
-        </form>
-      </div>
-      <xblock>
-        <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <button class="layui-btn" onclick="x_admin_show('添加用户','./admin-add.html')"><i class="layui-icon"></i>添加</button>
-        <span class="x-right" style="line-height:40px">共有数据：88 条</span>
-      </xblock>
-      <table class="layui-table">
-        <thead>
-          <tr>
-            <th>
-              <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
-            </th>
-            <th>ID</th>
-            <th>登录名</th>
-            <th>手机</th>
-            <th>邮箱</th>
-            <th>角色</th>
-            <th>加入时间</th>
-            <th>状态</th>
-            <th>操作</th>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
-            </td>
-            <td>1</td>
-            <td>admin</td>
-            <td>18925139194</td>
-            <td>113664000@qq.com</td>
-            <td>超级管理员</td>
-            <td>2017-01-01 11:11:42</td>
-            <td class="td-status">
-              <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>
-            <td class="td-manage">
-              <a onclick="member_stop(this,'10001')" href="javascript:;"  title="启用">
-                <i class="layui-icon">&#xe601;</i>
-              </a>
-              <a title="编辑"  onclick="x_admin_show('编辑','admin-edit.html')" href="javascript:;">
-                <i class="layui-icon">&#xe642;</i>
-              </a>
-              <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
-                <i class="layui-icon">&#xe640;</i>
-              </a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <div class="page">
-        <div>
-          <a class="prev" href="">&lt;&lt;</a>
-          <a class="num" href="">1</a>
-          <span class="current">2</span>
-          <a class="num" href="">3</a>
-          <a class="num" href="">489</a>
-          <a class="next" href="">&gt;&gt;</a>
-        </div>
-      </div>
-
-    </div>
-    <script>
-      layui.use('laydate', function(){
-        var laydate = layui.laydate;
-        
-        //执行一个laydate实例
-        laydate.render({
-          elem: '#start' //指定元素
-        });
-
-        //执行一个laydate实例
-        laydate.render({
-          elem: '#end' //指定元素
-        });
-      });
-
-       /*用户-停用*/
-      function member_stop(obj,id){
-          layer.confirm('确认要停用吗？',function(index){
-
-              if($(obj).attr('title')=='启用'){
-
-                //发异步把用户状态进行更改
-                $(obj).attr('title','停用')
-                $(obj).find('i').html('&#xe62f;');
-
-                $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');
-                layer.msg('已停用!',{icon: 5,time:1000});
-
-              }else{
-                $(obj).attr('title','启用')
-                $(obj).find('i').html('&#xe601;');
-
-                $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');
-                layer.msg('已启用!',{icon: 5,time:1000});
-              }
-              
-          });
-      }
-
-      /*用户-删除*/
-      function member_del(obj,id){
-          layer.confirm('确认要删除吗？',function(index){
-              //发异步删除数据
-              $(obj).parents("tr").remove();
-              layer.msg('已删除!',{icon:1,time:1000});
-          });
-      }
-
-      function delAll (argument) {
-
-        var data = tableCheck.getData();
-  
-        layer.confirm('确认要删除吗？'+data,function(index){
-            //捉到所有被选中的，发异步进行删除
-            layer.msg('删除成功', {icon: 1});
-            $(".layui-form-checked").not('.header').parents('tr').remove();
-        });
-      }
-    </script>
    
+    
+
+	<div class="container">
+     <div class="row">
+			<div class="col-md-12">
+				<h1 class="page-header">章节知识管理</h1>
+			</div>
+			
+			
+	</div>
+	<div class="panel panel-default">
+			<div class="panel-body">
+				<form class="form-inline" method="post" >
+					<div class="form-group">
+						<label for="courseName">课程名称</label> 
+						<input type="text" class="form-control" id="courseName" 
+						                   value="" name="courseName" />
+					</div>
+				
+					<button type="submit" class="btn btn-primary">查询</button>
+				</form>
+			</div>
+		</div>
+		<a href="#" class="btn btn-primary" data-toggle="modal" 
+		           data-target="#myModal" onclick="clearCustomer()">新建课程</a>
+			<div class="row">
+			<div class="col-lg-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">课程信息列表</div>
+					<!-- /.panel-heading -->
+					<table class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th>编号</th>
+								<th>课程名称</th>
+								<th>所属科目</th>
+								<th>章节个数</th>
+								<th>查看章节</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody>
+						<c:if test="${ !empty Courses}">
+							<c:forEach items="${Courses}" var="course"  varStatus="status">
+								<tr>
+									<td>${status.index+1 }</td>
+									<td>${course.c_name}</td>
+									<td>${course.c_chapter_num}</td>
+									<td>${course.c_s_id}</td>
+									<td>
+										<a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#customerEditDialog" onclick= "editCustomer(${course_c_id})">查看章节</a>
+										
+									</td>
+									<td>
+										<a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#customerEditDialog" onclick= "editCustomer(${course_c_id})">修改</a>
+										<a href="#" class="btn btn-danger btn-xs" onclick="deleteCustomer(${row.cust_id})">删除</a>
+									</td>
+								</tr>
+							</c:forEach>
+						</c:if>
+						</tbody>
+					</table>
+					<div class="col-md-12 text-right">
+						<%-- <itheima:page url="${pageContext.request.contextPath }/customer/list.action" /> --%>
+					</div>
+					<!-- /.panel-body -->
+				</div>
+				<!-- /.panel -->
+			</div>
+			<!-- /.col-lg-12 -->
+		</div>           
+		  
+		           
+		           
+		           
+		           
+		<!-- -----------------------------添加课程的模态框---------------------------------------------- -->
+				   			<div class="modal fade" id="myModal"  tabindex="-1" role="diaog" aria-labelledby="myModalLabel" aria-hidden="true">
+				   				
+				   				<div class="modal-dialog">
+				   					<div class="modal-content">
+				   						<div class="modal-header">
+				   							<button type="button" class="close" data-dismiss="modal"  aria-hidden="true">&times;</button>
+				   							<h4 class="modal-title" id="myModalLabel">添加课程</h4>
+				   						</div>
+				   						<div class="modal-body">
+				   						<form class="form-horizontal" role="form" id="addTB">
+				   								<div class="form-group">
+													<label class=" col-md-2 control-label">科目</label> 
+													<div class="col-md-8">
+													<!-- 一级下拉框 -->
+													<select	class=" form-control " id="addSubject2" name="subject" ">
+														<option value="">--请选择--</option>
+														<c:forEach items="${sessionScope.SUBJECTS_SESSION}" var="item">
+															<option	 value="${item.s_id}">${item.s_name}</option>
+														</c:forEach>
+													</select>
+													</div>
+													 <div class="col-md-2">
+													 	
+											   		 </div>
+												</div><!-- /form-gromp -->	
+												
+											  <div class="form-group">
+											    <label for="stem" class="col-md-2 control-label">课程名称</label>
+											    <div class="col-md-8">
+											      <input type="text" class="form-control" id="addTBName" placeholder="">
+											    </div>
+											    <div class="col-md-2"></div>
+											  </div><!-- /form-gromp -->	
+											  <div class="form-group" id="chapter-num">
+											    <label for="text" class="col-md-2 control-label">章节个数</label>
+											    <div class="col-md-8">
+											      <select id="addChapterNum"	class=" form-control "  onchange="change2(this.id)" >
+														<option value="">--请选择--</option>
+														<option value="1">1</option>
+														<option value="2">2</option>
+														<option value="3">3</option>
+														<option value="4">4</option>
+														<option value="5">5</option>
+														<option value="6">6</option>
+														<option value="7">7</option>
+														<option value="8">8</option>
+														<option value="9">9</option>
+														<option value="10">10</option>
+														<option value="11">11</option>
+														<option value="12">12</option>
+														<option value="13">13</option>
+														<option value="14">14</option>
+														<option value="15">15</option>
+														<option value="16">16</option>
+														<option value="17">17</option>
+														<option value="18">18</option>
+														<option value="19">19</option>
+													</select>
+											    </div>
+											    <div class="col-md-2">
+											    	<!-- <a id ="addChoice" class="btn btn-default btn-md"  href="#" role="button" onclick="addCt">
+											    		<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+											    	</a> -->
+											    	
+											    </div>
+											  </div><!-- /form-gromp -->
+											  <script type="text/javascript">
+											  /*用户点击添加课程*/
+											  function addBook(){	    	
+										    		var c_s_id = $("#addSubject2").val();
+										    		var c_name=$("#addTBName").val();
+										    		var c_chapter_num=$("#addChapterNum").val();
+										    		var str="";
+										    		//children()方法：获取该元素下的直接子集元素
+													//find()方法：获取该元素下的所有子集元素
+										    		$("#addChapterHeader").find("input").each(function(){
+										    			//alert(this.value);
+										    			str+=this.value+"@@";
+										    		});
+										    		var c_chapter_headers=str;
+										    		//alert(str);
+										    		//alert("c_s_id:"+c_s_id+" c_name:"+c_name+" c_chapter_num:"+c_chapter_num+" c_chapter_headers:"+c_chapter_headers);
+										    		var data={c_name:c_name,c_chapter_num:c_chapter_num,c_chapter_headers:c_chapter_headers,c_s_id:c_s_id};
+										    		$.ajax({
+												       	   method:"post",
+												         	url:"/testManage/addCourse.action",
+												         	contentType: 'application/json; charset=UTF-8',
+												         	data:JSON.stringify(data),
+														 	dataType:'json',
+														 	
+												       	   	success:function (data) {
+												       	   		if(data.result=="yes"){
+																alert("添加成功");
+																$("#myModal").modal('hide');  //手动关闭
+																$("#addTB").reset();
+																}else{
+																	alert("保存失败");
+															    }
+												          	  
+												         	 }
+												   	 });
+											   	
+											   	 };
+											   	 /*用户选择章节数目之后，添加章节到模态框*/
+											  	function change2(id){
+											  		var num = $("#addChapterNum").val();
+											  			var str="<div>请输入各章节标题</div>";
+											  			//alert(num);		
+										           	  	for (var i = 1; i <= num; i++) {
+										           	  		  str+="<div class='form-group'>"+
+										           	  		  "<label for='text' class='col-md-2 control-label'>第"+i+"章</label>"+
+										           	  		  "<div class='col-md-10'>"+
+										           	  		  "<input type='text' class='form-control' >"+
+										           	  		  "</div>"+
+										           	  		  "</div>";
+										         	 	 } 
+										           	 	 
+											  			/* $("#chapter-num").after(str); */
+											  			$("#addChapterHeader").append(str);
+											  			
+											  			//alert();
+											  	};
+											  	function reset(){
+											  		
+											  		/* $("#addTB")[0].reset(); */
+											  		 $("#addSubject2").find("option[text='--请选择--']").attr("selected",true);
+											  		 $("#addChapterNum").find("option[text='--请选择--']").attr("selected",true);
+											  		 $("#addTBName").val("");
+											  		
+											  		 $("#addChapterHeader").empty();
+											  		  $("#addChapterHeader").html();
+											  	};
+											  	$('body').on('hidden.bs.modal', '.modal', function () {
+												    $(this).removeData('bs.modal');
+												});
+											  </script>	
+											  <!-- <div>请输入各章节标题</div>
+											  <div class="form-group" id="chapter-header" >
+											  		<label for="text" class="col-md-2 control-label"></label>
+											  		<div class="col-md-10">
+												      <input type="text" class="form-control" >
+												    </div>
+											  </div> -->
+											  <div id="addChapterHeader">
+											  		<!-- js动态填充内容 -->
+											  </div>
+											</form>  
+				   						</div>
+				   						<div class="modal-footer">
+				   							<div class="form-group">
+											    <div class="col-sm-offset-2 col-sm-10">
+											      <button type="button" class="btn btn-primary" onclick="addBook()">提交</button>
+											      <button type="button" class="btn btn-default" onclick="reset()" >重置</button>
+				   								
+											    </div>
+											  </div>
+				   						</div>
+				   					</div><!--/ model-content -->
+				   				</div><!--/ model-dialog -->
+				   			</div><!--/ model -->
+				   			<!-- --------------结束---------------添加课程的模态框---------------------------------------------- -->
+    </div>
   </body>
 </html>

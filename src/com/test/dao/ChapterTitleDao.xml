@@ -37,5 +37,10 @@
 		delete  from chapter_title where ct_id=#{ct_id}
 	</delete>
 	
+	<select id="getAllCourses" resultType="Course">
+		select * from course;
+	
+	</select>
+	
 	
 </mapper>
