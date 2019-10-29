@@ -26,6 +26,8 @@ public class ManageController {
 
 	@Autowired
 	private KnowledgePointService knowledgePointService;
+	
+	@Autowired
 	private ChapterService chapterService;
 	
 	@Autowired
@@ -103,6 +105,21 @@ public class ManageController {
 		
 	}
 	
+	
+	/*根据课程的id所有的章节*/
+	@RequestMapping(value = "/getChapterByCid.action",method = RequestMethod.GET)
+	public String getChapters(HttpServletRequest request,String c_id,Model model){
+		//String c_id=request.getParameter("c_id");
+		System.out.println(c_id);
+		
+		System.out.println("getChapter:"+c_id);
+		
+		List<ChapterTitle> list=chapterService.getChapterByCid(String.valueOf(c_id));
+		model.addAttribute("Chapter",list);
+		System.out.println("CourseList:"+list.toString());
+		return "ChapterManage";
+		
+	}
 	
 	
 	

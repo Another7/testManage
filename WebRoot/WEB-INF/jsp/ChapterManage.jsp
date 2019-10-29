@@ -34,6 +34,8 @@
 	    $("#new_zipcode").val("");
 	    $("#new_address").val("");
 	} 
+	
+	
  </script>
 
 	
@@ -63,7 +65,7 @@
 			<div class="panel-body">
 				<form class="form-inline" method="post" >
 					<div class="form-group">
-						<label for="courseName">课程名称</label> 
+						<label for="courseName">章节名称</label> 
 						<input type="text" class="form-control" id="courseName" 
 						                   value="" name="courseName" />
 					</div>
@@ -73,38 +75,35 @@
 			</div>
 		</div>
 		<a href="#" class="btn btn-primary" data-toggle="modal" 
-		           data-target="#myModal" onclick="clearCustomer()">新建课程</a>
+		           data-target="#myModal" onclick="clearCustomer()">新建章节</a>
 			<div class="row">
 			<div class="col-lg-12">
 				<div class="panel panel-default">
-					<div class="panel-heading">课程信息列表</div>
+					<div class="panel-heading">章节信息列表</div>
 					<!-- /.panel-heading -->
 					<table class="table table-bordered table-striped">
 						<thead>
 							<tr>
 								<th>编号</th>
-								<th>课程名称</th>
-								<th>所属科目</th>
-								<th>章节个数</th>
-								<th>章节</th>
+								<th>章节名称</th>
+								<th>知识点</th>
 								<th>操作</th>
 							</tr>
 						</thead>
 						<tbody>
-						<c:if test="${ !empty Courses}">
-							<c:forEach items="${Courses}" var="course"  varStatus="status">
+						<c:if test="${ !empty Chapter}">
+							<c:forEach items="${Chapter}" var="chapter"  varStatus="status">
 								<tr>
 									<td>${status.index+1 }</td>
-									<td>${course.c_name}</td>
-									<td>${course.c_chapter_num}</td>
-									<td>${course.c_s_id}</td>
+									<td>${chapter.ct_name}</td>
+									
 									<td>
-										<a href="getChapterByCid.action?c_id=${course.c_id}" class="btn btn-primary btn-xs"  >查看章节</a>
+										<a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#customerEditDialog" onclick= "editCustomer(${chapte.ct_id})">查看详情</a>
 										
 									</td>
 									<td>
-										<a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#customerEditDialog" onclick= "editCustomer(${course_c_id})">修改</a>
-										<a href="#" class="btn btn-danger btn-xs" onclick="deleteCustomer(${row.cust_id})">删除</a>
+										<a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#customerEditDialog" onclick= "editCustomer(${chapte.ct_id})">修改</a>
+										<a href="#" class="btn btn-danger btn-xs" onclick="deleteCustomer(${chapte.ct_id})">删除</a>
 									</td>
 								</tr>
 							</c:forEach>
@@ -132,7 +131,7 @@
 				   					<div class="modal-content">
 				   						<div class="modal-header">
 				   							<button type="button" class="close" data-dismiss="modal"  aria-hidden="true">&times;</button>
-				   							<h4 class="modal-title" id="myModalLabel">添加课程</h4>
+				   							<h4 class="modal-title" id="myModalLabel">查看详情</h4>
 				   						</div>
 				   						<div class="modal-body">
 				   						<form class="form-horizontal" role="form" id="addTB">
