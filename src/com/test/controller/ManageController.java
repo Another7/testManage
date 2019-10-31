@@ -12,14 +12,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.test.po.ChapterTitle;
 import com.test.po.Course;
 import com.test.po.KnowledgePoint;
+import com.test.po.Subject;
+import com.test.pojo.ChapterData;
 import com.test.service.ChapterService;
 import com.test.service.CourseService;
 import com.test.service.KnowledgePointService;
+import com.test.service.SubjectService;
 
 @Controller
 public class ManageController {
@@ -32,6 +36,9 @@ public class ManageController {
 	
 	@Autowired
 	private CourseService courseService;
+	
+	@Autowired
+	private SubjectService subjectService;
 	
 	//根据章节id查询该章节下的所有知识点
 	@RequestMapping(value = "/getKnowledgePointByCt_id.action",method = RequestMethod.POST)
@@ -99,6 +106,10 @@ public class ManageController {
 	//	System.out.println(courseService==null);
 		List<Course> courses=courseService.getAllCourses();
 		
+		//查询出subject列表放入session
+		List<Subject> subjectList=subjectService.getAllSubjects();
+		//将科目类别写入session	
+		request.getSession().setAttribute("SUBJECTS_SESSION", subjectList);
 		
 		model.addAttribute("Courses", courses);
 		return "KnowledgePointManage";
@@ -116,10 +127,34 @@ public class ManageController {
 		
 		List<ChapterTitle> list=chapterService.getChapterByCid(String.valueOf(c_id));
 		model.addAttribute("Chapter",list);
+		model.addAttribute("c_id",c_id);
 		System.out.println("CourseList:"+list.toString());
 		return "ChapterManage";
 		
 	}
+	
+	//新建章节（单个）
+	@RequestMapping(value = "/addChapter.action")
+	@ResponseBody
+	public Map<String,String> addChapters( @RequestBody ChapterData chapter){
+		//String c_id=request.getParameter("c_id");
+		String c_id=chapter.getC_id();
+		String ct_name=chapter.getCt_name();
+		 Map<String, String> map=new HashMap<String, String>();
+		System.out.println("111:"+c_id);
+		System.out.println("addChapters222:"+ct_name);
+		
+		boolean result=chapterService.addChapter(Integer.valueOf(c_id),ct_name);
+		if(result){
+			map.put("result", "yes");
+		}else{
+			map.put("result", "no");
+		}	
+		
+		return map;
+		
+	}
+
 	
 	
 	

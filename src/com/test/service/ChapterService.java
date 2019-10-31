@@ -21,6 +21,9 @@ public interface ChapterService {
 	public int deleteChapterByCid(Integer ct_id);
 	//修改章节
 	public int updateChapter(ChapterTitle chapterTitle);
+	
+	//添加章节
+	public boolean addChapter(Integer c_id,String ct_name);
 
 	
 	

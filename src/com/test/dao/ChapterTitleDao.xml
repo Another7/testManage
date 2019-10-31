@@ -42,5 +42,10 @@
 	
 	</select>
 	
+	<!-- 根据课程表id查询章节表中的最大序号 -->
+	<select id="getChapterMaxNumByCid" parameterType="Integer" resultType="Integer">
+		select MAX(ct_num) from chapter_title where ct_c_id=#{c_id}
+	</select>  
+	
 	
 </mapper>

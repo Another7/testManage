@@ -257,7 +257,6 @@ public class QuestionController {
 	public List<Course> getCourses(HttpServletRequest request){
 		String s_id=(String)request.getParameter("data");
 		System.out.println("toAddTestBook:"+s_id);
-		
 		List<Course> list=CourseService.getCoursesBySid(s_id);
 		System.out.println("CourseList:"+list.toString());
 		

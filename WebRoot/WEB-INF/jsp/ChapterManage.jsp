@@ -23,16 +23,16 @@
  <link href="css/bootstrap.min.css" rel="stylesheet">
  <script type="text/javascript">
  //清空新建课程窗口中的数据
-	function clearCustomer() {
-	    $("#new_customerName").val("");
-	    $("#new_customerFrom").val("")
+	function reset() {
+	    $("#chapterName").val("");
+	  /*   $("#new_customerFrom").val("")
 	    $("#new_custIndustry").val("")
 	    $("#new_custLevel").val("")
 	    $("#new_linkMan").val("");
 	    $("#new_phone").val("");
 	    $("#new_mobile").val("");
 	    $("#new_zipcode").val("");
-	    $("#new_address").val("");
+	    $("#new_address").val(""); */
 	} 
 	
 	
@@ -75,7 +75,7 @@
 			</div>
 		</div>
 		<a href="#" class="btn btn-primary" data-toggle="modal" 
-		           data-target="#myModal" onclick="clearCustomer()">新建章节</a>
+		           data-target="#createChapter" onclick="reset()">新建章节</a>
 			<div class="row">
 			<div class="col-lg-12">
 				<div class="panel panel-default">
@@ -99,7 +99,6 @@
 									
 									<td>
 										<a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#customerEditDialog" onclick= "editCustomer(${chapte.ct_id})">查看详情</a>
-										
 									</td>
 									<td>
 										<a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#customerEditDialog" onclick= "editCustomer(${chapte.ct_id})">修改</a>
@@ -124,110 +123,91 @@
 		           
 		           
 		           
-		<!-- -----------------------------添加课程的模态框---------------------------------------------- -->
-				   			<div class="modal fade" id="myModal"  tabindex="-1" role="diaog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<!-- -----------------------------添加章节的模态框---------------------------------------------- -->
+				   			<div class="modal fade" id="createChapter"  tabindex="-1" role="diaog" aria-labelledby="myModalLabel" aria-hidden="true">
 				   				
 				   				<div class="modal-dialog">
 				   					<div class="modal-content">
 				   						<div class="modal-header">
 				   							<button type="button" class="close" data-dismiss="modal"  aria-hidden="true">&times;</button>
-				   							<h4 class="modal-title" id="myModalLabel">查看详情</h4>
+				   							<h4 class="modal-title" id="myModalLabel">新建章节</h4>
 				   						</div>
 				   						<div class="modal-body">
 				   						<form class="form-horizontal" role="form" id="addTB">
-				   								<div class="form-group">
-													<label class=" col-md-2 control-label">科目</label> 
-													<div class="col-md-8">
-													<!-- 一级下拉框 -->
-													<select	class=" form-control " id="addSubject2" name="subject" ">
-														<option value="">--请选择--</option>
-														<c:forEach items="${sessionScope.SUBJECTS_SESSION}" var="item">
-															<option	 value="${item.s_id}">${item.s_name}</option>
-														</c:forEach>
-													</select>
-													</div>
-													 <div class="col-md-2">
-													 	
-											   		 </div>
-												</div><!-- /form-gromp -->	
+				   								
 												
 											  <div class="form-group">
-											    <label for="stem" class="col-md-2 control-label">课程名称</label>
+											    <label for="stem" class="col-md-2 control-label">章节名称</label>
 											    <div class="col-md-8">
-											      <input type="text" class="form-control" id="addTBName" placeholder="">
-											    </div>
-											    <div class="col-md-2"></div>
-											  </div><!-- /form-gromp -->	
-											  <div class="form-group" id="chapter-num">
-											    <label for="text" class="col-md-2 control-label">章节个数</label>
-											    <div class="col-md-8">
-											      <select id="addChapterNum"	class=" form-control "  onchange="change2(this.id)" >
-														<option value="">--请选择--</option>
-														<option value="1">1</option>
-														<option value="2">2</option>
-														<option value="3">3</option>
-														<option value="4">4</option>
-														<option value="5">5</option>
-														<option value="6">6</option>
-														<option value="7">7</option>
-														<option value="8">8</option>
-														<option value="9">9</option>
-														<option value="10">10</option>
-														<option value="11">11</option>
-														<option value="12">12</option>
-														<option value="13">13</option>
-														<option value="14">14</option>
-														<option value="15">15</option>
-														<option value="16">16</option>
-														<option value="17">17</option>
-														<option value="18">18</option>
-														<option value="19">19</option>
-													</select>
+													<input id="chapterName" type="text" class="form-control"  placeholder="">
 											    </div>
 											    <div class="col-md-2">
-											    	<!-- <a id ="addChoice" class="btn btn-default btn-md"  href="#" role="button" onclick="addCt">
-											    		<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-											    	</a> -->
 											    	
 											    </div>
-											  </div><!-- /form-gromp -->
+											  </div><!-- /form-gromp -->	
+											
 											  <script type="text/javascript">
-											  /*用户点击添加课程*/
-											  function addBook(){	    	
-										    		var c_s_id = $("#addSubject2").val();
-										    		var c_name=$("#addTBName").val();
-										    		var c_chapter_num=$("#addChapterNum").val();
-										    		var str="";
-										    		//children()方法：获取该元素下的直接子集元素
-													//find()方法：获取该元素下的所有子集元素
-										    		$("#addChapterHeader").find("input").each(function(){
-										    			//alert(this.value);
-										    			str+=this.value+"@@";
-										    		});
-										    		var c_chapter_headers=str;
-										    		//alert(str);
-										    		//alert("c_s_id:"+c_s_id+" c_name:"+c_name+" c_chapter_num:"+c_chapter_num+" c_chapter_headers:"+c_chapter_headers);
-										    		var data={c_name:c_name,c_chapter_num:c_chapter_num,c_chapter_headers:c_chapter_headers,c_s_id:c_s_id};
+											  /*用户点击添加章节*/
+											  function addChapter(){	
+											  
+											  		var c_id='${c_id}';    	
+										    		var ct_name=$("#chapterName").val();
+										    		var data={ct_name:ct_name,c_id:c_id};
+										    		
+										    		//alert(c_id);
+										    		//alert(ct_name);
 										    		$.ajax({
 												       	   method:"post",
-												         	url:"/testManage/addCourse.action",
+												         	url:"/testManage/addChapter.action",
 												         	contentType: 'application/json; charset=UTF-8',
 												         	data:JSON.stringify(data),
 														 	dataType:'json',
-														 	
 												       	   	success:function (data) {
+												       	   		
 												       	   		if(data.result=="yes"){
-																alert("添加成功");
-																$("#myModal").modal('hide');  //手动关闭
-																$("#addTB").reset();
+										     						alert("添加成功");
+																$("#createChapter").modal('hide');  //手动关闭
+																
+																window.location.href ="/testManage/getChapterByCid.action?c_id="+c_id;
 																}else{
 																	alert("保存失败");
 															    }
+															    $("#chapterName").val("");
 												          	  
 												         	 }
 												   	 });
 											   	
 											   	 };
+											   	 
+											   	 
+											   	 /* 根据所选择的科目，查找该科目下的课程列表，并显示在select里*/
+												function change(id){	    	
+										    		var code = $("#selectSubject").val();
+										    		//alert(code);
+										    		$.ajax({
+											       	   method:"post",
+											         	url:"/testManage/getCourses.action",
+											         	data:{"data":code},
+													 	dataType:'json',
+											       	   	success:function (res) {
+											       	   		if(res.length == 0){
+										                        //如果一级没有对应的二级 则清空二级并不往下执行
+										                        $("#selectCourse").empty();
+										                        $("#selectCourse").selectpicker("refresh");
+										                          
+										                        return ;
+										                   	 }
+										                   	// alert(res.length);
+											          		 var str="";
+											           	  	for (var i = 0; i < res.length; i++) {
+											            	 	  str+="<option value='"+res[i].c_id+"'>"+res[i].c_name+"</option>";
+											         	 	 } 
+											           	  $("#selectCourse").append(str);
+											          	  $("#selectCourse").find("option[text='--请选择--']").attr("selected",true);
+											          }
+											   	 });
+										    	}
+											   	 
 											   	 /*用户选择章节数目之后，添加章节到模态框*/
 											  	function change2(id){
 											  		var num = $("#addChapterNum").val();
@@ -276,8 +256,8 @@
 				   						<div class="modal-footer">
 				   							<div class="form-group">
 											    <div class="col-sm-offset-2 col-sm-10">
-											      <button type="button" class="btn btn-primary" onclick="addBook()">提交</button>
-											      <button type="button" class="btn btn-default" onclick="reset()" >重置</button>
+											      <button type="button" class="btn btn-primary" onclick="addChapter()">提交</button>
+											      <button type="reset" class="btn btn-default" onclick="reset()" >重置</button>
 				   								
 											    </div>
 											  </div>

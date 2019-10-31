@@ -40,4 +40,10 @@ public class ManageTest {
 		List<Course> courses=courseService.getAllCourses();
 		System.out.println(courses);
 	}
+	
+	@Test
+	public void testAddChapter() {
+		
+		int chapterNum=chapterTitleDao.getChapterMaxNumByCid(25);
+	}
 }

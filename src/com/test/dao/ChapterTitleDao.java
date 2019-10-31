@@ -15,6 +15,9 @@ public interface ChapterTitleDao {
 	public int deleteChapterByCid(Integer ct_id);
 	//修改章节
 	public int updateChapter(ChapterTitle chapterTitle);
+	//获取所有章节列表
 	public List<Course> getAllCourses();
+	//获取给定的课程id的章节序号最大值
+	public  int getChapterMaxNumByCid(int c_id);
 	
 }
