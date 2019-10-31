@@ -48,6 +48,31 @@
          	 }
    	 });
 	}
+	// 删除课程
+	function deleteCourse(id) {
+		if (confirm("确定删除该试题？")==true){ 
+			 	$.ajax({
+	       	   method:"post",
+	       	   contentType: 'application/json; charset=UTF-8',
+	         	url:"/testManage/deleteCourse.action",
+	         	data:{c_id:c_id},
+			 	dataType:'json',
+	       	   	success:function (data) {
+	       	   		if(data.result=="1"){
+							alert("课程删除成功！");
+					}else if(data.result=="-1"){
+							alert("该课程下有章节，不能删除！");
+					}else{
+							alert("课程删除失败！");
+					}
+	          }
+		   	 });
+		 }else{ 
+		  	return false;
+		 } 
+   	 		   	 
+	   
+	}
  </script>
 
 	
@@ -118,7 +143,7 @@
 									</td>
 									<td>
 										<a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#updateCourseModal" onclick= "editCourse(${course.c_id})">修改</a>
-										<a href="#" class="btn btn-danger btn-xs" onclick="deleteCustomer(${course.c_id})">删除</a>
+										<a href="#" class="btn btn-danger btn-xs" onclick="deleteCourse(${course.c_id})">删除</a>
 									</td>
 								</tr>
 							</c:forEach>
@@ -356,31 +381,7 @@
 													
 												
 											}
-											// 删除课程
-											function deleteCourse(id) {
-												if (confirm("确定删除该试题？")==true){ 
-													 	$.ajax({
-											       	   method:"post",
-											       	   contentType: 'application/json; charset=UTF-8',
-											         	url:"/testManage/deleteCourse.action",
-											         	data:{c_id:c_id},
-													 	dataType:'json',
-											       	   	success:function (data) {
-											       	   		if(data.result=="1"){
-																	alert("课程删除成功！");
-															}else if(data.result=="-1"){
-																	alert("该课程下有章节，不能删除！");
-															}else{
-																	alert("课程删除失败！");
-															}
-											          }
-												   	 });
-												 }else{ 
-												  return false; 
-												 } 
-										   	 		   	 
-											   
-											}
+											
 													</script>								
 											  
 											</form>  
@@ -393,6 +394,8 @@
 				   				</div><!--/ model-dialog -->
 				   			</div><!--/ model -->
 				   			<!-- --------------结束---------------添加课程的模态框---------------------------------------------- -->
+				   			<!-- 删除模态框 -->
+				   			
     </div>
   </body>
 </html>
