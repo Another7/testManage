@@ -25,8 +25,15 @@
 			#{c_s_id}
 		)
 	</insert>
+	<!-- 根据课程id获取课程 -->
+	<select id="getCoursesByCid" parameterType="Integer" resultType="Course">
+		select * from course where c_id=#{c_id}
+	</select>
 	
-	
+	<update id="updateCourse" parameterType="Course" >
+		update course set c_name=#{c_name}
+			where c_id=#{c_id}
+	</update>
 	
 
 	

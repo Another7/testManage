@@ -17,4 +17,8 @@ public interface CourseDao {
 	boolean addCourse(Course Course);
 	
 	Course getCourseByName(String c_name);
+
+	Course getCoursesByCid(Integer c_id);
+
+	int updateCourse(Course course);
 }

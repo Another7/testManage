@@ -150,7 +150,6 @@ public class ManageController {
 		}else{
 			map.put("result", "no");
 		}	
-		
 		return map;
 		
 	}

@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.test.po.ChapterTitle;
@@ -388,6 +389,33 @@ public class QuestionController {
 		return map;
 	}
 	
+	/*根据课程的id获取课程对象*/
+	@RequestMapping(value = "/getCourseById.action",method = RequestMethod.GET)
+	@ResponseBody
+	public Course getCourseById(HttpServletRequest request){
+		String id=(String) request.getParameter("c_id");
+	
+		System.out.println("testid:"+id);
+		Course course=CourseService.getCoursesByCid(Integer.valueOf(id));
+		System.out.println("test:"+course.toString());
+		return course;
+	}
+	
+	/*修改课程名称*/
+	@RequestMapping(value = "/updateCourse.action",method = RequestMethod.GET)
+	@ResponseBody
+	public Map<String,String> UpdateCourse(@RequestBody Course course){
+		
+		Map<String, String> map=new HashMap<String, String>();
+		int rt=CourseService.updateCourse(course);
+		
+		 if(rt>0){
+			map.put("result", "yes");
+		}else{
+			map.put("result", "no");
+		}
+		return map;
+	}
 /*-----------------------------------------------以下为转发------------------------------------*/
 	
 	/*转发到查询单选题页面*/

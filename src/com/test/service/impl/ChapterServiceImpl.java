@@ -16,7 +16,6 @@ import com.test.service.ChapterService;
 public class ChapterServiceImpl implements ChapterService {
 
 	
-	
 	@Autowired 
 	ChapterTitleDao chapterTitleDao;
 	
@@ -29,10 +28,6 @@ public class ChapterServiceImpl implements ChapterService {
 		
 		return list;
 	}
-	
-	
-	
-	
 	@Override
 	public int deleteChapterByCid(Integer ct_id) {
 		// TODO Auto-generated method stub
@@ -57,19 +52,13 @@ public class ChapterServiceImpl implements ChapterService {
 		return 1;//更新成功
 	}
 
-
-
-
 	@Override
 	public boolean addChapter(Integer c_id,String ct_name) {
 		
 		System.out.println("c_id:"+c_id);
 		int chapterNum=chapterTitleDao.getChapterMaxNumByCid(c_id);
 		System.out.println("chapterNum:"+chapterNum);
-		
 		ChapterTitle chapterTitle=new ChapterTitle(ct_name,c_id,chapterNum+1);
-		
-		
 		return chapterTitleDao.addChapterTitle(chapterTitle);
 	}
 	

@@ -10,6 +10,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.test.dao.ChapterTitleDao;
+import com.test.dao.CourseDao;
 import com.test.po.ChapterTitle;
 import com.test.po.Course;
 import com.test.service.ChapterService;
@@ -28,6 +29,8 @@ public class ManageTest {
 	@Autowired
 	ChapterTitleDao chapterTitleDao;
 	
+	@Autowired
+	CourseDao CourseDao;
 	
 	@Test
 	public void delete(){
@@ -44,6 +47,9 @@ public class ManageTest {
 	@Test
 	public void testAddChapter() {
 		
-		int chapterNum=chapterTitleDao.getChapterMaxNumByCid(25);
+		/*int chapterNum=chapterTitleDao.getChapterMaxNumByCid(25);*/
+		
+		Course teBook0=CourseDao.getCourseByName("≤‚ ‘");
+		System.out.println(teBook0.toString());
 	}
 }

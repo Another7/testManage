@@ -34,6 +34,20 @@
 	    $("#new_zipcode").val("");
 	    $("#new_address").val("");
 	} 
+	//用户点击修改课程按钮
+	function editCourse(id) {
+	alert(id);
+	    $.ajax({
+       	   method:"get",
+         	url:"/testManage/getCourseById.action?c_id"+id,
+         	contentType: 'application/json; charset=UTF-8',
+         	data:{"c_id":id},
+		 	dataType:'json',
+       	   	success:function (data) {
+       	   		$("#updateCourseName").val(data.c_name);
+         	 }
+   	 });
+	}
  </script>
 
 	
@@ -103,8 +117,8 @@
 										
 									</td>
 									<td>
-										<a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#customerEditDialog" onclick= "editCustomer(${course_c_id})">修改</a>
-										<a href="#" class="btn btn-danger btn-xs" onclick="deleteCustomer(${row.cust_id})">删除</a>
+										<a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#updateCourseModal" onclick= "editCourse(${course.c_id})">修改</a>
+										<a href="#" class="btn btn-danger btn-xs" onclick="deleteCustomer(${course.c_id})">删除</a>
 									</td>
 								</tr>
 							</c:forEach>
@@ -220,7 +234,8 @@
 												       	   		if(data.result=="yes"){
 																alert("添加成功");
 																$("#myModal").modal('hide');  //手动关闭
-																$("#addTB").reset();
+																reset();//清除模态框缓存数据
+																window.location.href ="/testManage/getAllCourses.action";//更新添加成功后的数据
 																}else{
 																	alert("保存失败");
 															    }
@@ -283,6 +298,97 @@
 											    </div>
 											  </div>
 				   						</div>
+				   					</div><!--/ model-content -->
+				   				</div><!--/ model-dialog -->
+				   			</div><!--/ model -->
+				   			<!-- --------------结束---------------添加课程的模态框---------------------------------------------- -->
+				   			
+<!-- -----------------------------修改课程的模态框开始---------------------------------------------- -->
+				   			<div class="modal fade" id="updateCourseModal"  tabindex="-1" role="diaog" aria-labelledby="myModalLabel" aria-hidden="true">
+				   				
+				   				<div class="modal-dialog">
+				   					<div class="modal-content">
+				   						<div class="modal-header">
+				   							<button type="button" class="close" data-dismiss="modal"  aria-hidden="true">&times;</button>
+				   							<h4 class="modal-title" id="myModalLabel">修改课程信息</h4>
+				   						</div>
+				   						<div class="modal-body">
+				   						<form class="form-horizontal" role="form" id="addTB">
+				   								
+												
+											  <div class="form-group">
+											    <label for="stem" class="col-md-2 control-label">课程名称</label>
+											    <div class="col-md-8">
+											    <input type="hidden" id="c_id" name="c_id"/><!-- 课程id -->
+											    <input type="hidden" id="c_chapter_num" name="c_chapter_num"/><!-- 课程章节数 -->
+											     <input type="hidden" id="c_s_id" name="c_s_id"/><!-- 所属科目 -->
+											      <input type="text" class="form-control" id="updateCourseName" placeholder="">
+											    </div>
+											    <div class="col-md-2"></div>
+											  </div><!-- /form-gromp -->	
+											 
+											  <script type="text/javascript">
+											
+										    // 点击保存修改课程操作
+											function updateCourse() {
+												var id=$("#c_id").val();
+												var num=$("#c_chapter_num").val();
+												var sid=$("#c_s_id").val();
+												var name= $("#updateCourseName").val();
+												var data={c_id:id,c_name:name,c_chapter_num:num,c_s_id:sid};
+												$.ajax({
+											       	   method:"post",
+											         	url:"/testManage/updateCourse.action",
+											         	contentType: 'application/json; charset=UTF-8',
+											         	data:JSON.stringify(data),
+													 	dataType:'json',
+											       	   	success:function (data) {
+											       	   		if(data.result=="yes"){
+															alert("课程信息更新成功！");
+															$("#updateCourseModal").modal('hide');  //手动关闭
+															window.location.href ="/testManage/getAllCourses.action";//更新添加成功后的数据
+															}else{
+																alert("保存失败");
+														    }
+											          	  
+											         	 }
+											   	 });
+													
+												
+											}
+											// 删除课程
+											function deleteCourse(id) {
+												if (confirm("确定删除该试题？")==true){ 
+													 	$.ajax({
+											       	   method:"post",
+											       	   contentType: 'application/json; charset=UTF-8',
+											         	url:"/testManage/deleteCourse.action",
+											         	data:{c_id:c_id},
+													 	dataType:'json',
+											       	   	success:function (data) {
+											       	   		if(data.result=="1"){
+																	alert("课程删除成功！");
+															}else if(data.result=="-1"){
+																	alert("该课程下有章节，不能删除！");
+															}else{
+																	alert("课程删除失败！");
+															}
+											          }
+												   	 });
+												 }else{ 
+												  return false; 
+												 } 
+										   	 		   	 
+											   
+											}
+													</script>								
+											  
+											</form>  
+				   						</div>
+				   						<div class="modal-footer">
+											<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+											<button type="button" class="btn btn-primary" onclick="updateCourse()">保存修改</button>
+										</div>
 				   					</div><!--/ model-content -->
 				   				</div><!--/ model-dialog -->
 				   			</div><!--/ model -->

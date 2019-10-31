@@ -393,7 +393,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 												       	   		if(data.result=="yes"){
 																alert("添加成功");
 																$("#myModal").modal('hide');  //手动关闭
-																$("#addTB").reset();
+																reset();//清除模态框缓存数据
 																}else{
 																	alert("保存失败");
 															    }

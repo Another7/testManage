@@ -21,4 +21,8 @@ public interface CourseService {
 	public boolean addCourseByBookData(CourseData CourseData);
 	
 	public List<Course> getAllCourses();
+
+	public Course getCoursesByCid(Integer id);
+
+	public int updateCourse(Course course);
 }

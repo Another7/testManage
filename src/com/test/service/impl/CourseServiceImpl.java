@@ -51,7 +51,7 @@ public class CourseServiceImpl implements CourseService{
 		System.out.println(Course.toString());
 		boolean result=CourseDao.addCourse(Course);
 		if(result==true){//如果课程添加成功
-			
+			System.out.println(c_name);
 			Course teBook0=CourseDao.getCourseByName(c_name);
 			Integer ct_c_id=Integer.valueOf(teBook0.getc_id());//获得添加成功的课程编号
 			//System.out.println("c_chapter_num:"+c_chapter_num);
@@ -63,21 +63,29 @@ public class CourseServiceImpl implements CourseService{
 					 chapterTitleDao.addChapterTitle(chapterTitle);
 				}
 			}
-			
-			
-			
 		}
-		
-		
 		return result;
 	}
-  
 	@Override
 	public List<Course> getAllCourses() {
 		// TODO Auto-generated method stub
 		List<Course> list=chapterTitleDao.getAllCourses();
 		
 		return list;
+	}
+
+	@Override
+	public Course getCoursesByCid(Integer c_id) {
+		
+		Course course=CourseDao.getCoursesByCid(c_id);
+		return course;
+	}
+
+	@Override
+	public int updateCourse(Course course) {
+		
+		int result=CourseDao.updateCourse(course);
+		return result;
 	}
 }
 
