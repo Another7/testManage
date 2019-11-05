@@ -402,13 +402,14 @@ public class QuestionController {
 	}
 	
 	/*ÐÞ¸Ä¿Î³ÌÃû³Æ*/
-	@RequestMapping(value = "/updateCourse.action",method = RequestMethod.GET)
+	@RequestMapping(value = "/updateCourse.action",method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String,String> UpdateCourse(@RequestBody Course course){
 		
 		Map<String, String> map=new HashMap<String, String>();
+		System.out.println("UpdateCourse"+course.toString());
 		int rt=CourseService.updateCourse(course);
-		
+		System.out.println(rt);
 		 if(rt>0){
 			map.put("result", "yes");
 		}else{

@@ -2,6 +2,11 @@ package com.test.po;
 
 public class Course {
 
+	public Course() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	Integer c_id;
 	String c_name;
 	Integer c_chapter_num;

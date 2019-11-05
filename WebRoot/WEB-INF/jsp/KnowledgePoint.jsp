@@ -14,7 +14,7 @@
   <head>
     <base href="<%=basePath%>">
     
-    <title>章节管理页面</title>
+    <title>知识点管理页面</title>
     
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	
@@ -34,14 +34,14 @@
 	    $("#new_zipcode").val("");
 	    $("#new_address").val(""); */
 	} 
-	//用户点击修改章节按钮
+	//用户点击修改知识点按钮
 	function editChapter(id) {
 	//alert(id);
 	    $.ajax({
        	   method:"get",
-         	url:"/testManage/getChapterById.action?ct_id"+id,
+         	url:"/testManage/getKnowledgePointById.action?kp_id"+id,
          	contentType: 'application/json; charset=UTF-8',
-         	data:{"c_id":id},
+         	data:{"kp_id":id},
 		 	dataType:'json',
        	   	success:function (data) {
        	   	

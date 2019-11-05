@@ -36,7 +36,7 @@
 	} 
 	//用户点击修改课程按钮
 	function editCourse(id) {
-	alert(id);
+	//alert(id);
 	    $.ajax({
        	   method:"get",
          	url:"/testManage/getCourseById.action?c_id"+id,
@@ -44,7 +44,12 @@
          	data:{"c_id":id},
 		 	dataType:'json',
        	   	success:function (data) {
+       	   	
        	   		$("#updateCourseName").val(data.c_name);
+       	   		$("#c_id").val(data.c_id);
+       	   		$("#c_chapter_num").val(data.c_chapter_num);
+       	   		$("#c_s_id").val(data.c_s_id);
+       	   		
          	 }
    	 });
 	}
@@ -55,7 +60,7 @@
 	       	   method:"post",
 	       	   contentType: 'application/json; charset=UTF-8',
 	         	url:"/testManage/deleteCourse.action",
-	         	data:{c_id:c_id},
+	         	data:{c_id:id},
 			 	dataType:'json',
 	       	   	success:function (data) {
 	       	   		if(data.result=="1"){
@@ -369,9 +374,9 @@
 													 	dataType:'json',
 											       	   	success:function (data) {
 											       	   		if(data.result=="yes"){
-															alert("课程信息更新成功！");
-															$("#updateCourseModal").modal('hide');  //手动关闭
-															window.location.href ="/testManage/getAllCourses.action";//更新添加成功后的数据
+																alert("课程信息更新成功！");
+																$("#updateCourseModal").modal('hide');  //手动关闭
+																window.location.href ="/testManage/getAllCourses.action";//更新添加成功后的数据
 															}else{
 																alert("保存失败");
 														    }

@@ -44,6 +44,7 @@ public class ManageController {
 	@RequestMapping(value = "/getKnowledgePointByCt_id.action",method = RequestMethod.POST)
 	@ResponseBody
 	public List<KnowledgePoint> getKnowledgePointByCt_id(int ct_id){
+		
 		return knowledgePointService.getKnowledgePointByCt_id(ct_id);
 	}
 	
@@ -82,6 +83,7 @@ public class ManageController {
 		Map<String, String> map=new HashMap<String, String>();
 		int status_code = chapterService.updateChapter(chapterTitle);
 		map.put("status_code",String.valueOf(status_code));
+		
 		return map;
 		
 	}
@@ -138,7 +140,7 @@ public class ManageController {
 	@ResponseBody
 	public Map<String,String> addChapters( @RequestBody ChapterData chapter){
 		//String c_id=request.getParameter("c_id");
-		String c_id=chapter.getC_id();
+		String c_id=chapter.getC_id();//»ñÈ¡ÕÂ½Úid
 		String ct_name=chapter.getCt_name();
 		 Map<String, String> map=new HashMap<String, String>();
 		System.out.println("111:"+c_id);
