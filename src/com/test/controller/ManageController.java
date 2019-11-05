@@ -45,7 +45,9 @@ public class ManageController {
 	@ResponseBody
 	public List<KnowledgePoint> getKnowledgePointByCt_id(int ct_id){
 		
-		return knowledgePointService.getKnowledgePointByCt_id(ct_id);
+		List<KnowledgePoint> list=knowledgePointService.getKnowledgePointByCt_id(ct_id);
+		System.out.println("getKnowledgePointService:"+list.toString());
+		return list;
 	}
 	
 	

@@ -98,7 +98,7 @@
 	<div class="container">
      <div class="row">
 			<div class="col-md-12">
-				<h1 class="page-header">章节知识管理</h1>
+				<h1 class="page-header">知识点管理</h1>
 			</div>
 			
 			
@@ -107,9 +107,9 @@
 			<div class="panel-body">
 				<form class="form-inline" method="post" >
 					<div class="form-group">
-						<label for="courseName">章节名称</label> 
-						<input type="text" class="form-control" id="courseName" 
-						                   value="" name="courseName" />
+						<label for="knowledgePointName">知识点名称</label> 
+						<input type="text" class="form-control" id="knowledgePointName" 
+						                   value="" name="knowledgePointName" />
 					</div>
 				
 					<button type="submit" class="btn btn-primary">查询</button>
@@ -117,33 +117,29 @@
 			</div>
 		</div>
 		<a href="#" class="btn btn-primary" data-toggle="modal" 
-		           data-target="#createChapter" onclick="reset()">新建章节</a>
+		           data-target="#createKnowledgePoint" onclick="reset()">新建知识点</a>
 			<div class="row">
 			<div class="col-lg-12">
 				<div class="panel panel-default">
-					<div class="panel-heading">章节信息列表</div>
+					<div class="panel-heading">知识点信息列表</div>
 					<!-- /.panel-heading -->
 					<table class="table table-bordered table-striped">
 						<thead>
 							<tr>
 								<th>编号</th>
-								<th>章节名称</th>
-								<th>知识点</th>
+								<th>知识点名称</th>
 								<th>操作</th>
 							</tr>
 						</thead>
 						<tbody>
-						<c:if test="${ !empty Chapter}">
-							<c:forEach items="${Chapter}" var="chapter"  varStatus="status">
+						<c:if test="${ !empty KnowledgePoint}">
+							<c:forEach items="${KnowledgePoint}" var="KnowledgePoint"  varStatus="status">
 								<tr>
 									<td>${status.index+1 }</td>
-									<td>${chapter.ct_name}</td>
+									<td>${KnowledgePoint.kp_name}</td>
 									<td>
-										<a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#customerEditDialog" onclick= "editChapter(${chapte.ct_id})">查看详情</a>
-									</td>
-									<td>
-										<a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#updateChapterModal" onclick= "editChapter(${chapte.ct_id})">修改</a>
-										<a href="#" class="btn btn-danger btn-xs" onclick="deleteChapter(${chapte.ct_id})">删除</a>
+										<a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#updateKnowledgePointModal" onclick= "editChapter(${KnowledgePoint.kp_id})">修改</a>
+										<a href="#" class="btn btn-danger btn-xs" onclick="deleteKnowledgePoint(${KnowledgePoint.kp_id})">删除</a>
 									</td>
 								</tr>
 							</c:forEach>
@@ -165,22 +161,22 @@
 		           
 		           
 		<!-- -----------------------------添加章节的模态框---------------------------------------------- -->
-				   			<div class="modal fade" id="createChapter"  tabindex="-1" role="diaog" aria-labelledby="myModalLabel" aria-hidden="true">
+				   			<div class="modal fade" id="createKnowledgePoint"  tabindex="-1" role="diaog" aria-labelledby="myModalLabel" aria-hidden="true">
 				   				
 				   				<div class="modal-dialog">
 				   					<div class="modal-content">
 				   						<div class="modal-header">
 				   							<button type="button" class="close" data-dismiss="modal"  aria-hidden="true">&times;</button>
-				   							<h4 class="modal-title" id="myModalLabel">新建章节</h4>
+				   							<h4 class="modal-title" id="myModalLabel">新建知识点</h4>
 				   						</div>
 				   						<div class="modal-body">
 				   						<form class="form-horizontal" role="form" id="addTB">
 				   								
 												
 											  <div class="form-group">
-											    <label for="stem" class="col-md-2 control-label">章节名称</label>
+											    <label for="stem" class="col-md-2 control-label">知识名称</label>
 											    <div class="col-md-8">
-													<input id="chapterName" type="text" class="form-control"  placeholder="">
+													<input id="knowledgePointName" type="text" class="form-control"  placeholder="">
 											    </div>
 											    <div class="col-md-2">
 											    	
@@ -189,17 +185,17 @@
 											
 											  <script type="text/javascript">
 											  /*用户点击添加章节*/
-											  function addChapter(){	
+											  function addknowledgePoint(){	
 											  
 											  		var c_id='${c_id}';    	
-										    		var ct_name=$("#chapterName").val();
+										    		var ct_name=$("#knowledgePointName").val();
 										    		var data={ct_name:ct_name,c_id:c_id};
 										    		
 										    		//alert(c_id);
 										    		//alert(ct_name);
 										    		$.ajax({
 												       	   method:"post",
-												         	url:"/testManage/addChapter.action",
+												         	url:"/testManage/addknowledgePoint.action",
 												         	contentType: 'application/json; charset=UTF-8',
 												         	data:JSON.stringify(data),
 														 	dataType:'json',
@@ -207,13 +203,13 @@
 												       	   		
 												       	   		if(data.result=="yes"){
 										     						alert("添加成功");
-																$("#createChapter").modal('hide');  //手动关闭
+																	$("#createknowledgePoint").modal('hide');  //手动关闭
 																
-																window.location.href ="/testManage/getChapterByCid.action?c_id="+c_id;
+																window.location.href ="/testManage/getknowledgePointByKpid.action?c_id="+c_id;
 																}else{
 																	alert("保存失败");
 															    }
-															    $("#chapterName").val("");
+															    $("#knowledgePointName").val("");
 												          	  
 												         	 }
 												   	 });
@@ -278,7 +274,7 @@
 				   			<!-- --------------结束---------------添加章节的模态框---------------------------------------------- -->
 				   			
 <!-- -----------------------------修改章节的模态框开始---------------------------------------------- -->
-				   			<div class="modal fade" id="updateChapterModal"  tabindex="-1" role="diaog" aria-labelledby="myModalLabel" aria-hidden="true">
+				   			<div class="modal fade" id="#updateKnowledgePointModal"  tabindex="-1" role="diaog" aria-labelledby="myModalLabel" aria-hidden="true">
 				   				
 				   				<div class="modal-dialog">
 				   					<div class="modal-content">
