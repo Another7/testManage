@@ -19,5 +19,7 @@ public interface ChapterTitleDao {
 	public List<Course> getAllCourses();
 	//获取给定的课程id的章节序号最大值
 	public  int getChapterMaxNumByCid(int c_id);
+	//根据ct_id获取章节信息
+	public ChapterTitle getChapterById(Integer ct_id);
 	
 }

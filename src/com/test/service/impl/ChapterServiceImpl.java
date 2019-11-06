@@ -61,6 +61,12 @@ public class ChapterServiceImpl implements ChapterService {
 		ChapterTitle chapterTitle=new ChapterTitle(ct_name,c_id,chapterNum+1);
 		return chapterTitleDao.addChapterTitle(chapterTitle);
 	}
+	@Override
+	public ChapterTitle getChapterById(Integer ct_id) {
+		// TODO Auto-generated method stub
+		
+		return chapterTitleDao.getChapterById(ct_id);
+	}
 	
 	
 

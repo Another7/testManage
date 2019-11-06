@@ -25,4 +25,8 @@ public interface CourseService {
 	public Course getCoursesByCid(Integer id);
 
 	public int updateCourse(Course course);
+	
+	public int deleteCourse(Integer c_id);
+	
+	
 }

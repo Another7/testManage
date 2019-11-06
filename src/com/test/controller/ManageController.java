@@ -164,7 +164,24 @@ public class ManageController {
 	}
 
 	
+	@RequestMapping(value = "/deleteCourse.action")
+	@ResponseBody
+	//根据课程id删除课程
+	public Map<String,String> deleteCourse(int c_id){
+		Map<String, String> map=new HashMap<String, String>();
+		map.put("status_code",String.valueOf(courseService.deleteCourse(c_id)));
+		return map;
+	}
 	
+	
+	@RequestMapping(value = "/getChapterById.action")
+	@ResponseBody
+	//根据章节id获取章节
+	public String getChapterById(HttpServletRequest request,Model model){
+		int ct_id = (int) request.getAttribute("ct_id");
+		model.addAttribute("chapterTitle", chapterService.getChapterById(ct_id));
+		return "chapterManager";
+	}
 	
 	
 	

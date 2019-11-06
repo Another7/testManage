@@ -47,5 +47,11 @@
 		select MAX(ct_num) from chapter_title where ct_c_id=#{c_id}
 	</select>  
 	
+	<!-- 根据章节id查所有信息 -->
+	
+	<select id="getChapterById" parameterType="Integer" resultType="chaptertitle">
+		select * from chapter_title where ct_id=#{ct_id}
+	</select>
+	
 	
 </mapper>

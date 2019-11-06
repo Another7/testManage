@@ -25,6 +25,8 @@ public interface ChapterService {
 	//添加章节
 	public boolean addChapter(Integer c_id,String ct_name);
 
+	//根据章节id查章节信息
+	public ChapterTitle getChapterById(Integer ct_id);
 	
 	
 }

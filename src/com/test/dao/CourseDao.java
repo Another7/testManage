@@ -21,4 +21,8 @@ public interface CourseDao {
 	Course getCoursesByCid(Integer c_id);
 
 	int updateCourse(Course course);
+	
+	int deleteCourse(Integer c_id);
+	
+	
 }

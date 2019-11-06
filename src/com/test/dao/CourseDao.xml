@@ -35,6 +35,10 @@
 			where c_id=#{c_id}
 	</update>
 	
+	
+	<delete id="deleteCourse" parameterType="Integer">
+		delete  from course where c_id=#{c_id}
+	</delete>
 
 	
 	

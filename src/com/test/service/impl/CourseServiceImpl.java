@@ -87,6 +87,23 @@ public class CourseServiceImpl implements CourseService{
 		int result=CourseDao.updateCourse(course);
 		return result;
 	}
+
+	@Override
+	public int deleteCourse(Integer c_id) {
+		// TODO Auto-generated method stub
+		Course course = getCoursesByCid(c_id);
+		if(course.getc_chapter_num()==0){
+			try{
+				CourseDao.deleteCourse(c_id);
+				return 1;//删除成功
+			}catch(Exception e){
+				e.printStackTrace();
+				return 0;//删除失败
+			}
+		}else{
+			return -1;//章节数不为0不能删除
+		}
+	}
 }
 
 
