@@ -20,6 +20,10 @@ public class KnowledgePoint {
 		this.kp_ct_id = kp_ct_id;
 		this.kp_name = kp_name;
 	}
+	public KnowledgePoint() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	public KnowledgePoint(Integer kp_c_id, Integer kp_ct_id, String kp_name) {
 		super();
 		this.kp_c_id = kp_c_id;

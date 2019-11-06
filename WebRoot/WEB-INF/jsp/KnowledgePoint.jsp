@@ -34,8 +34,8 @@
 	    $("#new_zipcode").val("");
 	    $("#new_address").val(""); */
 	} 
-	//用户点击修改知识点按钮
-	function editChapter(id) {
+	//用户点击修改知识点按钮，把知识点内容呈现
+	function editKnowledgePoint(id) {
 	//alert(id);
 	    $.ajax({
        	   method:"get",
@@ -45,30 +45,28 @@
 		 	dataType:'json',
        	   	success:function (data) {
        	   	
-       	   		$("#updateChapterName").val(data.ct_name);
-       	   		$("#ct_id").val(data.ct_id);
-       	   		$("#ct_num").val(data.ct_num);
-       	   		$("#c_c_id").val(data.c_c_id);
+       	   		$("#updateKpName").val(data.kp_name);
+       	   		$("#kp_c_id").val(data.kp_c_id);
+       	   		$("#kp_ct_id").val(data.ct_num);
+       	   		$("#kp_id").val(data.kp_id);
        	   		
          	 }
    	 });
 	}
 	// 删除章节
-	function deleteChapter(id) {
+	function deleteKnowledgePoint(id) {
 		if (confirm("确定删除该章节？")==true){ 
 			 	$.ajax({
 	       	   method:"post",
 	       	   contentType: 'application/json; charset=UTF-8',
-	         	url:"/testManage/deleteChapter.action",
+	         	url:"/testManage/deleteKnowledgePoint.action",
 	         	data:{ct_id:id},
 			 	dataType:'json',
 	       	   	success:function (data) {
-	       	   		if(data.result=="1"){
-							alert("章节删除成功！");
-					}else if(data.result=="-1"){
-							alert("该章节下有知识点，不能删除！");
+	       	   		if(data.status_code=="1"){
+							alert("知识点删除成功！");
 					}else{
-							alert("课程删除失败！");
+							alert("删除失败！");
 					}
 	          }
 		   	 });
@@ -138,7 +136,7 @@
 									<td>${status.index+1 }</td>
 									<td>${KnowledgePoint.kp_name}</td>
 									<td>
-										<a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#updateKnowledgePointModal" onclick= "editChapter(${KnowledgePoint.kp_id})">修改</a>
+										<a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#updateKnowledgePointModal" onclick= "editKnowledgePoint(${KnowledgePoint.kp_id})">修改</a>
 										<a href="#" class="btn btn-danger btn-xs" onclick="deleteKnowledgePoint(${KnowledgePoint.kp_id})">删除</a>
 									</td>
 								</tr>
@@ -174,9 +172,9 @@
 				   								
 												
 											  <div class="form-group">
-											    <label for="stem" class="col-md-2 control-label">知识名称</label>
-											    <div class="col-md-8">
-													<input id="knowledgePointName" type="text" class="form-control"  placeholder="">
+											    <label for="stem" class="col-md-3 control-label">知识点名称</label>
+											    <div class="col-md-9">
+													<input id="kpName" type="text" class="form-control"  placeholder="">
 											    </div>
 											    <div class="col-md-2">
 											    	
@@ -186,14 +184,14 @@
 											  <script type="text/javascript">
 											  /*用户点击添加章节*/
 											  function addknowledgePoint(){	
-											  
 											  		var ct_id='${ct_id}'; 
-											  		var c_id='$ct_c_id}';   	
-										    		var kp_name=$("#knowledgePointName").val();
-										    		var data={ct_name:ct_name,c_id:c_id};
+											  		var c_id='${ct_c_id}'; 
+											  		  	
+										    		var kp_name=$("#kpName").val();
 										    		
-										    		//alert(c_id);
-										    		//alert(ct_name);
+										    		var data={kp_c_id:c_id,kp_ct_id:ct_id,kp_name:kp_name};
+										    		
+										    	
 										    		$.ajax({
 												       	   method:"post",
 												         	url:"/testManage/addknowledgePoint.action",
@@ -202,11 +200,11 @@
 														 	dataType:'json',
 												       	   	success:function (data) {
 												       	   		
-												       	   		if(data.result=="yes"){
+												       	   		if(data.status_code=="1"){
 										     						alert("添加成功");
 																	$("#createknowledgePoint").modal('hide');  //手动关闭
 																
-																window.location.href ="/testManage/getknowledgePointByKpid.action?c_id="+c_id;
+																	window.location.href ="/testManage/getKnowledgePointByCt_id.action?ct_id="+ct_id+"&ct_c_id="+c_id;
 																}else{
 																	alert("保存失败");
 															    }
@@ -263,7 +261,7 @@
 				   						<div class="modal-footer">
 				   							<div class="form-group">
 											    <div class="col-sm-offset-2 col-sm-10">
-											      <button type="button" class="btn btn-primary" onclick="addChapter()">提交</button>
+											      <button type="button" class="btn btn-primary" onclick="addknowledgePoint()">提交</button>
 											      <button type="reset" class="btn btn-default" onclick="reset()" >重置</button>
 				   								
 											    </div>
@@ -281,19 +279,19 @@
 				   					<div class="modal-content">
 				   						<div class="modal-header">
 				   							<button type="button" class="close" data-dismiss="modal"  aria-hidden="true">&times;</button>
-				   							<h4 class="modal-title" id="myModalLabel">修改章节信息</h4>
+				   							<h4 class="modal-title" id="myModalLabel">修改知识点信息</h4>
 				   						</div>
 				   						<div class="modal-body">
 				   						<form class="form-horizontal" role="form" id="addTB">
 				   								
 												
 											  <div class="form-group">
-											    <label for="stem" class="col-md-2 control-label">章节名称</label>
+											    <label for="stem" class="col-md-2 control-label">知识点名称</label>
 											    <div class="col-md-8">
-											    <input type="hidden" id="ct_id" name="ct_id"/><!-- 章节id -->
-											    <input type="hidden" id="ct_num" name="ct_num"/><!-- 章节数 -->
-											     <input type="hidden" id="ct_c_id" name="ct_c_id"/><!-- 所属课程 -->
-											      <input type="text" class="form-control" id="updateChapterName" placeholder="">
+											    <input type="hidden" id="kp_id" name="kp_id"/><!-- 知识点id -->
+											    <input type="hidden" id="kp_ct_id" name="kp_ct_id"/><!-- 知识点所属章节id -->
+											     <input type="hidden" id="kp_c_id" name="kp_c_id"/><!-- 所属课程id -->
+											      <input type="text" class="form-control" id="updateKpName" placeholder="">
 											    </div>
 											    <div class="col-md-2"></div>
 											  </div><!-- /form-gromp -->	

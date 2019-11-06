@@ -49,17 +49,18 @@ public class ManageController {
 		System.out.println("getKnowledgePointService:"+list.toString());
 		model.addAttribute("knowledgePoint",list);
 		model.addAttribute("ct_id",ct_id);
-		model.addAttribute("c_id",ct_c_id);
+		model.addAttribute("ct_c_id",ct_c_id);
 		return "KnowledgePoint";
 	}
 	
 	
 	
 	//添加知识点
-	@RequestMapping(value = "/addKnowledgePoint.action",method = RequestMethod.POST)
+	@RequestMapping(value = "/addknowledgePoint.action",method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String,String> addKnowledgePoint(@RequestBody KnowledgePoint knowledgePoint){
 		Map<String, String> map=new HashMap<String, String>();
+		System.out.println(knowledgePoint.toString());
 		int status_code = knowledgePointService.addKnowledgePoint(knowledgePoint);
 		map.put("status_code",String.valueOf(status_code));
 		return map;
