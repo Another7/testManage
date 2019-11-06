@@ -132,8 +132,8 @@
 							</tr>
 						</thead>
 						<tbody>
-						<c:if test="${ !empty KnowledgePoint}">
-							<c:forEach items="${KnowledgePoint}" var="KnowledgePoint"  varStatus="status">
+						<c:if test="${ !empty knowledgePoint}">
+							<c:forEach items="${knowledgePoint}" var="KnowledgePoint"  varStatus="status">
 								<tr>
 									<td>${status.index+1 }</td>
 									<td>${KnowledgePoint.kp_name}</td>
@@ -187,8 +187,9 @@
 											  /*用户点击添加章节*/
 											  function addknowledgePoint(){	
 											  
-											  		var c_id='${c_id}';    	
-										    		var ct_name=$("#knowledgePointName").val();
+											  		var ct_id='${ct_id}'; 
+											  		var c_id='$ct_c_id}';   	
+										    		var kp_name=$("#knowledgePointName").val();
 										    		var data={ct_name:ct_name,c_id:c_id};
 										    		
 										    		//alert(c_id);
