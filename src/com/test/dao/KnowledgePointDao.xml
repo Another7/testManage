@@ -26,5 +26,16 @@
 	<delete id="deleteKnowledgePointByKp_id" parameterType="Integer">
 		delete  from knowledge_point where kp_id=#{kp_id}
 	</delete>
+	
+	<!-- 修改 -->
+	<update id="updateKnowledgePoint" parameterType="KnowledgePoint">
+		update knowledge_point set kp_name=#{kp_name}
+		where kp_id=#{kp_id}
+	</update>
+	
+	<!-- 根据kp_id获取kp -->
+	<select id="getKnowledgePointByKp_id" parameterType="Integer" resultType="KnowledgePoint">
+		select * from knowledge_point where kp_id=#{kp_id}
+	</select>
 
 </mapper>

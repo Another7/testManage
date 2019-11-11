@@ -12,4 +12,6 @@ public interface KnowledgePointDao {
 	public int addKnowledgePoint(KnowledgePoint knowledgePoint);
 	//É¾³ýÖªÊ¶µã
 	public int deleteKnowledgePointByKp_id(int kp_id);
+	public int  updateKnowledgePoint(KnowledgePoint knowledgePoint);
+	public KnowledgePoint getKnowledgePointByKp_id(int kp_id);
 }

@@ -69,12 +69,12 @@ public class ManageController {
 	
 	
 	//删除知识点
-	@RequestMapping(value = "/deleteKnowledgePointByKp_id.action",method = RequestMethod.POST)
+	@RequestMapping(value = "/deleteKnowledgePointByKp_id.action",method = RequestMethod.GET)
 	@ResponseBody
-	public Map<String,String> deleteKnowledgePointByKp_id(int kp_id){
+	public Map<String,String> deleteKnowledgePointByKp_id(String kp_id){
 		
 		Map<String, String> map=new HashMap<String, String>();
-		int status_code = knowledgePointService.deleteKnowledgePointByKp_id(kp_id);
+		int status_code = knowledgePointService.deleteKnowledgePointByKp_id(Integer.valueOf(kp_id));
 		map.put("status_code",String.valueOf(status_code));
 		return map;
 		
@@ -96,12 +96,14 @@ public class ManageController {
 	
 	
 	//删除章节
-	@RequestMapping(value = "/deleteChapterByCid.action",method = RequestMethod.POST)
+	@RequestMapping(value = "/deleteChapterByCtid.action",method = RequestMethod.GET)
 	@ResponseBody
-	public Map<String,String> deleteChapterByCid(int ct_id){
+	public Map<String,String> deleteChapterByCid(String ct_id){
 		
 		Map<String, String> map=new HashMap<String, String>();
-		int status_code = chapterService.deleteChapterByCid(ct_id);
+		System.out.println(ct_id);
+		int status_code = chapterService.deleteChapterByCid(Integer.valueOf(ct_id));
+		System.out.println(status_code);
 		map.put("status_code",String.valueOf(status_code));
 		return map;
 		
@@ -129,15 +131,15 @@ public class ManageController {
 	@RequestMapping(value = "/getChapterByCid.action",method = RequestMethod.GET)
 	public String getChapters(HttpServletRequest request,String c_id,Model model){
 		//String c_id=request.getParameter("c_id");
-		System.out.println(c_id);
+		//System.out.println(c_id);
 		
-		System.out.println("getChapter:"+c_id);
+		//System.out.println("getChapter:"+c_id);
 		
 		List<ChapterTitle> list=chapterService.getChapterByCid(String.valueOf(c_id));
 		model.addAttribute("Chapter",list);
 		model.addAttribute("c_id",c_id);
 		
-		System.out.println("CourseList:"+list.toString());
+		//System.out.println("CourseList:"+list.toString());
 		return "ChapterManage";
 		
 	}
@@ -150,8 +152,8 @@ public class ManageController {
 		String c_id=chapter.getC_id();//获取章节id
 		String ct_name=chapter.getCt_name();
 		 Map<String, String> map=new HashMap<String, String>();
-		System.out.println("111:"+c_id);
-		System.out.println("addChapters222:"+ct_name);
+	//	System.out.println("111:"+c_id);
+		//System.out.println("addChapters222:"+ct_name);
 		
 		boolean result=chapterService.addChapter(Integer.valueOf(c_id),ct_name);
 		if(result){
@@ -163,26 +165,55 @@ public class ManageController {
 		
 	}
 
-	
-	@RequestMapping(value = "/deleteCourse.action")
-	@ResponseBody
 	//根据课程id删除课程
-	public Map<String,String> deleteCourse(int c_id){
+	@RequestMapping(value = "/deleteCourse.action", method = RequestMethod.GET)
+	@ResponseBody
+	public Map<String,String> deleteCourse(String c_id){
 		Map<String, String> map=new HashMap<String, String>();
-		map.put("status_code",String.valueOf(courseService.deleteCourse(c_id)));
+		//System.out.println(c_id); 
+		int status_code=courseService.deleteCourse(Integer.valueOf(c_id));
+		//System.out.println(status_code);
+		map.put("status_code",String.valueOf(status_code));
 		return map;
 	}
-	
-	
-	@RequestMapping(value = "/getChapterById.action")
-	@ResponseBody
 	//根据章节id获取章节
-	public String getChapterById(HttpServletRequest request,Model model){
-		int ct_id = (int) request.getAttribute("ct_id");
-		model.addAttribute("chapterTitle", chapterService.getChapterById(ct_id));
-		return "chapterManager";
+	@RequestMapping(value = "/getChapterById.action", method = RequestMethod.GET)
+	@ResponseBody
+	public ChapterTitle getChapterById(HttpServletRequest request){
+		String ct_id=(String) request.getParameter("ct_id");
+		//System.out.println("ct_id:"+ct_id);
+		ChapterTitle chapter=chapterService.getChapterById(Integer.valueOf(ct_id));
+		return chapter;
+		
 	}
 	
+	
+	//修改知识点
+		@RequestMapping(value = "/updateKnowledgePoint.action",method = RequestMethod.POST)
+		@ResponseBody
+		public Map<String,String> updateChapter(@RequestBody KnowledgePoint knowledgePoint){
+			
+			Map<String, String> map=new HashMap<String, String>();
+			int status_code = knowledgePointService.updateKnowledgePoint(knowledgePoint);
+			map.put("status_code",String.valueOf(status_code));
+			
+			return map;
+			
+		}
+		
+		
+		////获取知识点
+		@RequestMapping(value = "/getKnowledgePointByKpId.action", method = RequestMethod.GET)
+		@ResponseBody
+		public KnowledgePoint getKnowledgePointById(HttpServletRequest request){
+			String kp_id=(String) request.getParameter("kp_id");
+			//System.out.println("ct_id:"+ct_id);
+			KnowledgePoint knowledgePoint=knowledgePointService.getKnowledgePointById(Integer.valueOf(kp_id));
+			System.out.println(knowledgePoint.toString());
+			return knowledgePoint;
+			
+		}
+		
 	
 	
 }

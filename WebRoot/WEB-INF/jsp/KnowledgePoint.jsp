@@ -36,12 +36,11 @@
 	} 
 	//用户点击修改知识点按钮，把知识点内容呈现
 	function editKnowledgePoint(id) {
-	//alert(id);
+	alert(id);
 	    $.ajax({
        	   method:"get",
-         	url:"/testManage/getKnowledgePointById.action?kp_id"+id,
+         	url:"/testManage/getKnowledgePointByKpId.action?kp_id="+id,
          	contentType: 'application/json; charset=UTF-8',
-         	data:{"kp_id":id},
 		 	dataType:'json',
        	   	success:function (data) {
        	   	
@@ -54,21 +53,22 @@
    	 });
 	}
 	// 删除章节
-	function deleteKnowledgePoint(id) {
-		if (confirm("确定删除该章节？")==true){ 
+	function deleteKnowledgePoint(id,ctid) {
+		if (confirm("确定删除该知识点？")==true){ 
 			 	$.ajax({
-	       	   method:"post",
-	       	   contentType: 'application/json; charset=UTF-8',
-	         	url:"/testManage/deleteKnowledgePoint.action",
-	         	data:{ct_id:id},
-			 	dataType:'json',
-	       	   	success:function (data) {
-	       	   		if(data.status_code=="1"){
-							alert("知识点删除成功！");
-					}else{
-							alert("删除失败！");
-					}
-	          }
+		       	   method:"get",
+		       	   contentType: 'application/json; charset=UTF-8',
+		         	url:"/testManage/deleteKnowledgePointByKp_id.action?kp_id="+id,
+				 	dataType:'json',
+		       	   	success:function (data) {
+		       	   		if(data.status_code=="1"){
+								alert("知识点删除成功！");
+						}else{
+								alert("删除失败！");
+						}
+						window.location.href ="/testManage/getKnowledgePointByCt_id.action?ct_id="+ctid;//更新数据
+						
+		          }
 		   	 });
 		 }else{ 
 		  	return false;
@@ -136,10 +136,10 @@
 									<td>${status.index+1 }</td>
 									<td>${KnowledgePoint.kp_name}</td>
 									<td>
-										<a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#updateKnowledgePointModal" onclick= "editKnowledgePoint(${KnowledgePoint.kp_id})">修改</a>
-										<a href="#" class="btn btn-danger btn-xs" onclick="deleteKnowledgePoint(${KnowledgePoint.kp_id})">删除</a>
+										<a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal" onclick= "editKnowledgePoint(${KnowledgePoint.kp_id})">修改</a>
+										<a href="javascript:void(0);" class="btn btn-danger btn-xs" onclick="deleteKnowledgePoint(${KnowledgePoint.kp_id},${KnowledgePoint.kp_ct_id })">删除</a>
 									</td>
-								</tr>
+								</tr>  
 							</c:forEach>
 						</c:if>
 						</tbody>
@@ -272,8 +272,8 @@
 				   			</div><!--/ model -->
 				   			<!-- --------------结束---------------添加章节的模态框---------------------------------------------- -->
 				   			
-<!-- -----------------------------修改章节的模态框开始---------------------------------------------- -->
-				   			<div class="modal fade" id="#updateKnowledgePointModal"  tabindex="-1" role="diaog" aria-labelledby="myModalLabel" aria-hidden="true">
+<!-- -----------------------------修改的模态框开始---------------------------------------------- -->
+				   			<div class="modal fade" id="#myModal"  tabindex="-1" role="diaog" aria-labelledby="myModalLabel" aria-hidden="true">
 				   				
 				   				<div class="modal-dialog">
 				   					<div class="modal-content">
@@ -300,22 +300,22 @@
 											
 										    // 点击保存修改章节操作
 											function updateChapter() {
-												var id=$("#ct_id").val();
-												var num=$("#ct_num").val();
-												var cid=$("#ct_c_id").val();
-												var name= $("#updateChapterName").val();
-												var data={ct_id:id,ct_name:name,ct_c_id:cid,ct_num:num};
+												var id=$("#kp_id").val();
+												var ctid=$("#kp_ct_id").val();
+												var cid=$("#kp_c_id").val();
+												var kpname= $("#updateKpName").val();
+												var data={kp_id:id,kp_c_id:cid,kp_ct_id:ctid,kp_name:kpname};
 												$.ajax({
 											       	   method:"post",
-											         	url:"/testManage/updateChapter.action",
+											         	url:"/testManage/updateKnowledgePoint.action",
 											         	contentType: 'application/json; charset=UTF-8',
 											         	data:JSON.stringify(data),
 													 	dataType:'json',
 											       	   	success:function (data) {
 											       	   		if(data.status_code=="1"){
-																alert("章节更新成功！");
-																$("#updateChapterModal").modal('hide');  //手动关闭
-															//	window.location.href ="/testManage/getAllCourses.action";//更新添加成功后的数据
+																alert("知识点更新成功！");
+																$("#myModal").modal('hide');  //手动关闭
+																window.location.href ="/testManage/getKnowledgePointByCt_id.action?ct_id="+ctid+"&ct_c_id="+cid;//更新添加成功后的数据
 															}else{
 																alert("保存失败");
 														    }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.test.po.ChapterTitle;
 import com.test.po.Course;
+import com.test.po.KnowledgePoint;
 
 
 
@@ -27,6 +28,9 @@ public interface ChapterService {
 
 	//根据章节id查章节信息
 	public ChapterTitle getChapterById(Integer ct_id);
+
+
+
 	
 	
 }

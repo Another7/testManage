@@ -55,24 +55,28 @@
 	}
 	// 删除课程
 	function deleteCourse(id) {
-		if (confirm("确定删除该试题？")==true){ 
-			 	$.ajax({
-	       	   method:"post",
-	       	   contentType: 'application/json; charset=UTF-8',
-	         	url:"/testManage/deleteCourse.action",
-	         	data:{c_id:id},
-			 	dataType:'json',
-	       	   	success:function (data) {
-	       	   		if(data.result=="1"){
-							alert("课程删除成功！");
-					}else if(data.result=="-1"){
-							alert("该课程下有章节，不能删除！");
-					}else{
-							alert("课程删除失败！");
-					}
-	          }
-		   	 });
+		if (confirm("确定删除该课程？")==true){ 
+				$.ajax({
+			       	   method:"GET",
+			         	url:"/testManage/deleteCourse.action?c_id="+id,
+			         	contentType: 'application/json; charset=UTF-8',
+					 	dataType:'json',
+			       	   	success:function (data) {
+			       	   		//alert();
+			       	   		if(data.status_code=="1"){
+								alert("课程删除成功！");
+							}else if(data.status_code=="-1"){
+									alert("该课程下有章节，不能删除！");
+							}else{
+									alert("课程删除失败！");
+							}
+							window.location.href ="/testManage/getAllCourses.action";//更新添加成功后的数据
+				          	  
+				         	 }
+			   	 });
+			 
 		 }else{ 
+		 	alert();
 		  	return false;
 		 } 
    	 		   	 
@@ -148,7 +152,7 @@
 									</td>
 									<td>
 										<a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#updateCourseModal" onclick= "editCourse(${course.c_id})">修改</a>
-										<a href="#" class="btn btn-danger btn-xs" onclick="deleteCourse(${course.c_id})">删除</a>
+										<a href="javascript:void(0);" class="btn btn-danger btn-xs" onclick="deleteCourse(${course.c_id})">删除</a>
 									</td>
 								</tr>
 							</c:forEach>

@@ -36,12 +36,11 @@
 	} 
 	//用户点击修改章节按钮
 	function editChapter(id) {
-	//alert(id);
+	alert(id);
 	    $.ajax({
        	   method:"get",
-         	url:"/testManage/getChapterById.action?ct_id"+id,
+         	url:"/testManage/getChapterById.action?ct_id="+id,
          	contentType: 'application/json; charset=UTF-8',
-         	data:{"c_id":id},
 		 	dataType:'json',
        	   	success:function (data) {
        	   	
@@ -54,22 +53,24 @@
    	 });
 	}
 	// 删除章节
-	function deleteChapter(id) {
+	function deleteChapter(id,cid) {
+	alert(id);
+	alert(cid);
 		if (confirm("确定删除该章节？")==true){ 
 			 	$.ajax({
-	       	   method:"post",
+	       	   method:"GET",
 	       	   contentType: 'application/json; charset=UTF-8',
-	         	url:"/testManage/deleteChapter.action",
-	         	data:{ct_id:id},
+	         	url:"/testManage/deleteChapterByCtid.action?ct_id="+id,
 			 	dataType:'json',
 	       	   	success:function (data) {
-	       	   		if(data.result=="1"){
+	       	   		if(data.status_code=="1"){
 							alert("章节删除成功！");
-					}else if(data.result=="-1"){
+					}else if(data.status_code=="-1"){
 							alert("该章节下有知识点，不能删除！");
 					}else{
-							alert("课程删除失败！");
+							alert("章节删除失败！");
 					}
+					window.location.href ="/testManage/getChapterByCid.action?c_id="+cid;//更新添加成功后的数据
 	          }
 		   	 });
 		 }else{ 
@@ -142,8 +143,8 @@
 										<a href="getKnowledgePointByCt_id.action?ct_id=${chapter.ct_id}&ct_c_id=${chapter.ct_c_id}" class="btn btn-primary btn-xs"  >查看详情</a>
 									</td>
 									<td>
-										<a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#updateChapterModal" onclick= "editChapter(${chapte.ct_id})">修改</a>
-										<a href="#" class="btn btn-danger btn-xs" onclick="deleteChapter(${chapte.ct_id})">删除</a>
+										<a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#updateChapterModal" onclick= "editChapter(${chapter.ct_id})">修改</a>
+										<a href="javascript:void(0);" class="btn btn-danger btn-xs" onclick="deleteChapter(${chapter.ct_id},${chapter.ct_c_id })">删除</a>
 									</td>
 								</tr>
 							</c:forEach>

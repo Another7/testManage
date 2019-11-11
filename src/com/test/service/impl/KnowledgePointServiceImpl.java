@@ -35,4 +35,21 @@ public class KnowledgePointServiceImpl implements KnowledgePointService {
 		return 1;
 	}
 
+	@Override
+	public int updateKnowledgePoint(KnowledgePoint knowledgePoint) {
+		try{
+			knowledgePointDao.updateKnowledgePoint(knowledgePoint);
+		}catch(Exception e){
+			return 0;//更新失败
+		}
+		return 1;//更新成功
+	}
+
+	@Override
+	public KnowledgePoint getKnowledgePointById(int kp_id) {
+		
+		
+		return knowledgePointDao.getKnowledgePointByKp_id(kp_id);
+	}
+
 }

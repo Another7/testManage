@@ -2,6 +2,10 @@ package com.test.po;
 
 public class ChapterTitle {
 
+	public ChapterTitle() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	public ChapterTitle(String ct_name, Integer ct_c_id, Integer ct_num) {
 		super();
 		this.ct_name = ct_name;
