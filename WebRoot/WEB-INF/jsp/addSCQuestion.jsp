@@ -73,23 +73,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		var chapterId=$("#addChapter").val();
     		//alert(kemu);
     		$.ajax({
-	       	   method:"post",
-	         	url:"/testManage/getKnowledgePointByCt_id.action",
-	         	data:{"ct_id":chapterId},
+	       	   method:"get",
+	         	url:"/testManage/getKnowledgePointByCt_id.action?ct_id="+chapterId,
 			 	dataType:'json',
 	       	   	success:function (res) {
+	       	   			alert(res.length);    
 	       	   		if(res.length == 0){
                         //如果一级没有对应的二级 则清空二级并 不往下执行
                         $("#addChapter").empty();
                         return ;
                    	 }
-                   //	 alert(res.length);
+                   	 
 	          		 var str="";
 	           	  	for (var i = 0; i < res.length; i++) {
 	            	 	   str+="<option value='"+res[i].kp_id+"'>"+res[i].kp_name+"</option>";
 	         	 	 } 
-	         	 	// alert(str);
-	         	 	// alert(res[i].kp_name);
 	           	  $("#point").append(str);
 	           	//  alert($("#point")==null);
 	          	  $("#point").find("option[text='--请选择--']").attr("selected",true);
@@ -254,34 +252,38 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				    </div>
 				    <div class="col-md-2"></div>
 				  </div>
-				   <div class="form-group">
-				    <label for="text" class="col-md-2 control-label">选项4</label>
-				    <div class="col-md-8">
-				      <input type="text" class="form-control"  placeholder="">
-				    </div>
-				    <div class="col-md-2">
-				    	<!-- <a id ="addClick" class="btn btn-default btn-md"   onclick="addXuanXiang()">
+							<div class="form-group">
+								<label for="text" class="col-md-2 control-label">选项4</label>
+								<div class="col-md-8">
+									<input type="text" class="form-control" placeholder="">
+								</div>
+								<div class="col-md-2">
+									<!-- <a id ="addClick" class="btn btn-default btn-md"   onclick="addXuanXiang()">
 				    		<span class="glyphicon glyphicon-plus" ></span>添加选项
 				    	</a> -->
-				    </div>
-				    <div class="form-group">
-				    <label for="stem" class="col-md-2 control-label">试题难度：</label>
-				   
-				     <div class="col-md-8">
-				      <!--  <textarea id="point" class="form-control" rows="2"></textarea> -->
-				       <!-- 一级下拉框 -->
-						<select id="level"	class=" form-control" name="level"  >
-							<option value="">--请选择--</option>
-							<option value="1">容易</option>
-							<option value="2">普通</option>
-							<option value="3">较难</option>
-							<option value="4">困难</option>
-						</select>
-				    </div>
-				    <div class="col-md-2"></div>
-				  </div>
-				  </div>
-				  </div><!-- /选项结束 -->
+								</div>
+								
+							</div>
+							
+							<div class="form-group">
+									<label for="stem" class="col-md-2 control-label">试题难度：</label>
+
+									<div class="col-md-8">
+										<!--  <textarea id="point" class="form-control" rows="2"></textarea> -->
+										<!-- 一级下拉框 -->
+										<select id="level" class=" form-control" name="level">
+											<option value="">--请选择--</option>
+											<option value="1">容易</option>
+											<option value="2">普通</option>
+											<option value="3">较难</option>
+											<option value="4">困难</option>
+										</select>
+									</div>
+									<div class="col-md-2"></div>
+								</div>
+								
+								
+						</div><!-- /选项结束 -->
 				  <div class="form-group">
 				    <label for="text" class="col-md-2 control-label">正确答案：</label>
 				    <div class="col-md-8">

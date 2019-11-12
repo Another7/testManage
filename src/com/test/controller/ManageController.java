@@ -32,7 +32,7 @@ public class ManageController {
 	private KnowledgePointService knowledgePointService;
 	
 	@Autowired
-	private ChapterService chapterService;
+	private ChapterService chapterService;     
 	
 	@Autowired
 	private CourseService courseService;
@@ -42,15 +42,15 @@ public class ManageController {
 	
 	//根据章节id查询该章节下的所有知识点
 	@RequestMapping(value = "/getKnowledgePointByCt_id.action",method = RequestMethod.GET)
-	public String getKnowledgePointByCt_id(HttpServletRequest request,String ct_id,String ct_c_id,Model model ){
+	public List<KnowledgePoint> getKnowledgePointByCt_id(HttpServletRequest request,String ct_id,Model model ){
 		
 		System.out.println("ctId:"+ct_id);
 		List<KnowledgePoint> list=knowledgePointService.getKnowledgePointByCt_id(Integer.valueOf(ct_id));
 		System.out.println("getKnowledgePointService:"+list.toString());
-		model.addAttribute("knowledgePoint",list);
+		//model.addAttribute("knowledgePoint",list);
 		model.addAttribute("ct_id",ct_id);
-		model.addAttribute("ct_c_id",ct_c_id);
-		return "KnowledgePoint";
+		//model.addAttribute("ct_c_id",ct_c_id);
+		return list;
 	}
 	
 	
