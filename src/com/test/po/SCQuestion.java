@@ -17,11 +17,12 @@ public class SCQuestion {
 	private String sc_t_name;//出题人
 	private Integer sc_c_id;//课程编号
 	private Integer sc_ct_id;//章节编号
+	private Integer sc_level;//试题难度
 	
 	
 	public SCQuestion(Integer sc_subject, String sc_point, String sc_stem,
 			String sc_option, String sc_answer, String sc_analysis,
-			String sc_t_name, Integer sc_c_id, Integer sc_ct_id) {
+			String sc_t_name, Integer sc_c_id, Integer sc_ct_id,Integer sc_level) {
 		super();
 		this.sc_subject = sc_subject;
 		this.sc_point = sc_point;
@@ -32,29 +33,42 @@ public class SCQuestion {
 		this.sc_t_name = sc_t_name;
 		this.sc_c_id = sc_c_id;
 		this.sc_ct_id = sc_ct_id;
+		this.sc_level=sc_level;
 	}
 
 	
+	public Integer getSc_level() {
+		return sc_level;
+	}
+
+
+	public void setSc_level(Integer sc_level) {
+		this.sc_level = sc_level;
+	}
+
+
 	public SCQuestion() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 
+	
+
+
 	@Override
 	public String toString() {
-		return "SCQuestion [sc_id=" + sc_id + ", sc_subject=" + sc_subject
-				+ ", sc_point=" + sc_point + ", sc_stem=" + sc_stem
-				+ ", sc_option=" + sc_option + ", sc_answer=" + sc_answer
-				+ ", sc_analysis=" + sc_analysis + ", sc_t_name=" + sc_t_name
-				+ ", sc_c_id=" + sc_c_id + ", sc_ct_id=" + sc_ct_id + "]";
+		return "SCQuestion [sc_id=" + sc_id + ", sc_subject=" + sc_subject + ", sc_point=" + sc_point + ", sc_stem="
+				+ sc_stem + ", sc_option=" + sc_option + ", sc_answer=" + sc_answer + ", sc_analysis=" + sc_analysis
+				+ ", sc_t_name=" + sc_t_name + ", sc_c_id=" + sc_c_id + ", sc_ct_id=" + sc_ct_id + ", sc_level="
+				+ sc_level + "]";
 	}
 
 
 	public SCQuestion(Integer sc_id, Integer sc_subject, String sc_point,
 			String sc_stem, String sc_option, String sc_answer,
 			String sc_analysis, String sc_t_name, Integer sc_c_id,
-			Integer sc_ct_id) {
+			Integer sc_ct_id,Integer sc_level) {
 		super();
 		this.sc_id = sc_id;
 		this.sc_subject = sc_subject;
@@ -66,6 +80,7 @@ public class SCQuestion {
 		this.sc_t_name = sc_t_name;
 		this.sc_c_id = sc_c_id;
 		this.sc_ct_id = sc_ct_id;
+		this.sc_level=sc_level;
 	}
 
 

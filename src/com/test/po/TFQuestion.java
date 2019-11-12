@@ -18,6 +18,13 @@ public class TFQuestion {
 	private String tf_t_name;//出题人
 	private Integer tf_c_id;//课程编号
 	private Integer tf_ct_id;//章节编号
+	private Integer tf_level;//试题难度
+	public Integer getTf_level() {
+		return tf_level;
+	}
+	public void setTf_level(Integer tf_level) {
+		this.tf_level = tf_level;
+	}
 	public Integer getTf_id() {
 		return tf_id;
 	}
@@ -79,7 +86,7 @@ public class TFQuestion {
 				+ ", tf_c_id=" + tf_c_id + ", tf_ct_id=" + tf_ct_id + "]";
 	}
 	public TFQuestion(Integer tf_subject, String tf_point, String tf_stem, String tf_answer, String tf_analysis,
-			 Integer tf_c_id, Integer tf_ct_id) {
+			 Integer tf_c_id, Integer tf_ct_id,Integer tf_level) {
 		super();
 		this.tf_subject = tf_subject;
 		this.tf_point = tf_point;
@@ -89,9 +96,10 @@ public class TFQuestion {
 	
 		this.tf_c_id = tf_c_id;
 		this.tf_ct_id = tf_ct_id;
+		this.tf_level=tf_level;
 	}
 	public TFQuestion(Integer tf_id, Integer tf_subject, String tf_point, String tf_stem, String tf_answer,
-			String tf_analysis, String tf_t_name, Integer tf_c_id, Integer tf_ct_id) {
+			String tf_analysis, String tf_t_name, Integer tf_c_id, Integer tf_ct_id,Integer tf_level) {
 		super();
 		this.tf_id = tf_id;
 		this.tf_subject = tf_subject;
@@ -102,6 +110,7 @@ public class TFQuestion {
 		this.tf_t_name = tf_t_name;
 		this.tf_c_id = tf_c_id;
 		this.tf_ct_id = tf_ct_id;
+		this.tf_level=tf_level;
 	}
 	public TFQuestion() {
 		super();

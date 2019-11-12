@@ -18,10 +18,11 @@ public class FBQuestion {
 	private String fb_analysis;//出题人
 	private Integer fb_c_id;//课程编号
 	private Integer fb_ct_id;//章节编号
+	private Integer fb_level;//试题难度
 	
 	public FBQuestion(Integer fb_subject, String fb_point, String fb_stem,
 			String fb_answer, String fb_analysis, Integer fb_c_id,
-			Integer fb_ct_id) {
+			Integer fb_ct_id,Integer fb_level) {
 		super();
 		this.fb_subject = fb_subject;
 		this.fb_point = fb_point;
@@ -30,6 +31,8 @@ public class FBQuestion {
 		this.fb_analysis = fb_analysis;
 		this.fb_c_id = fb_c_id;
 		this.fb_ct_id = fb_ct_id;
+		this.fb_level=fb_level;
+		
 	}
 
 	public FBQuestion() {
@@ -87,7 +90,7 @@ public class FBQuestion {
 
 	public FBQuestion(Integer fb_id, Integer fb_subject, String fb_point,
 			String fb_stem, String fb_answer, String fb_t_name,
-			String fb_analysis, Integer fb_c_id, Integer fb_ct_id) {
+			String fb_analysis, Integer fb_c_id, Integer fb_ct_id,Integer fb_level) {
 		super();
 		this.fb_id = fb_id;
 		this.fb_subject = fb_subject;
@@ -98,6 +101,15 @@ public class FBQuestion {
 		this.fb_analysis = fb_analysis;
 		this.fb_c_id = fb_c_id;
 		this.fb_ct_id = fb_ct_id;
+		this.fb_level=fb_level;
+	}
+
+	public Integer getFb_level() {
+		return fb_level;
+	}
+
+	public void setFb_level(Integer fb_level) {
+		this.fb_level = fb_level;
 	}
 
 	public String getFb_analysis() {

@@ -11,9 +11,10 @@ public class MCQuestion {
 	private Integer mc_subject;//所属科目id;
 	private String mc_point;//涉及到的知识点
 	private String mc_stem;//题干
+	
 	public MCQuestion(Integer mc_subject, String mc_point, String mc_stem,
 			String mc_option, String mc_answer, String mc_analysis,
-			String mc_c_id, String mc_ct_id) {
+			String mc_c_id, String mc_ct_id,Integer mc_level) {
 		super();
 		this.mc_subject = mc_subject;
 		this.mc_point = mc_point;
@@ -23,6 +24,7 @@ public class MCQuestion {
 		this.mc_analysis = mc_analysis;
 		this.mc_c_id = mc_c_id;
 		this.mc_ct_id = mc_ct_id;
+		this.mc_level=mc_level;
 	}
 
 	private String mc_option;//选项
@@ -32,11 +34,20 @@ public class MCQuestion {
 	private String mc_t_name;//出题人
 	private String mc_c_id;//课程编号
 	private String mc_ct_id;//章节编号
+	private Integer mc_level;//试题难度
 	
+	public Integer getMc_level() {
+		return mc_level;
+	}
+
+	public void setMc_level(Integer mc_level) {
+		this.mc_level = mc_level;
+	}
+
 	public MCQuestion(Integer mc_id, Integer mc_subject, String mc_point,
 			String mc_stem, String mc_option, String mc_answer,
 			String mc_analysis, String mc_t_name, String mc_c_id,
-			String mc_ct_id) {
+			String mc_ct_id,Integer mc_level) {
 		super();
 		this.mc_id = mc_id;
 		this.mc_subject = mc_subject;
@@ -48,15 +59,16 @@ public class MCQuestion {
 		this.mc_t_name = mc_t_name;
 		this.mc_c_id = mc_c_id;
 		this.mc_ct_id = mc_ct_id;
+		this.mc_level=mc_level;
 	}
+
 
 	@Override
 	public String toString() {
-		return "MCQuestion [mc_id=" + mc_id + ", mc_subject=" + mc_subject
-				+ ", mc_point=" + mc_point + ", mc_stem=" + mc_stem
-				+ ", mc_option=" + mc_option + ", mc_answer=" + mc_answer
-				+ ", mc_analysis=" + mc_analysis + ", mc_t_name=" + mc_t_name
-				+ ", mc_c_id=" + mc_c_id + ", mc_ct_id=" + mc_ct_id + "]";
+		return "MCQuestion [mc_id=" + mc_id + ", mc_subject=" + mc_subject + ", mc_point=" + mc_point + ", mc_stem="
+				+ mc_stem + ", mc_option=" + mc_option + ", mc_answer=" + mc_answer + ", mc_analysis=" + mc_analysis
+				+ ", mc_t_name=" + mc_t_name + ", mc_c_id=" + mc_c_id + ", mc_ct_id=" + mc_ct_id + ", mc_level="
+				+ mc_level + "]";
 	}
 
 	public Integer getMc_id() {

@@ -11,7 +11,14 @@ public class SCQuestionData {
 	private String sc_analysis;
 	private Integer sc_c_id;
 	private Integer sc_ct_id;
+	private Integer sc_level;
 	
+	public Integer getSc_level() {
+		return sc_level;
+	}
+	public void setSc_level(Integer sc_level) {
+		this.sc_level = sc_level;
+	}
 	public Integer getSc_subject() {
 		return sc_subject;
 	}
@@ -62,7 +69,7 @@ public class SCQuestionData {
 	}
 	public SCQuestionData(Integer sc_subject, String sc_point, String sc_stem,
 			String sc_option, String sc_answer, String sc_analysis,
-			Integer sc_c_id, Integer sc_ct_id) {
+			Integer sc_c_id, Integer sc_ct_id,Integer sc_level) {
 		
 		this.sc_subject = sc_subject;
 		this.sc_point = sc_point;
@@ -72,6 +79,7 @@ public class SCQuestionData {
 		this.sc_analysis = sc_analysis;
 		this.sc_c_id = sc_c_id;
 		this.sc_ct_id = sc_ct_id;
+		this.sc_level=sc_level;
 	}
 	public SCQuestionData() {
 		super();
@@ -79,12 +87,11 @@ public class SCQuestionData {
 	}
 	@Override
 	public String toString() {
-		return "SCQuestionData [sc_subject=" + sc_subject + ", sc_point="
-				+ sc_point + ", sc_stem=" + sc_stem + ", sc_option="
-				+ sc_option + ", sc_answer=" + sc_answer + ", sc_analysis="
-				+ sc_analysis + ", sc_c_id=" + sc_c_id + ", sc_ct_id="
-				+ sc_ct_id + "]";
+		return "SCQuestionData [sc_subject=" + sc_subject + ", sc_point=" + sc_point + ", sc_stem=" + sc_stem
+				+ ", sc_option=" + sc_option + ", sc_answer=" + sc_answer + ", sc_analysis=" + sc_analysis
+				+ ", sc_c_id=" + sc_c_id + ", sc_ct_id=" + sc_ct_id + ", sc_level=" + sc_level + "]";
 	}
+	
 	
 	
 }

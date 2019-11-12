@@ -125,7 +125,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		var c_id=$("#addCourse").val();
     		var ct_id=$("#addChapter").val();
     		var point=$("#point").val();
-		   var data={sc_subject:subject,sc_point:point,sc_stem:stem,sc_option:option,sc_answer:answer,sc_analysis:analysis,sc_c_id:c_id,sc_ct_id:ct_id};
+    		var level=$("#level").val();
+		   var data={sc_subject:subject,sc_point:point,sc_stem:stem,sc_option:option,sc_answer:answer,sc_analysis:analysis,sc_c_id:c_id,sc_ct_id:ct_id,sc_level:level};
 		   	$.ajax({
 		       	   method:"post",
 		         	url:"/testManage/addSCQuestion.action",
@@ -263,7 +264,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				    		<span class="glyphicon glyphicon-plus" ></span>添加选项
 				    	</a> -->
 				    </div>
-				    
+				    <div class="form-group">
+				    <label for="stem" class="col-md-2 control-label">试题难度：</label>
+				   
+				     <div class="col-md-8">
+				      <!--  <textarea id="point" class="form-control" rows="2"></textarea> -->
+				       <!-- 一级下拉框 -->
+						<select id="level"	class=" form-control" name="level"  >
+							<option value="">--请选择--</option>
+							<option value="1">容易</option>
+							<option value="2">普通</option>
+							<option value="3">较难</option>
+							<option value="4">困难</option>
+						</select>
+				    </div>
+				    <div class="col-md-2"></div>
+				  </div>
 				  </div>
 				  </div><!-- /选项结束 -->
 				  <div class="form-group">
