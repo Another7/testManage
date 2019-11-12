@@ -109,8 +109,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		var c_id=$("#addCourse").val();
     		var ct_id=$("#addChapter").val();
     		var point=$("#point").val();
+    		var level=$("#level").val();
 		   /* var data={tf_subject:subject,tf_point:point,tf_stem:stem,tf_answer:answer,tf_analysis:analysis,tf_c_id:c_id,tf_ct_id:ct_id}; */
-		   var data={tf_subject:subject,tf_point:point,tf_stem:stem,tf_answer:answer,tf_analysis:analysis,tf_c_id:c_id,tf_ct_id:ct_id};
+		   var data={tf_subject:subject,tf_point:point,tf_stem:stem,tf_answer:answer,tf_analysis:analysis,tf_c_id:c_id,tf_ct_id:ct_id,tf_level:level};
 		//   alert(data.toString());
 		   	$.ajax({
 		       	   method:"post",
@@ -217,7 +218,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				    <div class="col-md-2"></div>
 				  </div>
 				 
-				
+				<div class="form-group">
+									<label for="stem" class="col-md-2 control-label">试题难度：</label>
+
+									<div class="col-md-8">
+										<!--  <textarea id="point" class="form-control" rows="2"></textarea> -->
+										<!-- 一级下拉框 -->
+										<select id="level" class=" form-control" name="level">
+											<option value="">--请选择--</option>
+											<option value="1">容易</option>
+											<option value="2">普通</option>
+											<option value="3">较难</option>
+											<option value="4">困难</option>
+										</select>
+									</div>
+									<div class="col-md-2"></div>
+								</div>
 				  <div class="form-group">
 				    <label for="text" class="col-md-2 control-label">正确答案：</label>
 				    <div class="col-md-8">

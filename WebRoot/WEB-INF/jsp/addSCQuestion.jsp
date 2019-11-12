@@ -73,8 +73,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		var chapterId=$("#addChapter").val();
     		//alert(kemu);
     		$.ajax({
-	       	   method:"get",
-	         	url:"/testManage/getKnowledgePointByCt_id.action?ct_id="+chapterId,
+	       	   method:"post",
+	         	url:"/testManage/getKnowledgePointByCt_id.action",
+	         	data:{"ct_id":chapterId},
 			 	dataType:'json',
 	       	   	success:function (res) {
 	       	   			alert(res.length);    

@@ -107,7 +107,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		var c_id=$("#addCourse").val();
     		var ct_id=$("#addChapter").val();
     		var point=$("#point").val();
-		   var data={qa_subject:subject,qa_point:point,qa_stem:stem,qa_answer:answer,qa_analysis:analysis,qa_c_id:c_id,qa_ct_id:ct_id};
+    		var level=$("#level").val();
+		   var data={qa_subject:subject,qa_point:point,qa_stem:stem,qa_answer:answer,qa_analysis:analysis,qa_c_id:c_id,qa_ct_id:ct_id,qa_level:level};
 		   	$.ajax({
 		       	   method:"post",
 		         	url:"/testManage/addQAQuestion.action",
@@ -212,7 +213,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				    </div>
 				    <div class="col-md-2"></div>
 				  </div>
-				 
+				 <div class="form-group">
+									<label for="stem" class="col-md-2 control-label">试题难度：</label>
+
+									<div class="col-md-8">
+										<!--  <textarea id="point" class="form-control" rows="2"></textarea> -->
+										<!-- 一级下拉框 -->
+										<select id="level" class=" form-control" name="level">
+											<option value="">--请选择--</option>
+											<option value="1">容易</option>
+											<option value="2">普通</option>
+											<option value="3">较难</option>
+											<option value="4">困难</option>
+										</select>
+									</div>
+									<div class="col-md-2"></div>
+								</div>
 				  
 				  <div class="form-group">
 				    <label for="text" class="col-md-2 control-label">正确答案：</label>

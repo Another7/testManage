@@ -140,7 +140,7 @@
 									<td>${status.index+1 }</td>
 									<td>${chapter.ct_name}</td>
 									<td>
-										<a href="getKnowledgePointByCt_id.action?ct_id=${chapter.ct_id}&ct_c_id=${chapter.ct_c_id}" class="btn btn-primary btn-xs"  >查看详情</a>
+										<a href="getKnowledgePointByCt2_id.action?ct_id=${chapter.ct_id}&ct_c_id=${chapter.ct_c_id}" class="btn btn-primary btn-xs"  >查看详情</a>
 									</td>
 									<td>
 										<a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#updateChapterModal" onclick= "editChapter(${chapter.ct_id})">修改</a>

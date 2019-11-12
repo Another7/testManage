@@ -66,7 +66,7 @@
 						}else{
 								alert("删除失败！");
 						}
-						window.location.href ="/testManage/getKnowledgePointByCt_id.action?ct_id="+ctid;//更新数据
+						window.location.href ="/testManage/getKnowledgePointByCt_id.action?ct_id="+ctid+"&ct_c_id="+id;//更新数据
 						
 		          }
 		   	 });

@@ -41,7 +41,8 @@ public class ManageController {
 	private SubjectService subjectService;
 	
 	//根据章节id查询该章节下的所有知识点
-	@RequestMapping(value = "/getKnowledgePointByCt_id.action",method = RequestMethod.GET)
+	@RequestMapping(value = "/getKnowledgePointByCt_id.action",method = RequestMethod.POST)
+	@ResponseBody
 	public List<KnowledgePoint> getKnowledgePointByCt_id(HttpServletRequest request,String ct_id,Model model ){
 		
 		System.out.println("ctId:"+ct_id);
@@ -53,6 +54,20 @@ public class ManageController {
 		return list;
 	}
 	
+	//根据章节id查询该章节下的所有知识点
+		@RequestMapping(value = "/getKnowledgePointByCt2_id.action",method = RequestMethod.GET)
+		@ResponseBody
+		public String getKnowledgePointByCt_id(HttpServletRequest request,String ct_id,String ct_c_id,Model model ){
+			
+			System.out.println("ctId:"+ct_id);
+			List<KnowledgePoint> list=knowledgePointService.getKnowledgePointByCt_id(Integer.valueOf(ct_id));
+			System.out.println("getKnowledgePointService:"+list.toString());
+			model.addAttribute("knowledgePoint",list);
+			model.addAttribute("ct_id",ct_id);
+			model.addAttribute("ct_c_id",ct_c_id);
+			return "KnowledgePoint";
+		}
+		
 	
 	
 	//添加知识点

@@ -13,7 +13,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 <script src="js/jquery.min.js"></script>
  	<script src="js/bootstrap.min.js"></script>
  <link href="css/bootstrap.min.css" rel="stylesheet">
- <script type="text/javascript">
+ <script type="text/javascript">   
  	
  	/* 根据所选择的科目，查找该科目下的课程列表，并显示在select里*/
 		function change(id){	    	
@@ -98,7 +98,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		var c_id=$("#addCourse").val();
     		var ct_id=$("#addChapter").val();
     		var point=$("#point").val();
-		   var data={sc_subject:subject,sc_point:point,sc_stem:stem,sc_option:option,sc_answer:answer,sc_analysis:analysis,sc_c_id:c_id,sc_ct_id:ct_id};
+    		var level=$("#level").val();
+		   var data={sc_subject:subject,sc_point:point,sc_stem:stem,sc_option:option,sc_answer:answer,sc_analysis:analysis,sc_c_id:c_id,sc_ct_id:ct_id,sc_level:level};
 		   	$.ajax({
 		       	   method:"post",
 		         	url:"/testManage/addSCQuestion.action",
@@ -239,12 +240,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				      <input type="text" class="form-control"  placeholder="">
 				    </div>
 				    <div class="col-md-2">
-				    	<a id ="addClick" class="btn btn-default btn-md"   onclick="addXuanXiang()">
+				    	<!-- <a id ="addClick" class="btn btn-default btn-md"   onclick="addXuanXiang()">
 				    		<span class="glyphicon glyphicon-plus" ></span>添加选项
-				    	</a>
+				    	</a> -->
 				    </div>
 				    
 				  </div>
+				  
+				  <div class="form-group">
+									<label for="stem" class="col-md-2 control-label">试题难度：</label>
+
+									<div class="col-md-8">
+										<!--  <textarea id="point" class="form-control" rows="2"></textarea> -->
+										<!-- 一级下拉框 -->
+										<select id="level" class=" form-control" name="level">
+											<option value="">--请选择--</option>
+											<option value="1">容易</option>
+											<option value="2">普通</option>
+											<option value="3">较难</option>
+											<option value="4">困难</option>
+										</select>
+									</div>
+									<div class="col-md-2"></div>
+								</div>
+								
 				  </div><!-- /选项结束 -->
 				  <div class="form-group">
 				    <label for="text" class="col-md-2 control-label">正确答案：</label>

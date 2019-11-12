@@ -125,7 +125,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		var c_id=$("#addCourse").val();
     		var ct_id=$("#addChapter").val();
     		var point=$("#point").val();
-		   var data={mc_subject:subject,mc_point:point,mc_stem:stem,mc_option:option,mc_answer:answer,mc_analysis:analysis,mc_c_id:c_id,mc_ct_id:ct_id};
+    		var level=$("#level").val();
+		   var data={mc_subject:subject,mc_point:point,mc_stem:stem,mc_option:option,mc_answer:answer,mc_analysis:analysis,mc_c_id:c_id,mc_ct_id:ct_id,mc_level:level};
 		   	$.ajax({
 		       	   method:"post",
 		         	url:"/testManage/addMCQuestion.action",
@@ -268,6 +269,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				    </div>
 				    
 				  </div>
+				  
+				  <div class="form-group">
+									<label for="stem" class="col-md-2 control-label">试题难度：</label>
+
+									<div class="col-md-8">
+										<!--  <textarea id="point" class="form-control" rows="2"></textarea> -->
+										<!-- 一级下拉框 -->
+										<select id="level" class=" form-control" name="level">
+											<option value="">--请选择--</option>
+											<option value="1">容易</option>
+											<option value="2">普通</option>
+											<option value="3">较难</option>
+											<option value="4">困难</option>
+										</select>
+									</div>
+									<div class="col-md-2"></div>
+								</div>
 				  </div><!-- /选项结束 -->
 				  <div class="form-group">
 				    <label for="text" class="col-md-2 control-label">正确答案：</label>
