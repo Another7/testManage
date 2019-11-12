@@ -3,7 +3,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.test.dao.TFQuestionDao">
 
-	<!-- 插入单选题到数据库 -->
+	<!-- 插入判断题到数据库 -->
 	<insert id="saveTFQuestion" parameterType="tfquestion">
 		insert into true_or_false(
 			
@@ -14,7 +14,8 @@
 			tf_analysis,
 			tf_t_name,
 			tf_c_id,
-			tf_ct_id)
+			tf_ct_id,
+			tf_level)
 		values(
 			#{tf_subject},
 			#{tf_point},
@@ -23,8 +24,8 @@
 			#{tf_analysis},
 			#{tf_t_name},
 			#{tf_c_id},
-			#{tf_ct_id}
-			
+			#{tf_ct_id},
+			#{tf_level}
 		)
 	</insert>
 	<!-- 根据id查询单选题信息 -->

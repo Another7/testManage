@@ -14,7 +14,8 @@
 			sc_analysis,
 			sc_t_name,
 			sc_c_id,
-			sc_ct_id)
+			sc_ct_id,
+			sc_level)
 		values(
 			#{sc_subject},
 			#{sc_point},
@@ -24,7 +25,8 @@
 			#{sc_analysis},
 			#{sc_t_name},
 			#{sc_c_id},
-			#{sc_ct_id}
+			#{sc_ct_id},
+			#{sc_level}
 			
 		)
 	</insert>
@@ -37,7 +39,8 @@
 			sc_analysis=#{sc_analysis},
 			sc_t_name=#{sc_t_name},
 			sc_c_id=#{sc_c_id},
-			sc_ct_id=#{sc_ct_id}
+			sc_ct_id=#{sc_ct_id},
+			sc_level=#{sc_level}
 			where sc_id=#{sc_id}
 	</update>
 	

@@ -3,7 +3,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.test.dao.FBQuestionDao">
 
-	<!-- 插入单选题到数据库 -->
+	<!-- 插入填空题到数据库 -->
 	<insert id="saveFBQuestion" parameterType="fbquestion">
 		insert into fill_in_the_blank(
 			
@@ -15,7 +15,8 @@
 			fb_analysis,
 			fb_t_name,
 			fb_c_id,
-			fb_ct_id)
+			fb_ct_id，
+			fb_level)
 		values(
 			#{fb_subject},
 			#{fb_point},
@@ -24,7 +25,8 @@
 			#{fb_analysis},
 			#{fb_t_name},
 			#{fb_c_id},
-			#{fb_ct_id}
+			#{fb_ct_id},
+			#{fb_level}
 		)
 	</insert>
 	<!-- 根据id查询单选题信息 -->
