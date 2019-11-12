@@ -56,7 +56,6 @@ public class ManageController {
 	
 	//根据章节id查询该章节下的所有知识点
 		@RequestMapping(value = "/getKnowledgePointByCt2_id.action",method = RequestMethod.GET)
-		@ResponseBody
 		public String getKnowledgePointByCt_id(HttpServletRequest request,String ct_id,String ct_c_id,Model model ){
 			
 			System.out.println("ctId:"+ct_id);

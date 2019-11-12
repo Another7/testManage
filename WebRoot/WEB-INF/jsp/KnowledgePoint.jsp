@@ -66,7 +66,7 @@
 						}else{
 								alert("删除失败！");
 						}
-						window.location.href ="/testManage/getKnowledgePointByCt_id.action?ct_id="+ctid+"&ct_c_id="+id;//更新数据
+						window.location.href ="/testManage/getKnowledgePointByCt2_id.action?ct_id="+ctid+"&ct_c_id="+id;//更新数据
 						
 		          }
 		   	 });
@@ -204,7 +204,7 @@
 										     						alert("添加成功");
 																	$("#createknowledgePoint").modal('hide');  //手动关闭
 																
-																	window.location.href ="/testManage/getKnowledgePointByCt_id.action?ct_id="+ct_id+"&ct_c_id="+c_id;
+																	window.location.href ="/testManage/getKnowledgePointByCt2_id.action?ct_id="+ct_id+"&ct_c_id="+c_id;
 																}else{
 																	alert("保存失败");
 															    }
@@ -315,7 +315,7 @@
 											       	   		if(data.status_code=="1"){
 																alert("知识点更新成功！");
 																$("#myModal").modal('hide');  //手动关闭
-																window.location.href ="/testManage/getKnowledgePointByCt_id.action?ct_id="+ctid+"&ct_c_id="+cid;//更新添加成功后的数据
+																window.location.href ="/testManage/getKnowledgePointByCt2_id.action?ct_id="+ctid+"&ct_c_id="+cid;//更新添加成功后的数据
 															}else{
 																alert("保存失败");
 														    }
