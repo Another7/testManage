@@ -78,6 +78,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	          }
 	   	 });
     	}
+    	
+    	//点击输入试卷名称时，ajax发送章节id获取试题数量
     	function getChapterId(){
     			var selectedValues = [];    
 			 $("#addChapter:selected").each(function(){
@@ -85,7 +87,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			     
 		      });
 		      console.log(selectedValues);
-    	
+    	$.ajax({
+	       	   method:"post",
+	         	url:"/testManage/questionLevelNumber.action",
+	         	traditional: true,
+	         	data:{"data":selectedValues},
+			 	dataType:'json',
+	       	   	success:function (res) {
+	       	   			alert(res.length);    
+	       	   		
+	          }
+	   	 });
     	
     	}
     	/* 当章节改变时，获取该章节下的知识点列表，给对应的下拉框赋值 */
@@ -247,7 +259,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<label class=" col-md-2 control-label">试卷名称</label> 
 						<div class="col-md-8">
 						<!-- 一级下拉框 -->
-						 <input type="text" class="form-control"  placeholder="如：数据结构测试题">
+						 <input type="text" class="form-control" onclick="getChapterId()"  placeholder="如：数据结构测试题">
 						</div>
 						 <div class="col-md-2">
 						 	

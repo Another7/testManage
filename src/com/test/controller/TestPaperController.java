@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.test.po.Subject;
 import com.test.pojo.QuestionLevelNumber;
@@ -53,10 +54,10 @@ public class TestPaperController {
 
 	// 根据章节id获取不同类型问题的不同等级的数量
 	// 例如：单选题：简单的有多少道题，容易的有多少道题。
-	@RequestMapping(value = "/questionLevelNumber")
-	public Map<String, QuestionLevelNumber> getQuestionLevelNumber(@RequestBody String[] chapterIds) {
+	@RequestMapping(value = "/questionLevelNumber.action")
+	public Map<String, QuestionLevelNumber> getQuestionLevelNumber(@RequestParam(value = "data")String[] data ) {
 		List<Integer> chapterIdList = new ArrayList<Integer>();
-		for (String chapterId : chapterIds) {
+		for (String chapterId : data) {
 			Integer id = Integer.parseInt(chapterId);
 			chapterIdList.add(id);
 		}
