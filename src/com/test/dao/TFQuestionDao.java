@@ -22,4 +22,11 @@ public interface TFQuestionDao {
 
 
 	public int updateById(Integer tf_id);
+	
+	/**
+	 * 根据章节id查询判断题
+	 * @param chapterIdList 章节id列表
+	 * @return 判断题列表
+	 */
+	public List<TFQuestion> getTFQuestionByChapterId(List<Integer> chapterIdList);
 }

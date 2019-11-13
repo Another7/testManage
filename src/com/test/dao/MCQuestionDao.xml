@@ -37,7 +37,13 @@
 		select * from multiple_choice where mc_subject=#{mc_subject}
 	
 	</select>
-	
+	<select id="getMCQuestionByChapterId" parameterType="List" resultType="mcquestion">
+	select * from multiple_choice where mc_ct_id in
+		<foreach item="item" collection="list" open="(" separator=","
+			close=")">
+			#{item}
+		</foreach>
+	</select>
 	<delete id="deleteById" parameterType="Integer">
 		delete  from multiple_choice where mc_id=#{mc_id}
 	</delete>

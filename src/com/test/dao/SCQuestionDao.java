@@ -28,5 +28,11 @@ public interface SCQuestionDao {
 
 	public int updateSCQuestion(SCQuestion scQuestion);
 	
+	/**
+	 * 通过章节id查询出单选题列表
+	 * @param chapterIdList 章节id列表
+	 * @return 单选题列表
+	 */
+	public List<SCQuestion> getSCQuestionByChapterId(List<Integer> chapterIdList);
 	
 }

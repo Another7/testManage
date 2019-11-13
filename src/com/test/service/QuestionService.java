@@ -1,12 +1,14 @@
 package com.test.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.test.po.FBQuestion;
 import com.test.po.MCQuestion;
 import com.test.po.QAQuestion;
 import com.test.po.SCQuestion;
 import com.test.po.TFQuestion;
+import com.test.pojo.QuestionLevelNumber;
 import com.test.pojo.SCQuestionData;
 
 
@@ -62,5 +64,10 @@ public interface QuestionService {
 
 	public QAQuestion selectQAQuestionById(String qa_id);
 	
-	
+	/**
+	 * 根据章节id查询对应的问题的不同等级的数量
+	 * @param chapterIdList 章节id列表
+	 * @return 不同类型的题目所对应的不同难度的题目数量
+	 */
+	public Map<String, QuestionLevelNumber> countQuestionLevelNumber(List<Integer> chapterIdList);
 }

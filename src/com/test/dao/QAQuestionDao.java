@@ -13,4 +13,11 @@ public interface QAQuestionDao {
 	public int deleteById(Integer qa_id);
 
 	public int updateById(Integer qa_id);
+	
+	/**
+	 * 根据章节id查询问答题
+	 * @param chapterIdList 章节id列表
+	 * @return 问答题列表
+	 */
+	public List<QAQuestion> getQAQuestionByChapterId(List<Integer> chapterIdList);
 }

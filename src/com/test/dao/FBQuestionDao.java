@@ -21,4 +21,11 @@ public interface FBQuestionDao {
 	public int deleteById(Integer fb_id);
 
 	public int updateById(Integer fb_id);
+	
+	/**
+	 * 根据章节id查询填空题
+	 * @param chapterIdList 章节id列表
+	 * @return 填空题列表
+	 */
+	public List<FBQuestion> getFBQuestionByChapterId(List<Integer> chapterIdList);
 }
