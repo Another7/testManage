@@ -315,22 +315,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<label class=" col-sm-2 control-label">单选题</label> 
 						<div class="col-md-2">
 						<!-- 一级下拉框 -->
-						 简单题<input type="text" class="form-control"  placeholder="" style="width: 60px">道
+						 简单题&nbsp;<select id="SCLevel1" class=" form-control " style="width: 60px"
+											onchange="changeBook(this.id)">
+											<option value="">0-</option>
+										</select>&nbsp;道
 						</div>
 						<div class="col-xs-2">
 						<!-- 一级下拉框 -->
-						 一般题<input type="text" class="form-control"  placeholder="" style="width: 60px">道
+						 一般题&nbsp;<select id="SCLevel2" class=" form-control " style="width: 60px"
+											onchange="changeBook(this.id)">
+											<option value="">0</option>
+										</select>&nbsp;道
 						</div>
 						<div class="col-xs-2">
 						<!-- 一级下拉框 -->
-						 较难题<input type="text" class="form-control"  placeholder="" style="width: 60px">道
+						 较难题&nbsp;<select id="SCLevel3" class=" form-control " style="width: 60px"
+											onchange="changeBook(this.id)">
+											<option value="">0</option>
+										</select>&nbsp;道
 						</div>
 						<div class="col-xs-2">
 						<!-- 一级下拉框 -->
-						 困难题<input type="text" class="form-control"  placeholder="" style="width: 60px">道
+						 困难题&nbsp;<select id="SCLevel4" class=" form-control " style="width: 60px"
+											onchange="changeBook(this.id)">
+											<option value="">0</option>
+										</select>&nbsp;道
 						</div>
 						 <div class="col-xs-2">
-						 	每题<input type="text" class="form-control"  placeholder="0" style="width: 60px">分
+						 	每题&nbsp;<input type="text" class="form-control"  placeholder="0" style="width: 60px">&nbsp;分
 				   		 </div>
 						</div>
 					</div>
@@ -339,22 +351,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<label class=" col-xs-2 control-label">多选题</label> 
 				<div class="col-md-2">
 						<!-- 一级下拉框 -->
-						 简单题<input type="text" class="form-control"  placeholder="" style="width: 60px">道
+						 简单题&nbsp;<select id="MCLevel1" class=" form-control " style="width: 60px"
+											onchange="changeBook(this.id)">
+											<option value="">0-</option>
+										</select>&nbsp;道
 						</div>
 						<div class="col-xs-2">
 						<!-- 一级下拉框 -->
-						 一般题<input type="text" class="form-control"  placeholder="" style="width: 60px">道
+						 一般题&nbsp;<select id="MCLevel2" class=" form-control " style="width: 60px"
+											onchange="changeBook(this.id)">
+											<option value="">0</option>
+										</select>&nbsp;道
 						</div>
 						<div class="col-xs-2">
 						<!-- 一级下拉框 -->
-						 较难题<input type="text" class="form-control"  placeholder="" style="width: 60px">道
+						 较难题&nbsp;<select id="MCLevel3" class=" form-control " style="width: 60px"
+											onchange="changeBook(this.id)">
+											<option value="">0</option>
+										</select>&nbsp;道
 						</div>
 						<div class="col-xs-2">
 						<!-- 一级下拉框 -->
-						 困难题<input type="text" class="form-control"  placeholder="" style="width: 60px">道
+						 困难题&nbsp;<select id="MCLevel4" class=" form-control " style="width: 60px"
+											onchange="changeBook(this.id)">
+											<option value="">0</option>
+										</select>&nbsp;道
 						</div>
 						 <div class="col-xs-2">
-						 	每题<input type="text" class="form-control"  placeholder="0" style="width: 60px">分
+						 	每题&nbsp;<input type="text" class="form-control"  placeholder="0" style="width: 60px">&nbsp;分
 				   		 </div>
 						</div>
 					</div>
@@ -363,22 +387,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<label class=" col-xs-2 control-label">填空题</label> 
 					<div class="col-md-2">
 						<!-- 一级下拉框 -->
-						 简单题<input type="text" class="form-control"  placeholder="" style="width: 60px">道
+						 简单题&nbsp;<select id="FBLevel1" class=" form-control " style="width: 60px"
+											onchange="changeBook(this.id)">
+											<option value="">0-</option>
+										</select>&nbsp;道
 						</div>
 						<div class="col-xs-2">
 						<!-- 一级下拉框 -->
-						 一般题<input type="text" class="form-control"  placeholder="" style="width: 60px">道
+						 一般题&nbsp;<select id="FBLevel2" class=" form-control " style="width: 60px"
+											onchange="changeBook(this.id)">
+											<option value="">0</option>
+										</select>&nbsp;道
 						</div>
 						<div class="col-xs-2">
 						<!-- 一级下拉框 -->
-						 较难题<input type="text" class="form-control"  placeholder="" style="width: 60px">道
+						 较难题&nbsp;<select id="FBLevel3" class=" form-control " style="width: 60px"
+											onchange="changeBook(this.id)">
+											<option value="">0</option>
+										</select>&nbsp;道
 						</div>
 						<div class="col-xs-2">
 						<!-- 一级下拉框 -->
-						 困难题<input type="text" class="form-control"  placeholder="" style="width: 60px">道
+						 困难题&nbsp;<select id="FBLevel4" class=" form-control " style="width: 60px"
+											onchange="changeBook(this.id)">
+											<option value="">0</option>
+										</select>&nbsp;道
 						</div>
 						 <div class="col-xs-2">
-						 	每题<input type="text" class="form-control"  placeholder="0" style="width: 60px">分
+						 	每题&nbsp;<input type="text" class="form-control"  placeholder="0" style="width: 60px">&nbsp;分
 				   		 </div>
 						</div>
 					</div>
@@ -387,22 +423,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<label class=" col-xs-2 control-label">判断题</label> 
 					<div class="col-md-2">
 						<!-- 一级下拉框 -->
-						 简单题<input type="text" class="form-control"  placeholder="" style="width: 60px">道
+						 简单题&nbsp;<select id="TFLevel1" class=" form-control " style="width: 60px"
+											onchange="changeBook(this.id)">
+											<option value="">0-</option>
+										</select>&nbsp;道
 						</div>
 						<div class="col-xs-2">
 						<!-- 一级下拉框 -->
-						 一般题<input type="text" class="form-control"  placeholder="" style="width: 60px">道
+						 一般题&nbsp;<select id="TFLevel2" class=" form-control " style="width: 60px"
+											onchange="changeBook(this.id)">
+											<option value="">0</option>
+										</select>&nbsp;道
 						</div>
 						<div class="col-xs-2">
 						<!-- 一级下拉框 -->
-						 较难题<input type="text" class="form-control"  placeholder="" style="width: 60px">道
+						 较难题&nbsp;<select id="TFLevel3" class=" form-control " style="width: 60px"
+											onchange="changeBook(this.id)">
+											<option value="">0</option>
+										</select>&nbsp;道
 						</div>
 						<div class="col-xs-2">
 						<!-- 一级下拉框 -->
-						 困难题<input type="text" class="form-control"  placeholder="" style="width: 60px">道
+						 困难题&nbsp;<select id="TFLevel4" class=" form-control " style="width: 60px"
+											onchange="changeBook(this.id)">
+											<option value="">0</option>
+										</select>&nbsp;道
 						</div>
 						 <div class="col-xs-2">
-						 	每题<input type="text" class="form-control"  placeholder="0" style="width: 60px">分
+						 	每题&nbsp;<input type="text" class="form-control"  placeholder="0" style="width: 60px">&nbsp;分
 				   		 </div>
 						</div>
 					</div>
@@ -411,22 +459,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<label class=" col-xs-2 control-label">简答题</label> 
 						<div class="col-md-2">
 						<!-- 一级下拉框 -->
-						 简单题<input type="text" class="form-control"  placeholder="" style="width: 60px">道
+						 简单题&nbsp;<select id="QALevel1" class=" form-control " style="width: 60px"
+											onchange="changeBook(this.id)">
+											<option value="">0-</option>
+										</select>&nbsp;道
 						</div>
 						<div class="col-xs-2">
 						<!-- 一级下拉框 -->
-						 一般题<input type="text" class="form-control"  placeholder="" style="width: 60px">道
+						 一般题&nbsp;<select id="QALevel2" class=" form-control " style="width: 60px"
+											onchange="changeBook(this.id)">
+											<option value="">0</option>
+										</select>&nbsp;道
 						</div>
 						<div class="col-xs-2">
 						<!-- 一级下拉框 -->
-						 较难题<input type="text" class="form-control"  placeholder="" style="width: 60px">道
+						 较难题&nbsp;<select id="QALevel3" class=" form-control " style="width: 60px"
+											onchange="changeBook(this.id)">
+											<option value="">0</option>
+										</select>&nbsp;道
 						</div>
 						<div class="col-xs-2">
 						<!-- 一级下拉框 -->
-						 困难题<input type="text" class="form-control"  placeholder="" style="width: 60px">道
+						 困难题&nbsp;<select id="QALevel4" class=" form-control " style="width: 60px"
+											onchange="changeBook(this.id)">
+											<option value="">0</option>
+										</select>&nbsp;道
 						</div>
 						 <div class="col-xs-2">
-						 	每题<input type="text" class="form-control"  placeholder="0" style="width: 60px">分
+						 	每题&nbsp;<input type="text" class="form-control"  placeholder="0" style="width: 60px">&nbsp;分
 				   		 </div>
 						</div>
 					</div>
