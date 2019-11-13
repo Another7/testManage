@@ -59,22 +59,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	         	data:{"data":kemu},
 			 	dataType:'json',
 	       	   	success:function (res) {
+	       	   	//$('#addChapter').selectpicker('val', res);
+	       	   	alert(res.length);
 	       	   		if(res.length == 0){
                         //如果一级没有对应的二级 则清空二级并 不往下执行
-                        $("#addChapter").empty();
+                       // $("#addChapter").empty();
+                       
                         return ;
                    	 }
-                  // 	 alert(res.length);
+                  
 	          		 var str="";
 	           	  	for (var i = 0; i < res.length; i++) {
-	            	 	  str+="<option value='"+res[i].ct_id+"'>"+res[i].ct_name+"</option>";
+	            	 	  str+="<option value='"+res[i].ct_id+"'>"+(i+1)+"."+res[i].ct_name+"</option>";
 	         	 	 } 
 	           	  $("#addChapter").append(str);
 	          	  $("#addChapter").find("option[text='--请选择--']").attr("selected",true);
+	          	   $('.selectpicker').selectpicker('refresh');  //刷新数据
 	          }
 	   	 });
     	}
+    	function getChapterId(){
+    			var selectedValues = [];    
+			 $("#addChapter:selected").each(function(){
+			     selectedValues.push($(this).val()); 
+			     
+		      });
+		      console.log(selectedValues);
     	
+    	
+    	}
     	/* 当章节改变时，获取该章节下的知识点列表，给对应的下拉框赋值 */
     	function changeChapter(id){
     		var chapterId=$("#addChapter").val();
@@ -161,27 +174,80 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div>
 	<hr>
 	<ul class="breadcrumb">
-    <li><a href="#">我的题库</a></li>
-    <li><a href="#">上传试题</a></li>
-    <li class="active">添加单选题</li>
+	 <li><a href="#">我要组卷</a></li>
+    <li><a href="#">随机组卷</a></li>
+   
 	</ul>
-		<div class="panel panel-default">
+	<div class="panel panel-default">
+			<div class="panel-heading">选择章节</div>
 			<div class="panel-body">
-				<div>
+					<div>
+						<form class="form-horizontal" id="totalForm">
+
+								<div class="form-group">
+									<label class=" col-md-2 control-label">科目</label>
+									<div class="col-md-8">
+										<!-- 一级下拉框 -->
+										<select class=" form-control " id="addSubject" name="subject"
+											onchange="change(this.id)">
+											<option value="">--请选择--</option>
+											<c:forEach items="${sessionScope.SUBJECTS_SESSION}" var="item">
+												<option value="${item.s_id}">${item.s_name}</option>
+											</c:forEach>
+										</select>
+									</div>
+									<div class="col-md-2"></div>
+	
+								</div>
+								<div class="form-group">
+									<label class=" col-md-2 control-label">课程</label>
+									<div class="col-md-8">
+										<!-- 二级下拉框 -->
+										<select id="addCourse" class=" form-control " name="Course"
+											onchange="changeBook(this.id)">
+											<option value="">--请选择--</option>
+										</select>
+									</div>
+									<div class="col-md-2"></div>
+	
+								</div>
+					
+		
+							<div class="form-group">
+								<label for="text" class=" col-md-2 control-label">选择章节</label>
+								<div class="col-md-8">
+									<!-- 一级下拉框 -->
+									<!-- <select id="addChapter"	class=" form-control" name="chapter" onchange="changeChapter(this.id)" >
+									<option value="">--请选择--</option>
+								</select> -->
+									<select id="addChapter"
+										class="selectpicker show-tick form-control" multiple>
+										<option value="">--请选择--</option>
+									</select>
+								</div>
+								<div class="col-md-2"></div>
+							</div>
+
+
+					</form>
 					
 				</div>
+				
+			</div>
+		
+		</div>
+	</div>
+	<div class="panel panel-default">
+		 <div class="panel-heading">试卷设置</div>
+			<div class="panel-body">
+				
 				<form class="form-horizontal" id="totalForm">
 				
 					 <div class="form-group">
-						<label class=" col-md-2 control-label">科目</label> 
+						<label class=" col-md-2 control-label">试卷名称</label> 
 						<div class="col-md-8">
 						<!-- 一级下拉框 -->
-						<select	class=" form-control " id="addSubject" name="subject" onchange="change(this.id)">
-							<option value="">--请选择--</option>
-							<c:forEach items="${sessionScope.SUBJECTS_SESSION}" var="item">
-								<option	 value="${item.s_id}">${item.s_name}</option>
-							</c:forEach>
-						</select>
+						 <input type="text" class="form-control"  placeholder="如：数据结构测试题">
 						</div>
 						 <div class="col-md-2">
 						 	
@@ -189,309 +255,207 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						
 					</div>
 					<div class="form-group">
-						<label class=" col-md-2 control-label">课程</label> 
+						<label class=" col-md-2 control-label">填写试卷用途说明</label> 
 						<div class="col-md-8">
-						<!-- 二级下拉框 -->
-						<select id="addCourse"	class=" form-control " name="Course" onchange="changeBook(this.id)">
-							<option value="">--请选择--</option>
-						</select>
+						 <input type="text" class="form-control"  placeholder="如：期末试题">
 						</div>
 						<div class="col-md-2">
-						 <div id ="addChoice" class="btn btn-default btn-md"  data-toggle="modal" data-target="#myModal"  role="button">
-				    		<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-				    	</div>
-				   		添加课程
+						
 				   		
 				   		</div>
 					</div>
 					 
 					<div class="form-group">
-						<label   for="text" class=" col-md-2 control-label">选择章节</label> 
+						<label   for="text" class=" col-md-2 control-label">填写学期</label> 
 						<div class="col-md-8">
-						<!-- 一级下拉框 -->
-						<!-- <select id="addChapter"	class=" form-control" name="chapter" onchange="changeChapter(this.id)" >
-							<option value="">--请选择--</option>
-						</select> -->
-<select id="addChapter" name="addChapter" class="selectpicker show-tick form-control" multiple data-live-search="false">
-                                      
-                                </select>
+						 <input type="text" class="form-control"  placeholder="格式：2018-2019学年上学期">
+							
 						</div>
 						<div class="col-md-2">
 							 
 				    	</div>
 				    </div>
-				<!--  <div class="form-group">
-				    <label for="stem" class="col-md-2 control-label">考查知识点：</label>
-				   
-				     <div class="col-md-8">
-				       <textarea id="point" class="form-control" rows="2"></textarea>
-				       一级下拉框
-						<select id="point"	class=" form-control" name="point"  >
-							<option value="">--请选择--</option>
-						</select>
-				    </div>
-				    <div class="col-md-2"></div>
-				  </div> -->
-				  <div class="form-group">
-				    <label for="stem" class="col-md-2 control-label">请填写题目</label>
-				   
-				     <div class="col-md-8">
-				       <textarea id="SCStem" class="form-control" rows="3"></textarea>
-				    </div>
-				    <div class="col-md-2"></div>
-				  </div>
-				 
-				  <div id="choices"><!-- -------选项开始 -->
-				  <div class="form-group">
-				    <label for="text" class="col-md-2 control-label">选项1</label>
-				    <div class="col-md-8">
-				      <input type="text" class="form-control"  placeholder="">
-				    </div>
-				    <div class="col-md-2"></div>
-				  </div>
-				  <div class="form-group">
-				    <label for="text" class="col-md-2 control-label">选项2</label>
-				    <div class="col-md-8">
-				      <input type="text" class="form-control"  placeholder="">
-				    </div>
-				    <div class="col-md-2"></div>
-				  </div>
-				   <div class="form-group">
-				    <label for="text" class="col-md-2 control-label">选项3</label>
-				    <div class="col-md-8">
-				      <input type="text" class="form-control"  placeholder="">
-				    </div>
-				    <div class="col-md-2"></div>
-				  </div>
-							<div class="form-group">
-								<label for="text" class="col-md-2 control-label">选项4</label>
-								<div class="col-md-8">
-									<input type="text" class="form-control" placeholder="">
-								</div>
-								<div class="col-md-2">
-									<!-- <a id ="addClick" class="btn btn-default btn-md"   onclick="addXuanXiang()">
-				    		<span class="glyphicon glyphicon-plus" ></span>添加选项
-				    	</a> -->
-								</div>
-								
-							</div>
+			<div class="form-group">
+						<label   for="text" class=" col-md-2 control-label">填写所在专业</label> 
+						<div class="col-md-8">
+						 <input type="text" class="form-control"  placeholder="如：软件工程专业">
 							
-							<div class="form-group">
-									<label for="stem" class="col-md-2 control-label">试题难度：</label>
-
-									<div class="col-md-8">
-										<!--  <textarea id="point" class="form-control" rows="2"></textarea> -->
-										<!-- 一级下拉框 -->
-										<select id="level" class=" form-control" name="level">
-											<option value="">--请选择--</option>
-											<option value="1">容易</option>
-											<option value="2">普通</option>
-											<option value="3">较难</option>
-											<option value="4">困难</option>
-										</select>
-									</div>
-									<div class="col-md-2"></div>
-								</div>
-								
-								
-						</div><!-- /选项结束 -->
-				  <div class="form-group">
-				    <label for="text" class="col-md-2 control-label">正确答案：</label>
-				    <div class="col-md-8">
-				      <input id="answer" type="text" class="form-control"  placeholder="">
+						</div>
+						<div class="col-md-2">
+							 
+				    	</div>
 				    </div>
-				    <div class="col-md-2"></div>
-				  </div>
-				  
-				  <div class="form-group">
-				    <label for="stem" class="col-md-2 control-label">答案解析：</label>
-				   
-				     <div class="col-md-8">
-				       <textarea id="analysis" class="form-control" rows="3"></textarea>
+				
+				
+				<div class="form-group">
+						<label   for="text" class=" col-md-2 control-label">填写所在班级</label> 
+						<div class="col-md-8">
+						 <input type="text" class="form-control"  placeholder="如：RB软工卓越161班">
+							
+						</div>
+						<div class="col-md-2">
+							 
+				    	</div>
 				    </div>
-				    <div class="col-md-2"></div>
-				  </div>
-				  
-				  <!-- <div class="form-group">
-				    <div class="col-sm-offset-2 col-sm-10">
-				      <div class="checkbox">
-				        <label>
-				          <input type="checkbox"> Remember me
-				        </label>
-				      </div>
-				    </div>
-				  </div> -->
-				 
-				  <div class="form-group">
-				    <div class="col-sm-offset-2 col-sm-10">
-				      <a type="" class="btn btn-default" onclick="submitAll()">保存</a>
-				    </div>
-				  </div>
-				  <!-- -----------------------------添加课程的模态框---------------------------------------------- -->
-				   			<div class="modal fade" id="myModal"  tabindex="-1" role="diaog" aria-labelledby="myModalLabel" aria-hidden="true">
-				   				
-				   				<div class="modal-dialog">
-				   					<div class="modal-content">
-				   						<div class="modal-header">
-				   							<button type="button" class="close" data-dismiss="modal"  aria-hidden="true">&times;</button>
-				   							<h5 class="modal-title" id="myModalLabel">添加课程</h5>
-				   						</div>
-				   						<div class="modal-body">
-				   						<form class="form-horizontal" role="form" id="addTB">
-				   								<div class="form-group">
-													<label class=" col-md-2 control-label">科目</label> 
-													<div class="col-md-8">
-													<!-- 一级下拉框 -->
-													<select	class=" form-control " id="addSubject2" name="subject" ">
-														<option value="">--请选择--</option>
-														<c:forEach items="${sessionScope.SUBJECTS_SESSION}" var="item">
-															<option	 value="${item.s_id}">${item.s_name}</option>
-														</c:forEach>
-													</select>
-													</div>
-													 <div class="col-md-2">
-													 	
-											   		 </div>
-												</div><!-- /form-gromp -->	
-												
-											  <div class="form-group">
-											    <label for="stem" class="col-md-2 control-label">课程名称</label>
-											    <div class="col-md-8">
-											      <input type="text" class="form-control" id="addTBName" placeholder="">
-											    </div>
-											    <div class="col-md-2"></div>
-											  </div><!-- /form-gromp -->	
-											  <div class="form-group" id="chapter-num">
-											    <label for="text" class="col-md-2 control-label">章节个数</label>
-											    <div class="col-md-8">
-											      <select id="addChapterNum"	class=" form-control "  onchange="change2(this.id)" >
-														<option value="">--请选择--</option>
-														<option value="1">1</option>
-														<option value="2">2</option>
-														<option value="3">3</option>
-														<option value="4">4</option>
-														<option value="5">5</option>
-														<option value="6">6</option>
-														<option value="7">7</option>
-														<option value="8">8</option>
-														<option value="9">9</option>
-														<option value="10">10</option>
-														<option value="11">11</option>
-														<option value="12">12</option>
-														<option value="13">13</option>
-														<option value="14">14</option>
-														<option value="15">15</option>
-														<option value="16">16</option>
-														<option value="17">17</option>
-														<option value="18">18</option>
-														<option value="19">19</option>
-													</select>
-											    </div>
-											    <div class="col-md-2">
-											    	<!-- <a id ="addChoice" class="btn btn-default btn-md"  href="#" role="button" onclick="addCt">
-											    		<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-											    	</a> -->
-											    	
-											    </div>
-											  </div><!-- /form-gromp -->
-											  <script type="text/javascript">
-											  /*用户点击添加课程*/
-											  function addBook(){	    	
-										    		var c_s_id = $("#addSubject2").val();
-										    		var c_name=$("#addTBName").val();
-										    		var c_chapter_num=$("#addChapterNum").val();
-										    		var str="";
-										    		//children()方法：获取该元素下的直接子集元素
-													//find()方法：获取该元素下的所有子集元素
-										    		$("#addChapterHeader").find("input").each(function(){
-										    			//alert(this.value);
-										    			str+=this.value+"@@";
-										    		});
-										    		var c_chapter_headers=str;
-										    		//alert(str);
-										    		//alert("c_s_id:"+c_s_id+" c_name:"+c_name+" c_chapter_num:"+c_chapter_num+" c_chapter_headers:"+c_chapter_headers);
-										    		var data={c_name:c_name,c_chapter_num:c_chapter_num,c_chapter_headers:c_chapter_headers,c_s_id:c_s_id};
-										    		$.ajax({
-												       	   method:"post",
-												         	url:"/testManage/addCourse.action",
-												         	contentType: 'application/json; charset=UTF-8',
-												         	data:JSON.stringify(data),
-														 	dataType:'json',
-														 	
-												       	   	success:function (data) {
-												       	   		if(data.result=="yes"){
-																alert("添加成功");
-																$("#myModal").modal('hide');  //手动关闭
-																reset();//清除模态框缓存数据
-																}else{
-																	alert("保存失败");
-															    }
-												          	  
-												         	 }
-												   	 });
-											   	
-											   	 };
-											   	 /*用户选择章节数目之后，添加章节到模态框*/
-											  	function change2(id){
-											  		var num = $("#addChapterNum").val();
-											  			var str="<div>请输入各章节标题</div>";
-											  			//alert(num);		
-										           	  	for (var i = 1; i <= num; i++) {
-										           	  		  str+="<div class='form-group'>"+
-										           	  		  "<label for='text' class='col-md-2 control-label'>第"+i+"章</label>"+
-										           	  		  "<div class='col-md-10'>"+
-										           	  		  "<input type='text' class='form-control' >"+
-										           	  		  "</div>"+
-										           	  		  "</div>";
-										         	 	 } 
-										           	 	 
-											  			/* $("#chapter-num").after(str); */
-											  			$("#addChapterHeader").append(str);
-											  			
-											  			//alert();
-											  	};
-											  	function reset(){
-											  		
-											  		/* $("#addTB")[0].reset(); */
-											  		 $("#addSubject2").find("option[text='--请选择--']").attr("selected",true);
-											  		 $("#addChapterNum").find("option[text='--请选择--']").attr("selected",true);
-											  		 $("#addTBName").val("");
-											  		
-											  		 $("#addChapterHeader").empty();
-											  		  $("#addChapterHeader").html();
-											  	};
-											  	$('body').on('hidden.bs.modal', '.modal', function () {
-												    $(this).removeData('bs.modal');
-												});
-											  </script>	
-											  <!-- <div>请输入各章节标题</div>
-											  <div class="form-group" id="chapter-header" >
-											  		<label for="text" class="col-md-2 control-label"></label>
-											  		<div class="col-md-10">
-												      <input type="text" class="form-control" >
-												    </div>
-											  </div> -->
-											  <div id="addChapterHeader">
-											  		<!-- js动态填充内容 -->
-											  </div>
-											</form>  
-				   						</div>
-				   						<div class="modal-footer">
-				   							<div class="form-group">
-											    <div class="col-sm-offset-2 col-sm-10">
-											      <button type="button" class="btn btn-default" onclick="addBook()">提交</button>
-											      <button type="button" class="btn btn-default" onclick="reset()" >重置</button>
-				   								
-											    </div>
-											  </div>
-				   						</div>
-				   					</div><!--/ model-content -->
-				   				</div><!--/ model-dialog -->
-				   			</div><!--/ model -->
-				   			<!-- --------------结束---------------添加课程的模态框---------------------------------------------- -->
+				
 				</form>
 			</div>
 		</div>
+			
+	
+	</div>
+	<div class="panel panel-default">
+		 <div class="panel-heading">试题量设置</div>
+			<div class="panel-body">
+				
+				<form class="form-horizontal" id="totalForm">
+					
+					 <div class="form-group">
+					 <div class="form-inline">
+						<label class=" col-sm-2 control-label">单选题</label> 
+						<div class="col-md-2">
+						<!-- 一级下拉框 -->
+						 简单题<input type="text" class="form-control"  placeholder="" style="width: 60px">道
+						</div>
+						<div class="col-xs-2">
+						<!-- 一级下拉框 -->
+						 一般题<input type="text" class="form-control"  placeholder="" style="width: 60px">道
+						</div>
+						<div class="col-xs-2">
+						<!-- 一级下拉框 -->
+						 较难题<input type="text" class="form-control"  placeholder="" style="width: 60px">道
+						</div>
+						<div class="col-xs-2">
+						<!-- 一级下拉框 -->
+						 困难题<input type="text" class="form-control"  placeholder="" style="width: 60px">道
+						</div>
+						 <div class="col-xs-2">
+						 	每题<input type="text" class="form-control"  placeholder="0" style="width: 60px">分
+				   		 </div>
+						</div>
+					</div>
+					<div class="form-group">
+					<div class="form-inline">
+						<label class=" col-xs-2 control-label">多选题</label> 
+				<div class="col-md-2">
+						<!-- 一级下拉框 -->
+						 简单题<input type="text" class="form-control"  placeholder="" style="width: 60px">道
+						</div>
+						<div class="col-xs-2">
+						<!-- 一级下拉框 -->
+						 一般题<input type="text" class="form-control"  placeholder="" style="width: 60px">道
+						</div>
+						<div class="col-xs-2">
+						<!-- 一级下拉框 -->
+						 较难题<input type="text" class="form-control"  placeholder="" style="width: 60px">道
+						</div>
+						<div class="col-xs-2">
+						<!-- 一级下拉框 -->
+						 困难题<input type="text" class="form-control"  placeholder="" style="width: 60px">道
+						</div>
+						 <div class="col-xs-2">
+						 	每题<input type="text" class="form-control"  placeholder="0" style="width: 60px">分
+				   		 </div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="form-inline">
+						<label class=" col-xs-2 control-label">填空题</label> 
+					<div class="col-md-2">
+						<!-- 一级下拉框 -->
+						 简单题<input type="text" class="form-control"  placeholder="" style="width: 60px">道
+						</div>
+						<div class="col-xs-2">
+						<!-- 一级下拉框 -->
+						 一般题<input type="text" class="form-control"  placeholder="" style="width: 60px">道
+						</div>
+						<div class="col-xs-2">
+						<!-- 一级下拉框 -->
+						 较难题<input type="text" class="form-control"  placeholder="" style="width: 60px">道
+						</div>
+						<div class="col-xs-2">
+						<!-- 一级下拉框 -->
+						 困难题<input type="text" class="form-control"  placeholder="" style="width: 60px">道
+						</div>
+						 <div class="col-xs-2">
+						 	每题<input type="text" class="form-control"  placeholder="0" style="width: 60px">分
+				   		 </div>
+						</div>
+					</div>
+					<div class="form-group">
+					<div class="form-inline">
+						<label class=" col-xs-2 control-label">判断题</label> 
+					<div class="col-md-2">
+						<!-- 一级下拉框 -->
+						 简单题<input type="text" class="form-control"  placeholder="" style="width: 60px">道
+						</div>
+						<div class="col-xs-2">
+						<!-- 一级下拉框 -->
+						 一般题<input type="text" class="form-control"  placeholder="" style="width: 60px">道
+						</div>
+						<div class="col-xs-2">
+						<!-- 一级下拉框 -->
+						 较难题<input type="text" class="form-control"  placeholder="" style="width: 60px">道
+						</div>
+						<div class="col-xs-2">
+						<!-- 一级下拉框 -->
+						 困难题<input type="text" class="form-control"  placeholder="" style="width: 60px">道
+						</div>
+						 <div class="col-xs-2">
+						 	每题<input type="text" class="form-control"  placeholder="0" style="width: 60px">分
+				   		 </div>
+						</div>
+					</div>
+					<div class="form-group">
+					<div class="form-inline">
+						<label class=" col-xs-2 control-label">简答题</label> 
+						<div class="col-md-2">
+						<!-- 一级下拉框 -->
+						 简单题<input type="text" class="form-control"  placeholder="" style="width: 60px">道
+						</div>
+						<div class="col-xs-2">
+						<!-- 一级下拉框 -->
+						 一般题<input type="text" class="form-control"  placeholder="" style="width: 60px">道
+						</div>
+						<div class="col-xs-2">
+						<!-- 一级下拉框 -->
+						 较难题<input type="text" class="form-control"  placeholder="" style="width: 60px">道
+						</div>
+						<div class="col-xs-2">
+						<!-- 一级下拉框 -->
+						 困难题<input type="text" class="form-control"  placeholder="" style="width: 60px">道
+						</div>
+						 <div class="col-xs-2">
+						 	每题<input type="text" class="form-control"  placeholder="0" style="width: 60px">分
+				   		 </div>
+						</div>
+					</div>
+					<hr>
+					<div class="form-group ">
+					<div class="form-inline">
+						 <div class="col-md-8"></div>
+						<div class="col-md-4">
+							<button class="btn btn-primary ">总分</button>
+							<input type="text" class="form-control"  placeholder="0">分
+							
+						</div>
+					</div>
+						
+					
+					</div>
+					
+				</form>
+			</div>
+		</div>
+		<hr>
+		<div style="text-align:center">
+		<button class="btn btn-primary" >生成试卷</button>	
+		</div>
+		
+		<hr>
+	
+	</div>
+	</div>
 	</div>
 </body>
 </html>
