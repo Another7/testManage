@@ -94,7 +94,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	         	data:{"data":selectedValues},
 			 	dataType:'json',
 	       	   	success:function (res) {
-	       	   			alert(res.length);    
+	       	   			alert(res.length);  
+	       	   			alert("")  
 	       	   		
 	          }
 	   	 });

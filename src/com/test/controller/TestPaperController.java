@@ -61,6 +61,12 @@ public class TestPaperController {
 			Integer id = Integer.parseInt(chapterId);
 			chapterIdList.add(id);
 		}
+		//scQuestionNumber		level1	level2	level3	level4
+		//mcQuestionNumber		
+		//tfQuestionNumber
+		//fbQuestionNumber
+		//qaQuestionNumber
+		
 		return questionService.countQuestionLevelNumber(chapterIdList);
 	}
 
