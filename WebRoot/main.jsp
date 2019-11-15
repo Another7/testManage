@@ -144,7 +144,7 @@
                 <ul class="sub-menu">
                   
                     
-                    <li><a _href="createTestPaper.action"><i class="iconfont">&#xe6a7;</i><cite>随机组卷</cite></a></li>
+                    <li><a _href="toCreateTestPaper.action"><i class="iconfont">&#xe6a7;</i><cite>随机组卷</cite></a></li>
                     <%-- <li><a _href="html/page.html"><i class="iconfont">&#xe6a7;</i><cite>自由组卷</cite></a></li> --%>
                 </ul>
             </li>

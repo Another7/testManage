@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.test.po.Subject;
 import com.test.pojo.QuestionLevelNumber;
+import com.test.pojo.TestPaperData;
 import com.test.service.ChapterService;
 import com.test.service.CourseService;
 import com.test.service.KnowledgePointService;
@@ -43,7 +44,7 @@ public class TestPaperController {
 	private QuestionService questionService;
 
 	// 转发到创建试卷页面
-	@RequestMapping(value = "/createTestPaper.action")
+	@RequestMapping(value = "/toCreateTestPaper.action")
 	public String getCourses(HttpServletRequest request, Model model) {
 
 		List<Subject> subjectList = subjectService.getAllSubjects();
@@ -72,5 +73,21 @@ public class TestPaperController {
 		
 		return questionService.countQuestionLevelNumber(chapterIdList);
 	}
+	//创建试卷，如果创建成功返回试卷
+		@RequestMapping(value = "/createTestPaper.action",method = RequestMethod.POST)
+		@ResponseBody
+		public TestPaperData createTestPaper(@RequestBody TestPaperData testPaperData) {
+			
+			/* String tpName;
+		 	String tpIllustrate;
+			private String tpTerm;
+			private String tpClass;
+			private QuestionLevelNumber scNumber;
+			private QuestionLevelNumber mcNumber;
+			private QuestionLevelNumber fbNumber;
+			private QuestionLevelNumber tfNumber;*/
+			
+			return null;
+		}
 
 }

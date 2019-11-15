@@ -364,28 +364,39 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	
     	function CreateTestPaper(){
     		res=confirm("确定生成试卷?"); //在页面上弹出对话框
+    		
+    		var name=$("#tpName").val();
+    		var illustrate=$("#tpIllustrate").val();
+    		var term=$("#tpTerm").val();
+    		var major=$("#tpMajor").val();
+    		var clazz=$("#tpClazz").val();
+    		var scNumber={level1:$("#SCLevel1").val(),level2:$("#SCLevel2").val(),level3:$("#SCLevel3").val(),level4:$("#SCLevel4").val()};
+    		var mcNumber={level1:$("#MCLevel1").val(),level2:$("#MCLevel2").val(),level3:$("#MCLevel3").val(),level4:$("#MCLevel4").val()};
+    		var fbNumber={level1:$("#FBLevel1").val(),level2:$("#FBLevel1").val(),level3:$("#FBLevel1").val(),level4:$("#FBLevel1").val()};
+    		var tfNumber={level1:$("#TFLevel1").val(),level2:$("#TFLevel1").val(),level3:$("#TFLevel1").val(),level4:$("#TFLevel1").val()};
+    		var qaNumber={level1:$("#QALevel1").val(),level2:$("#QALevel1").val(),level3:$("#QALevel1").val(),level4:$("#QALevel1").val()};
+    		var score=$("#totalScore").val();
+    		
+    		
 			if(res==true){
 			 //显示
                 $('#loadingModal').modal({backdrop: 'static', keyboard: false});
                 $("#loadingModal").modal('show');
                 $.ajax({
                     type: "post",
-                    url:"",
-                    dataType: "json",                               
+                    url:"/testManage/createTestPaper.action",
+                    contentType: 'application/json; charset=UTF-8', 
+                    data:JSON.stringify(data),   
+                    dataType: "json",                           
                     success: function(msg) {
-                        //隐藏
+                        //隐藏进度条
                         $("#loadingModal").modal('hide');
-                        BootCommons.alert(msg.message);                          
+                                             
                    },
                    error: function(msg) {
                      //隐藏
                        $("#loadingModal").modal('hide');
-                       if(!msg.message)
-                       {
-                           BootCommons.alert(msg.message);
-                       }else{
-                           BootCommons.alert("生成失败");
-                       }
+                     	alert("试卷生成出错！")
                    }
                 });
 			
@@ -555,7 +566,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<label class=" col-md-2 control-label">试卷名称</label> 
 						<div class="col-md-8">
 						<!-- 一级下拉框 -->
-						 <input type="text" class="form-control" onclick="getChapterId()"  placeholder="如：数据结构测试题">
+						 <input type="text" id="tpName" class="form-control" onclick="getChapterId()"  placeholder="如：数据结构测试题">
 						</div>
 						 <div class="col-md-2">
 						 	
@@ -565,7 +576,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="form-group">
 						<label class=" col-md-2 control-label">填写试卷用途说明</label> 
 						<div class="col-md-8">
-						 <input type="text" class="form-control"  placeholder="如：期末试题">
+						 <input type="text" id="tpIllustrate" class="form-control"  placeholder="如：期末试题">
 						</div>
 						<div class="col-md-2">
 						
@@ -576,7 +587,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="form-group">
 						<label   for="text" class=" col-md-2 control-label">填写学期</label> 
 						<div class="col-md-8">
-						 <input type="text" class="form-control"  placeholder="格式：2018-2019学年上学期">
+						 <input type="text" id="tpTerm" class="form-control"  placeholder="格式：2018-2019学年上学期">
 							
 						</div>
 						<div class="col-md-2">
@@ -586,7 +597,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="form-group">
 						<label   for="text" class=" col-md-2 control-label">填写所在专业</label> 
 						<div class="col-md-8">
-						 <input type="text" class="form-control"  placeholder="如：软件工程专业">
+						 <input type="text" id="tpMajor" class="form-control"  placeholder="如：软件工程专业">
 							
 						</div>
 						<div class="col-md-2">
@@ -598,7 +609,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="form-group">
 						<label   for="text" class=" col-md-2 control-label">填写所在班级</label> 
 						<div class="col-md-8">
-						 <input type="text" class="form-control"  placeholder="如：RB软工卓越161班">
+						 <input type="text" id="tpClazz" class="form-control"  placeholder="如：RB软工卓越161班">
 							
 						</div>
 						<div class="col-md-2">
