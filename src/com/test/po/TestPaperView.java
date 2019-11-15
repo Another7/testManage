@@ -1,5 +1,7 @@
 package com.test.po;
 
+import java.util.List;
+
 public class TestPaperView {
 
 	
@@ -8,11 +10,11 @@ public class TestPaperView {
 	private String tpTerm;
 	private String tpClass;
 	private String tpCreateName;//创建者姓名
-	private SCQuestion scQuestion;
-	private MCQuestion mcQuestion;
-	private FBQuestion fbQuestion;
-	private TFQuestion tfQuestion;
-	private QAQuestion qaQuestion;
+	private List<SCQuestion> scQuestions;
+	private List<MCQuestion> mcQuestions;
+	private List<FBQuestion> fbQuestions;
+	private List<TFQuestion> tfQuestions;
+	private List<QAQuestion> qaQuestion;
 	public String getTpName() {
 		return tpName;
 	}
@@ -43,63 +45,62 @@ public class TestPaperView {
 	public void setTpCreateName(String tpCreateName) {
 		this.tpCreateName = tpCreateName;
 	}
-	public SCQuestion getScQuestion() {
-		return scQuestion;
+	public List<SCQuestion> getScQuestions() {
+		return scQuestions;
 	}
-	public void setScQuestion(SCQuestion scQuestion) {
-		this.scQuestion = scQuestion;
+	public void setScQuestions(List<SCQuestion> scQuestions) {
+		this.scQuestions = scQuestions;
 	}
-	public MCQuestion getMcQuestion() {
-		return mcQuestion;
+	public List<MCQuestion> getMcQuestions() {
+		return mcQuestions;
 	}
-	public void setMcQuestion(MCQuestion mcQuestion) {
-		this.mcQuestion = mcQuestion;
+	public void setMcQuestions(List<MCQuestion> mcQuestions) {
+		this.mcQuestions = mcQuestions;
 	}
-	public FBQuestion getFbQuestion() {
-		return fbQuestion;
+	public List<FBQuestion> getFbQuestions() {
+		return fbQuestions;
 	}
-	public void setFbQuestion(FBQuestion fbQuestion) {
-		this.fbQuestion = fbQuestion;
+	public void setFbQuestions(List<FBQuestion> fbQuestions) {
+		this.fbQuestions = fbQuestions;
 	}
-	public TFQuestion getTfQuestion() {
-		return tfQuestion;
+	public List<TFQuestion> getTfQuestions() {
+		return tfQuestions;
 	}
-	public void setTfQuestion(TFQuestion tfQuestion) {
-		this.tfQuestion = tfQuestion;
+	public void setTfQuestions(List<TFQuestion> tfQuestions) {
+		this.tfQuestions = tfQuestions;
 	}
-	public QAQuestion getQaQuestion() {
+	public List<QAQuestion> getQaQuestion() {
 		return qaQuestion;
 	}
-	public void setQaQuestion(QAQuestion qaQuestion) {
+	public void setQaQuestion(List<QAQuestion> qaQuestion) {
 		this.qaQuestion = qaQuestion;
 	}
 	@Override
 	public String toString() {
 		return "TestPaperView [tpName=" + tpName + ", tpIllustrate=" + tpIllustrate + ", tpTerm=" + tpTerm
-				+ ", tpClass=" + tpClass + ", tpCreateName=" + tpCreateName + ", scQuestion=" + scQuestion
-				+ ", mcQuestion=" + mcQuestion + ", fbQuestion=" + fbQuestion + ", tfQuestion=" + tfQuestion
+				+ ", tpClass=" + tpClass + ", tpCreateName=" + tpCreateName + ", scQuestions=" + scQuestions
+				+ ", mcQuestions=" + mcQuestions + ", fbQuestions=" + fbQuestions + ", tfQuestions=" + tfQuestions
 				+ ", qaQuestion=" + qaQuestion + "]";
 	}
 	public TestPaperView(String tpName, String tpIllustrate, String tpTerm, String tpClass, String tpCreateName,
-			SCQuestion scQuestion, MCQuestion mcQuestion, FBQuestion fbQuestion, TFQuestion tfQuestion,
-			QAQuestion qaQuestion) {
+			List<SCQuestion> scQuestions, List<MCQuestion> mcQuestions, List<FBQuestion> fbQuestions,
+			List<TFQuestion> tfQuestions, List<QAQuestion> qaQuestion) {
 		super();
 		this.tpName = tpName;
 		this.tpIllustrate = tpIllustrate;
 		this.tpTerm = tpTerm;
 		this.tpClass = tpClass;
 		this.tpCreateName = tpCreateName;
-		this.scQuestion = scQuestion;
-		this.mcQuestion = mcQuestion;
-		this.fbQuestion = fbQuestion;
-		this.tfQuestion = tfQuestion;
+		this.scQuestions = scQuestions;
+		this.mcQuestions = mcQuestions;
+		this.fbQuestions = fbQuestions;
+		this.tfQuestions = tfQuestions;
 		this.qaQuestion = qaQuestion;
 	}
 	public TestPaperView() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
 	
 	
 }
