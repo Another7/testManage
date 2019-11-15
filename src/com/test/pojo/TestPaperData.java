@@ -1,5 +1,7 @@
 package com.test.pojo;
 
+import java.util.Arrays;
+
 public class TestPaperData {
 
 	
@@ -11,19 +13,25 @@ public class TestPaperData {
 	private QuestionLevelNumber mcNumber;
 	private QuestionLevelNumber fbNumber;
 	private QuestionLevelNumber tfNumber;
-	@Override
-	public String toString() {
-		return "TestPaperData [tpName=" + tpName + ", tpIllustrate=" + tpIllustrate + ", tpTerm=" + tpTerm
-				+ ", tpClass=" + tpClass + ", scNumber=" + scNumber + ", mcNumber=" + mcNumber + ", fbNumber="
-				+ fbNumber + ", tfNumber=" + tfNumber + ", qaNumber=" + qaNumber + "]";
-	}
+	private QuestionLevelNumber qaNumber;
+	private String [] chapterIds;
+	
 	public TestPaperData() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	@Override
+	public String toString() {
+		return "TestPaperData [tpName=" + tpName + ", tpIllustrate=" + tpIllustrate + ", tpTerm=" + tpTerm
+				+ ", tpClass=" + tpClass + ", scNumber=" + scNumber + ", mcNumber=" + mcNumber + ", fbNumber="
+				+ fbNumber + ", tfNumber=" + tfNumber + ", qaNumber=" + qaNumber + ", chapterIds="
+				+ Arrays.toString(chapterIds) + "]";
+	}
+
 	public TestPaperData(String tpName, String tpIllustrate, String tpTerm, String tpClass,
 			QuestionLevelNumber scNumber, QuestionLevelNumber mcNumber, QuestionLevelNumber fbNumber,
-			QuestionLevelNumber tfNumber, QuestionLevelNumber qaNumber) {
+			QuestionLevelNumber tfNumber, QuestionLevelNumber qaNumber, String[] chapterIds) {
 		super();
 		this.tpName = tpName;
 		this.tpIllustrate = tpIllustrate;
@@ -34,7 +42,17 @@ public class TestPaperData {
 		this.fbNumber = fbNumber;
 		this.tfNumber = tfNumber;
 		this.qaNumber = qaNumber;
+		this.chapterIds = chapterIds;
 	}
+
+	public String[] getChapterIds() {
+		return chapterIds;
+	}
+
+	public void setChapterIds(String[] chapterIds) {
+		this.chapterIds = chapterIds;
+	}
+
 	public String getTpName() {
 		return tpName;
 	}
@@ -89,5 +107,5 @@ public class TestPaperData {
 	public void setQaNumber(QuestionLevelNumber qaNumber) {
 		this.qaNumber = qaNumber;
 	}
-	private QuestionLevelNumber qaNumber;
+	
 }

@@ -364,7 +364,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	
     	function CreateTestPaper(){
     		res=confirm("确定生成试卷?"); //在页面上弹出对话框
-    		
+    		var chapterIds =[];    
+			 
+		      chapterIds=$("#addChapter").val();
+		      
     		var name=$("#tpName").val();
     		var illustrate=$("#tpIllustrate").val();
     		var term=$("#tpTerm").val();
@@ -376,7 +379,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		var tfNumber={level1:$("#TFLevel1").val(),level2:$("#TFLevel1").val(),level3:$("#TFLevel1").val(),level4:$("#TFLevel1").val()};
     		var qaNumber={level1:$("#QALevel1").val(),level2:$("#QALevel1").val(),level3:$("#QALevel1").val(),level4:$("#QALevel1").val()};
     		var score=$("#totalScore").val();
-    		
+    		var data={}
     		
 			if(res==true){
 			 //显示
