@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.test.po.Subject;
+import com.test.po.TestPaperView;
 import com.test.pojo.QuestionLevelNumber;
 import com.test.pojo.TestPaperData;
 import com.test.service.ChapterService;
@@ -73,10 +74,10 @@ public class TestPaperController {
 		
 		return questionService.countQuestionLevelNumber(chapterIdList);
 	}
-	//创建试卷，如果创建成功返回试卷
+	//创建试卷，如果创建成功返回试卷id
 		@RequestMapping(value = "/createTestPaper.action",method = RequestMethod.POST)
 		@ResponseBody
-		public TestPaperData createTestPaper(@RequestBody TestPaperData testPaperData) {
+		public Map<String,String> createTestPaper(@RequestBody TestPaperData testPaperData) {
 			
 			/* String tpName;
 		 	String tpIllustrate;
@@ -87,7 +88,29 @@ public class TestPaperController {
 			private QuestionLevelNumber fbNumber;
 			private QuestionLevelNumber tfNumber;*/
 			
-			return null;
+			//map存放试卷是否创建成功，如果成功，将试卷插入数据库，返回试卷id，如果失败只返回失败消息
+			 Map<String, String> map=new HashMap<String, String>();
+				//	System.out.println("111:"+c_id);
+					//System.out.println("addChapters222:"+ct_name);
+					
+			int result;
+			if(result){
+				map.put("result", "yes");
+			}else{
+				map.put("result", "no");
+			}	
+			return map;
+		}
+		
+		//根据试卷id获取试卷view对象(放到model中)
+		@RequestMapping(value = "/getTestPaperByTpid.action",method = RequestMethod.GET)
+		@ResponseBody
+		public String createTestPaper( String tpId,Model model) {
+			
+				
+					
+			
+			return "TestPaperView";//转发到TestPaperView
 		}
 
 }
