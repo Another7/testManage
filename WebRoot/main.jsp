@@ -156,7 +156,7 @@
                     <i class="iconfont nav_right">&#xe6a7;</i>
                 </a>
                 <ul class="sub-menu">
-                    <li><a _href="#"><i class="iconfont">&#xe6a7;</i><cite>我组的卷</cite></a></li>
+                    <li><a _href="TestPaperView.jsp"><i class="iconfont">&#xe6a7;</i><cite>我组的卷</cite></a></li>
                     <li><a _href="#"><i class="iconfont">&#xe6a7;</i><cite>收藏的卷</cite></a></li>
                 </ul>
             </li>

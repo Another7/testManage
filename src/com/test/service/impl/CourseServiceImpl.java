@@ -54,8 +54,7 @@ public class CourseServiceImpl implements CourseService{
 			System.out.println(c_name);
 			Course teBook0=CourseDao.getCourseByName(c_name);
 			Integer ct_c_id=Integer.valueOf(teBook0.getc_id());//获得添加成功的课程编号
-			//System.out.println("c_chapter_num:"+c_chapter_num);
-			//System.out.println("chapter.length:"+chapter.length);
+			
 			if(c_chapter_num==chapter.length){//如果分割的章节标题与章节数目对应，添加章节到数据库
 				for(int i=0;i<c_chapter_num;i++){
 					/*c_ct_id+=i+"@@";*/

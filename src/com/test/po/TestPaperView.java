@@ -2,16 +2,17 @@ package com.test.po;
 
 import java.util.List;
 
-public class TestPaperView {
+import com.test.pojo.MCQuestionView;
+import com.test.pojo.SCQuestionView;
 
-	
+public class TestPaperView {
 	private String tpName;
 	private String tpIllustrate;
 	private String tpTerm;
 	private String tpClass;
 	private String tpCreateName;//创建者姓名
-	private List<SCQuestion> scQuestions;
-	private List<MCQuestion> mcQuestions;
+	private List<SCQuestionView> scQuestions;
+	private List<MCQuestionView> mcQuestions;
 	private List<FBQuestion> fbQuestions;
 	private List<TFQuestion> tfQuestions;
 	private List<QAQuestion> qaQuestion;
@@ -45,16 +46,17 @@ public class TestPaperView {
 	public void setTpCreateName(String tpCreateName) {
 		this.tpCreateName = tpCreateName;
 	}
-	public List<SCQuestion> getScQuestions() {
+	
+	public List<SCQuestionView> getScQuestions() {
 		return scQuestions;
 	}
-	public void setScQuestions(List<SCQuestion> scQuestions) {
+	public void setScQuestions(List<SCQuestionView> scQuestions) {
 		this.scQuestions = scQuestions;
 	}
-	public List<MCQuestion> getMcQuestions() {
+	public List<MCQuestionView> getMcQuestions() {
 		return mcQuestions;
 	}
-	public void setMcQuestions(List<MCQuestion> mcQuestions) {
+	public void setMcQuestions(List<MCQuestionView> mcQuestions) {
 		this.mcQuestions = mcQuestions;
 	}
 	public List<FBQuestion> getFbQuestions() {
@@ -83,7 +85,7 @@ public class TestPaperView {
 				+ ", qaQuestion=" + qaQuestion + "]";
 	}
 	public TestPaperView(String tpName, String tpIllustrate, String tpTerm, String tpClass, String tpCreateName,
-			List<SCQuestion> scQuestions, List<MCQuestion> mcQuestions, List<FBQuestion> fbQuestions,
+			List<SCQuestionView> scQuestions, List<MCQuestionView> mcQuestions, List<FBQuestion> fbQuestions,
 			List<TFQuestion> tfQuestions, List<QAQuestion> qaQuestion) {
 		super();
 		this.tpName = tpName;

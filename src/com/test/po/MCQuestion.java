@@ -10,7 +10,7 @@ public class MCQuestion {
 	private Integer mc_id;//试题id
 	private Integer mc_subject;//所属科目id;
 	private String mc_point;//涉及到的知识点
-	private String mc_stem;//题干
+	
 	
 	public MCQuestion(Integer mc_subject, String mc_point, String mc_stem,
 			String mc_option, String mc_answer, String mc_analysis,
@@ -26,7 +26,7 @@ public class MCQuestion {
 		this.mc_ct_id = mc_ct_id;
 		this.mc_level=mc_level;
 	}
-
+	private String mc_stem;//题干
 	private String mc_option;//选项
 	private String mc_answer;//答案
 	

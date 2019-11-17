@@ -379,7 +379,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		var tfNumber={level1:$("#TFLevel1").val(),level2:$("#TFLevel1").val(),level3:$("#TFLevel1").val(),level4:$("#TFLevel1").val()};
     		var qaNumber={level1:$("#QALevel1").val(),level2:$("#QALevel1").val(),level3:$("#QALevel1").val(),level4:$("#QALevel1").val()};
     		var score=$("#totalScore").val();
-    		var data={}
+    		var data={tpName:name,tpIllustrate:illustrate,tpTerm:term,tpClass:clazz,scNumber:scNumber,mcNumber:mcNumber,fbNumber:fbNumber,tfNumber:tfNumber,qaNumber:qaNumber,chapterIds:chapterIds};
+    		
     		
 			if(res==true){
 			 //显示
@@ -391,12 +392,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     contentType: 'application/json; charset=UTF-8', 
                     data:JSON.stringify(data),   
                     dataType: "json",                           
-                    success: function(msg) {
-                        //隐藏进度条
-                        $("#loadingModal").modal('hide');
+                    success: function(data) {
+                        
+                        if(data.result=="yes"){
+                        	//表明创建试卷成功，获取试卷id,跳转到试卷展示页面
+                        	
+                        	//隐藏进度条
+                        	$("#loadingModal").modal('hide');
+                        	//获取model中的试卷id
+                        	var tpid='${tp_id}';
+                        	alert(tpid);
+                        	window.location.href ="/testManage/getTestPaperByTpid.action?tp_id="+tpid;//跳转到展示页面
+                        }
+                        
                                              
                    },
-                   error: function(msg) {
+                   error: function(data) {
                      //隐藏
                        $("#loadingModal").modal('hide');
                      	alert("试卷生成出错！")
