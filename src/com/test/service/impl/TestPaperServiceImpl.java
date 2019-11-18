@@ -100,4 +100,10 @@ public class TestPaperServiceImpl implements TestPaperService {
 		return 0;
 	}
 
+	@Override
+	public TestPaper selectTestPaperById(Integer testPaperId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
