@@ -3,6 +3,8 @@ package com.test.dao;
 import java.util.List;
 
 import com.test.po.FBQuestion;
+import com.test.po.SCQuestion;
+import com.test.pojo.QuestionLevelNumber;
 
 
 
@@ -28,4 +30,14 @@ public interface FBQuestionDao {
 	 * @return 填空题列表
 	 */
 	public List<FBQuestion> getFBQuestionByChapterId(List<Integer> chapterIdList);
+	
+	//TODO 填空题mybatis待实现
+	/**
+	 * 	根据章节id和填空题的难易程度随机生成单选题题目列表
+	 * @param chapterIdList 章节id列表
+	 * @param levelNumber 填空题难易程度及不同等级需要的题目数量
+	 * @return 符合要求的填空题列表
+	 */
+	public List<FBQuestion> getFBQuestionByChapterIdAndLevelRandom(List<Integer> chapterIdList,
+			QuestionLevelNumber levelNumber);
 }

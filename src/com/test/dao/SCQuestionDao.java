@@ -3,6 +3,7 @@ package com.test.dao;
 import java.util.List;
 
 import com.test.po.SCQuestion;
+import com.test.pojo.QuestionLevelNumber;
 
 public interface SCQuestionDao {
 
@@ -29,10 +30,20 @@ public interface SCQuestionDao {
 	public int updateSCQuestion(SCQuestion scQuestion);
 	
 	/**
-	 * 通过章节id查询出单选题列表
+	 * 	通过章节id查询出单选题列表
 	 * @param chapterIdList 章节id列表
 	 * @return 单选题列表
 	 */
 	public List<SCQuestion> getSCQuestionByChapterId(List<Integer> chapterIdList);
+	
+	//TODO 单选题mybatis待实现
+	/**
+	 * 	根据章节id和单选题的难易程度随机生成单选题题目列表
+	 * @param chapterIdList 章节id列表
+	 * @param levelNumber 单选题难易程度及不同等级需要的题目数量
+	 * @return 符合要求的单选题列表
+	 */
+	public List<SCQuestion> getSCQuestionByChapterIdAndLevelRandom(List<Integer> chapterIdList,
+			QuestionLevelNumber levelNumber);
 	
 }

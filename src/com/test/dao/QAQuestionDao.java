@@ -3,6 +3,8 @@ package com.test.dao;
 import java.util.List;
 
 import com.test.po.QAQuestion;
+import com.test.po.SCQuestion;
+import com.test.pojo.QuestionLevelNumber;
 
 public interface QAQuestionDao {
 
@@ -20,4 +22,14 @@ public interface QAQuestionDao {
 	 * @return 问答题列表
 	 */
 	public List<QAQuestion> getQAQuestionByChapterId(List<Integer> chapterIdList);
+	
+	//TODO 问答题mybatis待实现
+	/**
+	 * 	根据章节id和问答题的难易程度随机生成问答题题目列表
+	 * @param chapterIdList 章节id列表
+	 * @param levelNumber 问答题难易程度及不同等级需要的题目数量
+	 * @return 符合要求的问答题列表
+	 */
+	public List<QAQuestion> getQAQuestionByChapterIdAndLevelRandom(List<Integer> chapterIdList,
+			QuestionLevelNumber levelNumber);
 }

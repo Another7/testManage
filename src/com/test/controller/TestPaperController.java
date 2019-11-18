@@ -93,7 +93,8 @@ public class TestPaperController {
 				//	System.out.println("111:"+c_id);
 					//System.out.println("addChapters222:"+ct_name);
 					
-			int result;
+			// 试卷是否插入成功
+			boolean result = false;
 			if(result){
 				map.put("result", "yes");
 			}else{

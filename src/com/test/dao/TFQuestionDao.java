@@ -3,7 +3,9 @@ package com.test.dao;
 
 import java.util.List;
 
+import com.test.po.SCQuestion;
 import com.test.po.TFQuestion;
+import com.test.pojo.QuestionLevelNumber;
 
 public interface TFQuestionDao {
 
@@ -29,4 +31,14 @@ public interface TFQuestionDao {
 	 * @return 判断题列表
 	 */
 	public List<TFQuestion> getTFQuestionByChapterId(List<Integer> chapterIdList);
+	
+	//TODO 判断题mybatis待实现
+	/**
+	 * 	根据章节id和判断题的难易程度随机生成判断题题目列表
+	 * @param chapterIdList 章节id列表
+	 * @param levelNumber 判断题难易程度及不同等级需要的题目数量
+	 * @return 符合要求的判断题列表
+	 */
+	public List<TFQuestion> getTFQuestionByChapterIdAndLevelRandom(List<Integer> chapterIdList,
+			QuestionLevelNumber levelNumber);
 }

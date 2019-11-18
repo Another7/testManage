@@ -1,5 +1,14 @@
 package com.test.pojo;
 
+/**
+ *	题目的难易程度
+ *	level1表示简单
+ *	level2表示一般
+ *	level3表示较难
+ *	level4表示困难
+ * 
+ * @author Another 
+ */
 public class QuestionLevelNumber {
 	private Integer level1;
 	private Integer level2;
