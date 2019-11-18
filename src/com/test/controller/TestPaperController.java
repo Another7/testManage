@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -118,6 +119,13 @@ public class TestPaperController {
 		return "TestPaperView";// 转发到TestPaperView
 	}
 	
-	
+	//根据试卷id导出试卷
+	@RequestMapping(value = "/exportTestPaper.action", method = RequestMethod.GET)
+	@ResponseBody
+	public void exportTestPaper(HttpServletRequest request,HttpServletResponse response,String tpId) {
+				
+		
+		
+	}
 
 }
