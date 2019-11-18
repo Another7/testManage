@@ -7,16 +7,13 @@ import com.test.po.TestPaper;
  *
  */
 public interface TestPaperDao {
-	//TODO testPaper.xml 未创建，待实现
-	/**
-	 * 	插入试卷
+	/**DONE BY RIERBO 插入试卷
 	 * @param testPaper 试卷对象
 	 * @return 是否插入成功
 	 */
 	public int insertTestPaper(TestPaper testPaper);
 	
-	/**
-	 * 	根据单个试卷id查询试卷
+	/**DONE BY RIERBO 根据单个试卷id查询试卷
 	 * @param testPaperId 试卷id
 	 * @return 试卷对象
 	 */

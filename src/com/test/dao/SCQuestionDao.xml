@@ -72,4 +72,51 @@
 		where sc_id=#{sc_id}
 	</delete>
 
+	<select id="getSCQuestionByChapterIdAndLevelRandom" parameterType="List"
+		resultType="SCQuestion">
+		SELECT * FROM (
+			(SELECT 
+			    *
+			FROM
+			    single_choice q
+			WHERE
+			    q.'sc_level' = 1
+			ORDER BY RAND()
+			LIMIT #{levelNumber.level1} )
+		UNION
+			(SELECT 
+			    *
+			FROM
+			    single_choice q
+			WHERE
+			    q.'sc_level' = 2
+			ORDER BY RAND()
+			LIMIT #{levelNumber.level2} )
+			UNION
+				(SELECT 
+				    *
+				FROM
+				    single_choice q
+				WHERE
+				    q.'sc_level' = 3
+				ORDER BY RAND()
+				LIMIT #{levelNumber.level3} )
+			UNION
+				(SELECT 
+				    *
+				FROM
+				    single_choice q
+				WHERE
+				    q.'sc_level' = 4
+				ORDER BY RAND()
+				LIMIT #{levelNumber.level4} )
+			 ) demo
+			WHERE demo.sc_ct_id in 
+			<foreach item="item" collection="list" open="(" separator=","
+			close=")">
+				#{item}
+			</foreach>
+	</select>
+
+
 </mapper>

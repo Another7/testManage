@@ -50,4 +50,59 @@
 		fill_in_the_blank where fb_id=#{fb_id}
 	</delete>
 
+
+
+
+<select id="getFBQuestionByChapterIdAndLevelRandom" parameterType="List"
+		resultType="FBQuestion">
+		SELECT * FROM (
+			(SELECT 
+			    *
+			FROM
+			    fill_in_the_blank q
+			WHERE
+			    q.'fb_level' = 1
+			ORDER BY RAND()
+			LIMIT #{levelNumber.level1} )
+		UNION
+			(SELECT 
+			    *
+			FROM
+			    fill_in_the_blank q
+			WHERE
+			    q.'fb_level' = 2
+			ORDER BY RAND()
+			LIMIT #{levelNumber.level2} )
+			UNION
+				(SELECT 
+				    *
+				FROM
+				    fill_in_the_blank q
+				WHERE
+				    q.'fb_level' = 3
+				ORDER BY RAND()
+				LIMIT #{levelNumber.level3} )
+			UNION
+				(SELECT 
+				    *
+				FROM
+				   fill_in_the_blank q
+				WHERE
+				    q.'fb_level' = 4
+				ORDER BY RAND()
+				LIMIT #{levelNumber.level4} )
+			 ) demo
+			WHERE demo.fb_ct_id in 
+			<foreach item="item" collection="list" open="(" separator=","
+			close=")">
+				#{item}
+			</foreach>
+	</select>
+	
+
+
+
+
+
+
 </mapper>

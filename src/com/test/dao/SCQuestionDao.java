@@ -2,6 +2,8 @@ package com.test.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.test.po.SCQuestion;
 import com.test.pojo.QuestionLevelNumber;
 
@@ -36,7 +38,7 @@ public interface SCQuestionDao {
 	 */
 	public List<SCQuestion> getSCQuestionByChapterId(List<Integer> chapterIdList);
 	
-	//TODO 单选题mybatis待实现
+	//DONE BY RIERBO 单选题mybatis已实现
 	/**
 	 * 	根据章节id和单选题的难易程度随机生成单选题题目列表
 	 * @param chapterIdList 章节id列表
@@ -44,6 +46,7 @@ public interface SCQuestionDao {
 	 * @return 符合要求的单选题列表
 	 */
 	public List<SCQuestion> getSCQuestionByChapterIdAndLevelRandom(List<Integer> chapterIdList,
-			QuestionLevelNumber levelNumber);
-	
+			
+			@	Param("levelNumber") QuestionLevelNumber levelNumber);
+
 }
