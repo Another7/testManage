@@ -56,7 +56,7 @@
 			FROM
 			    true_or_false q
 			WHERE
-			    q.'tf_level' = 1
+			    q.tf_level = 1
 			ORDER BY RAND()
 			LIMIT #{levelNumber.level1} )
 		UNION
@@ -65,7 +65,7 @@
 			FROM
 			    true_or_false q
 			WHERE
-			    q.'tf_level' = 2
+			    q.tf_level = 2
 			ORDER BY RAND()
 			LIMIT #{levelNumber.level2} )
 			UNION
@@ -74,7 +74,7 @@
 				FROM
 				    true_or_false q
 				WHERE
-				    q.'tf_level' = 3
+				    q.tf_level = 3
 				ORDER BY RAND()
 				LIMIT #{levelNumber.level3} )
 			UNION
@@ -83,12 +83,12 @@
 				FROM
 				   true_or_false q
 				WHERE
-				    q.'tf_level' = 4
+				    q.tf_level = 4
 				ORDER BY RAND()
 				LIMIT #{levelNumber.level4} )
 			 ) demo
 			WHERE demo.tf_ct_id in 
-			<foreach item="item" collection="list" open="(" separator=","
+			<foreach item="item" collection="chapterIdList" open="(" separator=","
 			close=")">
 				#{item}
 			</foreach>

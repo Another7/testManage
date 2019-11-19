@@ -19,6 +19,31 @@ public class TestPaper {
 	private String tp_major;
 	private String tp_class;
 
+	
+	
+	public TestPaper() {
+		super();
+	}
+
+	public TestPaper(String tp_name, String tp_t_name, Integer tp_status, String tp_illustrate, Integer tp_score,
+			String tp_sc_id, String tp_mc_id, String tp_fb_id, String tp_tf_id, String tp_qa_id, String tp_term,
+			String tp_major, String tp_class) {
+		super();
+		this.tp_name = tp_name;
+		this.tp_t_name = tp_t_name;
+		this.tp_status = tp_status;
+		this.tp_illustrate = tp_illustrate;
+		this.tp_score = tp_score;
+		this.tp_sc_id = tp_sc_id;
+		this.tp_mc_id = tp_mc_id;
+		this.tp_fb_id = tp_fb_id;
+		this.tp_tf_id = tp_tf_id;
+		this.tp_qa_id = tp_qa_id;
+		this.tp_term = tp_term;
+		this.tp_major = tp_major;
+		this.tp_class = tp_class;
+	}
+
 	public Integer getTp_id() {
 		return tp_id;
 	}

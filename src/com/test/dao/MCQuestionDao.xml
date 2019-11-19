@@ -60,7 +60,7 @@
 			FROM
 			    multiple_choice q
 			WHERE
-			    q.'mc_level' = 1
+			    q.mc_level = 1
 			ORDER BY RAND()
 			LIMIT #{levelNumber.level1} )
 		UNION
@@ -69,7 +69,7 @@
 			FROM
 			    multiple_choice q
 			WHERE
-			    q.'mc_level' = 2
+			    q.mc_level = 2
 			ORDER BY RAND()
 			LIMIT #{levelNumber.level2} )
 			UNION
@@ -78,7 +78,7 @@
 				FROM
 				    multiple_choice q
 				WHERE
-				    q.'mc_level' = 3
+				    q.mc_level = 3
 				ORDER BY RAND()
 				LIMIT #{levelNumber.level3} )
 			UNION
@@ -87,12 +87,12 @@
 				FROM
 				   multiple_choice q
 				WHERE
-				    q.'mc_level' = 4
+				    q.mc_level = 4
 				ORDER BY RAND()
 				LIMIT #{levelNumber.level4} )
 			 ) demo
 			WHERE demo.mc_ct_id in 
-			<foreach item="item" collection="list" open="(" separator=","
+			<foreach item="item" collection="chapterIdList" open="(" separator=","
 			close=")">
 				#{item}
 			</foreach>

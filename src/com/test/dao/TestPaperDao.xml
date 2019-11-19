@@ -4,7 +4,7 @@
 <mapper namespace="com.test.dao.TestPaperDao">
 	
 	<!-- 插入试卷 -->
-	<insert id="insertTestPaper" parameterType="testPaper">
+	<insert id="insertTestPaper" useGeneratedKeys="true" keyProperty="tp_id" parameterType="testPaper">
 		insert into test_paper(
 			tp_id,
 			tp_name,

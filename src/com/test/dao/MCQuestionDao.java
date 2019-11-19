@@ -44,6 +44,6 @@ public interface MCQuestionDao {
 	 * @param levelNumber 多选题难易程度及不同等级需要的题目数量
 	 * @return 符合要求的多选题列表
 	 */
-	public List<MCQuestion> getMCQuestionByChapterIdAndLevelRandom(List<Integer> chapterIdList,
+	public List<MCQuestion> getMCQuestionByChapterIdAndLevelRandom(@Param("chapterIdList") List<Integer> chapterIdList,
 			@	Param("levelNumber") QuestionLevelNumber levelNumber);
 }

@@ -40,6 +40,6 @@ public interface FBQuestionDao {
 	 * @param levelNumber 填空题难易程度及不同等级需要的题目数量
 	 * @return 符合要求的填空题列表
 	 */
-	public List<FBQuestion> getFBQuestionByChapterIdAndLevelRandom(List<Integer> chapterIdList,
+	public List<FBQuestion> getFBQuestionByChapterIdAndLevelRandom(@Param("chapterIdList") List<Integer> chapterIdList,
 			@	Param("levelNumber") QuestionLevelNumber levelNumber);
 }

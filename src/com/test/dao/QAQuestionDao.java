@@ -32,6 +32,6 @@ public interface QAQuestionDao {
 	 * @param levelNumber 问答题难易程度及不同等级需要的题目数量
 	 * @return 符合要求的问答题列表
 	 */
-	public List<QAQuestion> getQAQuestionByChapterIdAndLevelRandom(List<Integer> chapterIdList,
+	public List<QAQuestion> getQAQuestionByChapterIdAndLevelRandom(@	Param("chapterIdList") List<Integer> chapterIdList,
 			@	Param("levelNumber") QuestionLevelNumber levelNumber);
 }

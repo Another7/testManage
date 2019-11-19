@@ -41,6 +41,6 @@ public interface TFQuestionDao {
 	 * @param levelNumber 判断题难易程度及不同等级需要的题目数量
 	 * @return 符合要求的判断题列表
 	 */
-	public List<TFQuestion> getTFQuestionByChapterIdAndLevelRandom(List<Integer> chapterIdList,
+	public List<TFQuestion> getTFQuestionByChapterIdAndLevelRandom(@Param("chapterIdList") List<Integer> chapterIdList,
 			@	Param("levelNumber") QuestionLevelNumber levelNumber);
 }
