@@ -12,6 +12,7 @@ import com.test.dao.MCQuestionDao;
 import com.test.dao.QAQuestionDao;
 import com.test.dao.SCQuestionDao;
 import com.test.dao.TFQuestionDao;
+import com.test.dao.TestPaperDao;
 import com.test.po.FBQuestion;
 import com.test.po.MCQuestion;
 import com.test.po.QAQuestion;
@@ -43,10 +44,12 @@ public class TestPaperServiceImpl implements TestPaperService {
 	private FBQuestionDao fbQuestionDao;
 	@Autowired
 	private QAQuestionDao qaQuestionDao;
+	@Autowired
+	private TestPaperDao testPaperDao;
 
 	@Override
-	public TestPaperView randomCreateTestPaper(TestPaperData testPaperData) {
-		TestPaperView testPaperView = new TestPaperView();
+	public TestPaper randomCreateTestPaper(TestPaperData testPaperData) {
+		TestPaper testPaper = new TestPaper();
 		// 章节id
 		String[] chapterIds = testPaperData.getChapterIds();
 		List<Integer> chapterIdList = new ArrayList<Integer>();
@@ -59,50 +62,116 @@ public class TestPaperServiceImpl implements TestPaperService {
 		QuestionLevelNumber tfQuestionLevelNumber = testPaperData.getTfNumber();
 		QuestionLevelNumber fbQuestionLevelNumber = testPaperData.getFbNumber();
 		QuestionLevelNumber qaQuestionLevelNumber = testPaperData.getQaNumber();
-		// 将单选题列表转化单选题视图
+
 		List<SCQuestion> scQuestionList = scQuestionDao.getSCQuestionByChapterIdAndLevelRandom(chapterIdList,
 				scQuestionLevelNumber);
-		List<SCQuestionView> scQuestionViewList = new ArrayList<SCQuestionView>();
-		for (SCQuestion scQuestion : scQuestionList) {
-			scQuestionViewList.add(new SCQuestionView(scQuestion));
-		}
 
-		// 将多选题列表转化为多选题视图
 		List<MCQuestion> mcQuestionList = mcQuestionDao.getMCQuestionByChapterIdAndLevelRandom(chapterIdList,
 				mcQuestionLevelNumber);
-		List<MCQuestionView> mcQuestionViewList = new ArrayList<MCQuestionView>();
-		for (MCQuestion mcQuestion : mcQuestionList) {
-			mcQuestionViewList.add(new MCQuestionView(mcQuestion));
-		}
 		List<TFQuestion> tfQuestionList = tfQuestionDao.getTFQuestionByChapterIdAndLevelRandom(chapterIdList,
 				tfQuestionLevelNumber);
 		List<FBQuestion> fbQuestionList = fbQuestionDao.getFBQuestionByChapterIdAndLevelRandom(chapterIdList,
 				fbQuestionLevelNumber);
 		List<QAQuestion> qaQuestionList = qaQuestionDao.getQAQuestionByChapterIdAndLevelRandom(chapterIdList,
 				qaQuestionLevelNumber);
+		StringBuffer scIds = new StringBuffer();
+		scQuestionList.stream().forEach(sc -> {
+			scIds.append(sc.getSc_id()).append("@@");
+		});
+		StringBuffer mcIds = new StringBuffer();
+		mcQuestionList.stream().forEach(mc -> {
+			mcIds.append(mc.getMc_id()).append("@@");
+		});
+		StringBuffer tfIds = new StringBuffer();
+		tfQuestionList.stream().forEach(tf -> {
+			mcIds.append(tf.getTf_id()).append("@@");
+		});
+		StringBuffer fbIds = new StringBuffer();
+		fbQuestionList.stream().forEach(fb -> {
+			fbIds.append(fb.getFb_id()).append("@@");
+		});
+		StringBuffer qaIds = new StringBuffer();
+		qaQuestionList.stream().forEach(qa -> {
+			qaIds.append(qa.getQa_id()).append("@@");
+		});
+		// 将查询出的不同类型的试题的封装到到testPaper中
+		testPaper.setTp_sc_id(scIds.toString());
+		testPaper.setTp_mc_id(mcIds.toString());
+		testPaper.setTp_tf_id(tfIds.toString());
+		testPaper.setTp_fb_id(fbIds.toString());
+		testPaper.setTp_qa_id(qaIds.toString());
 
-		testPaperView.setScQuestions(scQuestionViewList);
-		testPaperView.setMcQuestions(mcQuestionViewList);
-		testPaperView.setTfQuestions(tfQuestionList);
-		testPaperView.setFbQuestions(fbQuestionList);
-		testPaperView.setQaQuestion(qaQuestionList);
-		// 原有信息回代
-		testPaperView.setTpName(testPaperData.getTpName());
-		testPaperView.setTpIllustrate(testPaperData.getTpIllustrate());
-		testPaperView.setTpTerm(testPaperData.getTpTerm());
-		testPaperView.setTpClass(testPaperData.getTpClass());
+		testPaper.setTp_name(testPaperData.getTpName());
+		testPaper.setTp_class(testPaperData.getTpClass());
+		testPaper.setTp_illustrate(testPaperData.getTpIllustrate());
+		testPaper.setTp_term(testPaperData.getTpTerm());
+		testPaper.setTp_t_name("admin");
+		testPaper.setTp_status(0);
+		testPaper.setTp_score(testPaperData.getTpScore());
+		testPaper.setTp_major(testPaperData.getTpMajor());
 
-		return testPaperView;
+		return testPaper;
 	}
 
 	@Override
 	public int insertTestPaper(TestPaper testPaper) {
-		return 0;
+		return testPaperDao.insertTestPaper(testPaper);
 	}
 
 	@Override
 	public TestPaper selectTestPaperById(Integer testPaperId) {
-		// TODO Auto-generated method stub
+		return testPaperDao.selectTestPaperById(testPaperId);
+	}
+
+	@Override
+	public TestPaperView convertTestPaper(TestPaper testPaper) {
+		TestPaperView testPaperView = new TestPaperView();
+		testPaperView.setTpName(testPaper.getTp_name());
+		testPaperView.setTpCreateName(testPaper.getTp_t_name());
+		testPaperView.setTpClass(testPaper.getTp_class());
+		testPaperView.setTpIllustrate(testPaper.getTp_illustrate());
+		testPaperView.setTpTerm(testPaper.getTp_term());
+
+		String[] scIds = testPaper.getTp_sc_id().split("@@");
+		String[] mcIds = testPaper.getTp_mc_id().split("@@");
+		String[] tfIds = testPaper.getTp_tf_id().split("@@");
+		String[] fbIds = testPaper.getTp_fb_id().split("@@");
+		String[] qaIds = testPaper.getTp_qa_id().split("@@");
+		List<SCQuestion> scQuestionList = new ArrayList<SCQuestion>();
+		for (String id : scIds) {
+			scQuestionList.add(scQuestionDao.selectById(Integer.parseInt(id)));
+		}
+		List<MCQuestion> mcQuestionList = new ArrayList<MCQuestion>();
+		for (String id : mcIds) {
+			mcQuestionList.add(mcQuestionDao.selectById(Integer.parseInt(id)));
+		}
+		List<TFQuestion> tfQuestionList = new ArrayList<TFQuestion>();
+		for (String id : tfIds) {
+			tfQuestionList.add(tfQuestionDao.selectTFQuestionById(Integer.parseInt(id)));
+		}
+		List<FBQuestion> fbQuestionList = new ArrayList<FBQuestion>();
+		for (String id : fbIds) {
+			fbQuestionList.add(fbQuestionDao.selectFBQuestionById(Integer.parseInt(id)));
+		}
+		List<QAQuestion> qaQuestionList = new ArrayList<QAQuestion>();
+		for (String id : qaIds) {
+			qaQuestionList.add(qaQuestionDao.selectQAQuestionById(Integer.parseInt(id)));
+		}
+		// 将单选题列表转化单选题视图
+		List<SCQuestionView> scQuestionViewList = new ArrayList<SCQuestionView>();
+		for (SCQuestion scQuestion : scQuestionList) {
+			scQuestionViewList.add(new SCQuestionView(scQuestion));
+		}
+		testPaperView.setScQuestions(scQuestionViewList);
+		// 将多选题列表转化为多选题视图
+		List<MCQuestionView> mcQuestionViewList = new ArrayList<MCQuestionView>();
+		for (MCQuestion mcQuestion : mcQuestionList) {
+			mcQuestionViewList.add(new MCQuestionView(mcQuestion));
+		}
+		testPaperView.setMcQuestions(mcQuestionViewList);
+		testPaperView.setTfQuestions(tfQuestionList);
+		testPaperView.setFbQuestions(fbQuestionList);
+		testPaperView.setQaQuestion(qaQuestionList);
 		return null;
 	}
 

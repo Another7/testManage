@@ -29,7 +29,7 @@
 		#{tf_level}
 		)
 	</insert>
-	<!-- 根据id查询单选题信息 -->
+	<!-- 根据科目id查询判断题信息 -->
 	<select id="getTFQuestionsBySub" parameterType="Integer"
 		resultType="tfquestion">
 		select * from true_or_false where tf_subject=#{tf_subject}
@@ -42,57 +42,61 @@
 			#{item}
 		</foreach>
 	</select>
+	<select id="selectTFQuestionById" parameterType="Integer"
+		resultType="tfquestion">
+		select * from true_or_false where tf_id = #{tfId}
+	</select>
 	<delete id="deleteById" parameterType="Integer">
 		delete from true_or_false
 		where tf_id=#{tf_id}
 	</delete>
-	
-	
-	<select id="getTFQuestionByChapterIdAndLevelRandom" parameterType="List"
-		resultType="TFQuestion">
+
+
+	<select id="getTFQuestionByChapterIdAndLevelRandom"
+		parameterType="List" resultType="TFQuestion">
 		SELECT * FROM (
-			(SELECT 
-			    *
-			FROM
-			    true_or_false q
-			WHERE
-			    q.tf_level = 1
-			ORDER BY RAND()
-			LIMIT #{levelNumber.level1} )
+		(SELECT
+		*
+		FROM
+		true_or_false q
+		WHERE
+		q.tf_level = 1
+		ORDER BY RAND()
+		LIMIT #{levelNumber.level1} )
 		UNION
-			(SELECT 
-			    *
-			FROM
-			    true_or_false q
-			WHERE
-			    q.tf_level = 2
-			ORDER BY RAND()
-			LIMIT #{levelNumber.level2} )
-			UNION
-				(SELECT 
-				    *
-				FROM
-				    true_or_false q
-				WHERE
-				    q.tf_level = 3
-				ORDER BY RAND()
-				LIMIT #{levelNumber.level3} )
-			UNION
-				(SELECT 
-				    *
-				FROM
-				   true_or_false q
-				WHERE
-				    q.tf_level = 4
-				ORDER BY RAND()
-				LIMIT #{levelNumber.level4} )
-			 ) demo
-			WHERE demo.tf_ct_id in 
-			<foreach item="item" collection="chapterIdList" open="(" separator=","
-			close=")">
-				#{item}
-			</foreach>
+		(SELECT
+		*
+		FROM
+		true_or_false q
+		WHERE
+		q.tf_level = 2
+		ORDER BY RAND()
+		LIMIT #{levelNumber.level2} )
+		UNION
+		(SELECT
+		*
+		FROM
+		true_or_false q
+		WHERE
+		q.tf_level = 3
+		ORDER BY RAND()
+		LIMIT #{levelNumber.level3} )
+		UNION
+		(SELECT
+		*
+		FROM
+		true_or_false q
+		WHERE
+		q.tf_level = 4
+		ORDER BY RAND()
+		LIMIT #{levelNumber.level4} )
+		) demo
+		WHERE demo.tf_ct_id in
+		<foreach item="item" collection="chapterIdList" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
 	</select>
-	
-	
+
+
 </mapper>

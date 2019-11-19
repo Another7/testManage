@@ -28,11 +28,15 @@
 		#{qa_level}
 		)
 	</insert>
-	<!-- 根据id查询单选题信息 -->
+	<!-- 根据科目id查询问答题信息 -->
 	<select id="getQAQuestionsBySub" parameterType="Integer"
 		resultType="qaquestion">
 		select * from question_and_answer where
 		qa_subject=#{qa_subject}
+	</select>
+	<select id="selectQAQuestionById" parameterType="Integer"
+		resultType="qaquestion">
+		select * from question_and_answer where qa_id = #{qaId}
 	</select>
 	<select id="getQAQuestionByChapterId" parameterType="List"
 		resultType="qaquestion">
@@ -46,51 +50,52 @@
 		delete from
 		question_and_answer where qa_id=#{qa_id}
 	</delete>
-	
-	<select id="getQAQuestionByChapterIdAndLevelRandom" parameterType="List"
-		resultType="TFQuestion">
+
+	<select id="getQAQuestionByChapterIdAndLevelRandom"
+		parameterType="List" resultType="TFQuestion">
 		SELECT * FROM (
-			(SELECT 
-			    *
-			FROM
-			    question_and_answer q
-			WHERE
-			    q.qa_level = 1
-			ORDER BY RAND()
-			LIMIT #{levelNumber.level1} )
+		(SELECT
+		*
+		FROM
+		question_and_answer q
+		WHERE
+		q.qa_level = 1
+		ORDER BY RAND()
+		LIMIT #{levelNumber.level1} )
 		UNION
-			(SELECT 
-			    *
-			FROM
-			    question_and_answer q
-			WHERE
-			    q.qa_level = 2
-			ORDER BY RAND()
-			LIMIT #{levelNumber.level2} )
-			UNION
-				(SELECT 
-				    *
-				FROM
-				    question_and_answer q
-				WHERE
-				    q.qa_level = 3
-				ORDER BY RAND()
-				LIMIT #{levelNumber.level3} )
-			UNION
-				(SELECT 
-				    *
-				FROM
-				   question_and_answer q
-				WHERE
-				    q.qa_level = 4
-				ORDER BY RAND()
-				LIMIT #{levelNumber.level4} )
-			 ) demo
-			WHERE demo.qa_ct_id in 
-			<foreach item="item" collection="chapterIdList" open="(" separator=","
-			close=")">
-				#{item}
-			</foreach>
+		(SELECT
+		*
+		FROM
+		question_and_answer q
+		WHERE
+		q.qa_level = 2
+		ORDER BY RAND()
+		LIMIT
+		#{levelNumber.level2} )
+		UNION
+		(SELECT
+		*
+		FROM
+		question_and_answer q
+		WHERE
+		q.qa_level = 3
+		ORDER BY RAND()
+		LIMIT #{levelNumber.level3} )
+		UNION
+		(SELECT
+		*
+		FROM
+		question_and_answer q
+		WHERE
+		q.qa_level = 4
+		ORDER BY RAND()
+		LIMIT #{levelNumber.level4} )
+		) demo
+		WHERE demo.qa_ct_id in
+		<foreach item="item" collection="chapterIdList" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
 	</select>
 
 </mapper>

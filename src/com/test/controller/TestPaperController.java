@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.test.po.Subject;
 import com.test.po.TestPaper;
+import com.test.po.TestPaperView;
 import com.test.pojo.QuestionLevelNumber;
 import com.test.pojo.TestPaperData;
 import com.test.service.ChapterService;
@@ -27,6 +28,7 @@ import com.test.service.KnowledgePointService;
 import com.test.service.QuestionService;
 import com.test.service.SubjectService;
 import com.test.service.TestPaperService;
+import com.test.util.ExportWordUtil;
 
 @Controller
 public class TestPaperController {
@@ -96,12 +98,10 @@ public class TestPaperController {
 		Map<String, String> map = new HashMap<String, String>();
 		// System.out.println("111:"+c_id);
 		// System.out.println("addChapters222:"+ct_name);
-		TestPaper testPaper = new TestPaper();
-		//TODO id到底在哪里
-		int flag = testPaperService.insertTestPaper(testPaper);
+		TestPaper testPaper = testPaperService.randomCreateTestPaper(testPaperData);
+		boolean result = testPaperService.insertTestPaper(testPaper) > 0;
 		map.put("tpId", testPaper.getTp_id().toString());
 		// 试卷是否插入成功
-		boolean result = false;
 		if (result) {
 			map.put("result", "yes");
 		} else {
@@ -115,17 +115,20 @@ public class TestPaperController {
 	@ResponseBody
 	public String createTestPaper(String tpId, Model model) {
 		TestPaper testPaper = testPaperService.selectTestPaperById(Integer.parseInt(tpId));
-		model.addAttribute("testPaper", testPaper);
+		TestPaperView testPaperView = testPaperService.convertTestPaper(testPaper);
+		model.addAttribute("testPaperView", testPaperView);
 		return "TestPaperView";// 转发到TestPaperView
 	}
-	
-	//根据试卷id导出试卷
+
+	// 根据试卷id导出试卷
 	@RequestMapping(value = "/exportTestPaper.action", method = RequestMethod.GET)
 	@ResponseBody
-	public void exportTestPaper(HttpServletRequest request,HttpServletResponse response,String tpId) {
-				
-		
-		
+	public void exportTestPaper(HttpServletRequest request, HttpServletResponse response, String tpId) {
+		TestPaper testPaper = testPaperService.selectTestPaperById(Integer.parseInt(tpId));
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+
+		String targetPath = "";
+		ExportWordUtil.createWord(dataMap, targetPath);
 	}
 
 }

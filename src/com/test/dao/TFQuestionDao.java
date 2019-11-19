@@ -13,6 +13,13 @@ public interface TFQuestionDao {
 
 	public int saveTFQuestion(TFQuestion tfQuestion);
 	
+	/**
+	 * 	根据主键id查询判断题
+	 * @param tfId 主键id
+	 * @return 判断题对象
+	 */
+	public TFQuestion selectTFQuestionById(Integer tfId);
+	
 	
 	/**
 	 * Description  通过科目id获取所有单选题

@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.test.po.FBQuestion;
 import com.test.po.SCQuestion;
+import com.test.po.TFQuestion;
 import com.test.pojo.QuestionLevelNumber;
 
 
@@ -14,6 +15,13 @@ public interface FBQuestionDao {
 
 	
 	public int saveFBQuestion(FBQuestion fbQuestion);
+	
+	/**
+	 * 	根据主键id查询填空题
+	 * @param fbId 主键id
+	 * @return 填空题对象
+	 */
+	public FBQuestion selectFBQuestionById(Integer fbId);
 	
 	/**
 	 * Description  通过科目id获取所有单选题

@@ -13,6 +13,13 @@ public interface QAQuestionDao {
 	public int saveQAQuestion(QAQuestion qaQuestion);
 
 	public List<QAQuestion> getQAQuestionsBySub(Integer qa_subject);
+	
+	/**
+	 * 	根据主键id查询问答题
+	 * @param qaId 主键id
+	 * @return 问答题对象
+	 */
+	public QAQuestion selectQAQuestionById(Integer qaId);
 
 	public int deleteById(Integer qa_id);
 

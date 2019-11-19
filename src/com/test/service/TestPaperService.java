@@ -11,7 +11,7 @@ import com.test.pojo.TestPaperData;
 public interface TestPaperService {
 	// 随机生成符合要求的试卷
 	// 根据章节和题目的难易程度和数量进行随机生成
-	public TestPaperView randomCreateTestPaper(TestPaperData testPaperData);
+	public TestPaper randomCreateTestPaper(TestPaperData testPaperData);
 	
 	/**
 	 * 	插入试卷
@@ -26,4 +26,11 @@ public interface TestPaperService {
 	 * @return 试卷对象
 	 */
 	public TestPaper selectTestPaperById(Integer testPaperId);
+	
+	/**
+	 * 	将TestPaper转化为TestPaperView
+	 * @param testPaper 试卷
+	 * @return 试卷视图
+	 */
+	public TestPaperView convertTestPaper(TestPaper testPaper);
 }
