@@ -1,7 +1,9 @@
 package com.test.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -172,6 +174,26 @@ public class TestPaperServiceImpl implements TestPaperService {
 		testPaperView.setTfQuestions(tfQuestionList);
 		testPaperView.setFbQuestions(fbQuestionList);
 		testPaperView.setQaQuestion(qaQuestionList);
+		return null;
+	}
+
+	@Override
+	public Map<String, Object> dataFill(TestPaper testPaper) {
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		dataMap.put("schoolName", "中原工学院");
+		dataMap.put("startYear", "2016");
+		dataMap.put("endYear", "2017");
+		dataMap.put("semester", testPaper.getTp_term());
+		dataMap.put("class", testPaper.getTp_class());
+		// 拼接添加是期中考试还是期末考试
+		dataMap.put("testPaperName", "计算机网络 期末试卷");
+		dataMap.put("major", testPaper.getTp_major());
+		dataMap.put("marker", testPaper.getTp_t_name());
+		String scIds = testPaper.getTp_sc_id();
+		String mcIds = testPaper.getTp_mc_id();
+		String tfIds = testPaper.getTp_tf_id();
+		String fbIds = testPaper.getTp_fb_id();
+		String qaIds = testPaper.getTp_qa_id();
 		return null;
 	}
 
