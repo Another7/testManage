@@ -30,7 +30,7 @@ public class ManageController {
 
 	@Autowired
 	private KnowledgePointService knowledgePointService;
-	
+	   
 	@Autowired
 	private ChapterService chapterService;     
 	
