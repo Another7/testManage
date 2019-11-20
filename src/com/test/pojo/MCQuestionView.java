@@ -1,5 +1,6 @@
 package com.test.pojo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.test.po.MCQuestion;
@@ -9,7 +10,7 @@ public class MCQuestionView {
 	private List<String>  mc_option;//СЎПо
 	
 	public MCQuestionView(MCQuestion mc) {
-		
+		this.mc_option=new ArrayList<String>();
 		this.mc_stem = mc.getMc_stem();
 		String options[]=mc.getMc_option().split("@@");
 				

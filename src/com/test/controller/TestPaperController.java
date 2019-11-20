@@ -118,16 +118,18 @@ public class TestPaperController {
 
 	// 根据试卷id获取试卷view对象(放到model中)
 	@RequestMapping(value = "/getTestPaperByTpid.action", method = RequestMethod.GET)
-	@ResponseBody
 	public String createTestPaper(String tpId, Model model) {
 		System.out.println("tpId:"+tpId);
 		TestPaper testPaper = testPaperService.selectTestPaperById(Integer.parseInt(tpId));
 		TestPaperView testPaperView = testPaperService.convertTestPaper(testPaper);
+		
+		System.out.println(testPaperView.toString());
+		
 		model.addAttribute("testPaperView", testPaperView);
 		return "TestPaperView";// 转发到TestPaperView
 	}
 
-	// 根据试卷id导出试卷
+	// 根据试卷id导出试卷    
 	@RequestMapping(value = "/exportTestPaper.action", method = RequestMethod.GET)
 	@ResponseBody
 	public void exportTestPaper(HttpServletRequest request, HttpServletResponse response, String tpId) {

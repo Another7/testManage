@@ -1,5 +1,6 @@
 package com.test.pojo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.test.po.SCQuestion;
@@ -17,6 +18,7 @@ public class SCQuestionView {
 		
 	}
 	public SCQuestionView(SCQuestion sc) {
+		this.sc_option=new ArrayList<String>();
 		this.sc_stem=sc.getSc_stem();
 		String options[]=sc.getSc_option().split("@@");
 		for(int i=0;i<options.length;i++) {

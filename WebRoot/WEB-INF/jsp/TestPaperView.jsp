@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page isELIgnored="false" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -77,12 +78,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<br>
 					<hr>
 					<br>
-
+					
 					<div class="col-md-2 column "></div>
 					<div class="col-md-8 column bg-success">
 
 						<!-- 加载单选试题 -->
-						<c:if test="${! empty ${ testPaperView.scQuestions}}">
+						<c:if test="${!empty  testPaperView.scQuestions}">
 							<p class="sc">
 								<!-- 试题标号 -->
 								<strong>一、单项选择</strong>
@@ -91,7 +92,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<div class="row top-buffer">
 										<div class="col-md-12">
 											<!-- 题干 -->
-											<c:out value="${scQuestion.sc_term}"></c:out>
+											<c:out value="${scQuestion.sc_stem}"></c:out>
 										</div>
 										<c:forEach var="option" items="${scQuestion.sc_option }"
 											varStatus="status">
@@ -106,7 +107,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</p>
 						</c:if>
 						<!-- 加载多选试题 -->
-						<c:if test="${! empty ${ testPaperView.mcQuestions}}">
+						<c:if test="${! empty  testPaperView.mcQuestions}">
 							<p class="mc">
 								<!-- 试题标号 -->
 								<strong>二、多项选择</strong>
@@ -115,7 +116,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<div class="row top-buffer">
 										<div class="col-md-12">
 											<!-- 题干 -->
-											<c:out value="${mcQuestion.mc_term}"></c:out>
+											<c:out value="${mcQuestion.mc_stem}"></c:out>
 										</div>
 										<c:forEach var="option" items="${mcQuestion.mc_option }"
 											varStatus="status">
@@ -130,7 +131,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</p>
 						</c:if>
 						<!-- 加载填空题 -->
-						<c:if test="${! empty ${ testPaperView.fbQuestions}}">
+						<c:if test="${! empty  testPaperView.fbQuestions}">
 							<p class="fb">
 								<!-- 试题标号 -->
 								<strong>三、填空题</strong>
@@ -148,7 +149,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</p>
 						</c:if>
 						<!-- 加载判断题 -->
-						<c:if test="${! empty ${ testPaperView.tfQuestions}}">
+						<c:if test="${! empty  testPaperView.tfQuestions}">
 							<p class="tf">
 								<!-- 试题标号 -->
 								<strong>四、判断题</strong>
@@ -166,12 +167,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</p>
 						</c:if>
 						<!-- 加载简答题 -->
-						<c:if test="${! empty ${ testPaperView.qaQuestions}}">
+						<c:if test="${! empty  testPaperView.qaQuestion}">
 							<p class="qa">
 								<!-- 试题标号 -->
 								<strong>五、简答</strong>
 								<c:forEach var="scQuestion"
-									items="${ testPaperView.qaQuestions}" varStatus="status">
+									items="${ testPaperView.qaQuestion}" varStatus="status">
 									<div class="row top-buffer">
 										<div class="col-md-12">
 											<c:out value="${qaQuestion.qa_term}"></c:out>

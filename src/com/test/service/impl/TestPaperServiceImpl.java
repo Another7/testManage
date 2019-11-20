@@ -125,7 +125,11 @@ public class TestPaperServiceImpl implements TestPaperService {
 
 	@Override
 	public TestPaperView convertTestPaper(TestPaper testPaper) {
+		
+		
 		TestPaperView testPaperView = new TestPaperView();
+		
+		testPaperView.setTpId(testPaper.getTp_id());
 		testPaperView.setTpName(testPaper.getTp_name());
 		testPaperView.setTpCreateName(testPaper.getTp_t_name());
 		testPaperView.setTpClass(testPaper.getTp_class());
@@ -137,33 +141,37 @@ public class TestPaperServiceImpl implements TestPaperService {
 		String[] tfIds = testPaper.getTp_tf_id().split("@@");
 		String[] fbIds = testPaper.getTp_fb_id().split("@@");
 		String[] qaIds = testPaper.getTp_qa_id().split("@@");
+		//System.out.println("scIds:"+scIds.length+"mcIds:"+mcIds.length+"tfIds:"+tfIds.length+"fbIds:"+fbIds.length+"qaIds:"+qaIds.length);
 		List<SCQuestion> scQuestionList = new ArrayList<SCQuestion>();
 		for (String id : scIds) {
-			if(scIds.length>0) {
-				scQuestionList.add(scQuestionDao.selectById(Integer.parseInt(id)));
+			if(scIds.length>1) {
+				//System.out.println(id);
+				SCQuestion sc=scQuestionDao.selectById(Integer.parseInt(id));
+			//	System.out.println(sc.toString());
+				scQuestionList.add(sc);
 			}
 		}
 		List<MCQuestion> mcQuestionList = new ArrayList<MCQuestion>();
 		for (String id : mcIds) {
-			if(mcIds.length>0) {
-				mcQuestionList.add(mcQuestionDao.selectById(Integer.parseInt(id)));
+			if(mcIds.length>1) {
+				mcQuestionList.add(mcQuestionDao.selectById(Integer.parseInt(id)));   
 			}
 		}
 		List<TFQuestion> tfQuestionList = new ArrayList<TFQuestion>();
 		for (String id : tfIds) {
-			if(tfIds.length>0) {
+			if(tfIds.length>1) {
 				tfQuestionList.add(tfQuestionDao.selectTFQuestionById(Integer.parseInt(id)));
 			}
 		}
 		List<FBQuestion> fbQuestionList = new ArrayList<FBQuestion>();
 		for (String id : fbIds) {
-			if(fbIds.length>0) {
+			if(fbIds.length>1) {
 				fbQuestionList.add(fbQuestionDao.selectFBQuestionById(Integer.parseInt(id)));
 			}
 		}
 		List<QAQuestion> qaQuestionList = new ArrayList<QAQuestion>();
 		for (String id : qaIds) {
-			if(qaIds.length>0) {
+			if(qaIds.length>1) {
 				qaQuestionList.add(qaQuestionDao.selectQAQuestionById(Integer.parseInt(id)));
 			}
 		}
@@ -182,7 +190,7 @@ public class TestPaperServiceImpl implements TestPaperService {
 		testPaperView.setTfQuestions(tfQuestionList);
 		testPaperView.setFbQuestions(fbQuestionList);
 		testPaperView.setQaQuestion(qaQuestionList);
-		return null;
+		return testPaperView;
 	}
 
 }

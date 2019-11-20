@@ -6,6 +6,13 @@ import com.test.pojo.MCQuestionView;
 import com.test.pojo.SCQuestionView;
 
 public class TestPaperView {
+	private Integer tpId;
+	public Integer getTpId() {
+		return tpId;
+	}
+	public void setTpId(Integer tpId) {
+		this.tpId = tpId;
+	}
 	private String tpName;
 	private String tpIllustrate;
 	private String tpTerm;
@@ -77,17 +84,19 @@ public class TestPaperView {
 	public void setQaQuestion(List<QAQuestion> qaQuestion) {
 		this.qaQuestion = qaQuestion;
 	}
+
 	@Override
 	public String toString() {
-		return "TestPaperView [tpName=" + tpName + ", tpIllustrate=" + tpIllustrate + ", tpTerm=" + tpTerm
-				+ ", tpClass=" + tpClass + ", tpCreateName=" + tpCreateName + ", scQuestions=" + scQuestions
+		return "TestPaperView [tpId=" + tpId + ", tpName=" + tpName + ", tpIllustrate=" + tpIllustrate + ", tpTerm="
+				+ tpTerm + ", tpClass=" + tpClass + ", tpCreateName=" + tpCreateName + ", scQuestions=" + scQuestions
 				+ ", mcQuestions=" + mcQuestions + ", fbQuestions=" + fbQuestions + ", tfQuestions=" + tfQuestions
 				+ ", qaQuestion=" + qaQuestion + "]";
 	}
-	public TestPaperView(String tpName, String tpIllustrate, String tpTerm, String tpClass, String tpCreateName,
+	public TestPaperView(Integer tpId,String tpName, String tpIllustrate, String tpTerm, String tpClass, String tpCreateName,
 			List<SCQuestionView> scQuestions, List<MCQuestionView> mcQuestions, List<FBQuestion> fbQuestions,
 			List<TFQuestion> tfQuestions, List<QAQuestion> qaQuestion) {
 		super();
+		this.tpId=tpId;
 		this.tpName = tpName;
 		this.tpIllustrate = tpIllustrate;
 		this.tpTerm = tpTerm;
