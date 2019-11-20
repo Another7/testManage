@@ -839,7 +839,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="progress progress-striped active" style="margin-bottom: 0;">
             <div class="progress-bar" style="width: 100%;"></div>
         </div>
-        <h5>正在加载...</h5>
+        <h5>正在生成试卷...</h5>
     </div>
 </div>
 	</div>
