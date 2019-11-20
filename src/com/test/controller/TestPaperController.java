@@ -145,8 +145,6 @@ public class TestPaperController {
 		request.setCharacterEncoding("UTF-8");
 		TestPaper testPaper = testPaperService.selectTestPaperById(Integer.parseInt(tpId));
 		Map<String, Object> dataMap = testPaperService.dataFill(testPaper);
-//		getFillData(dataMap);
-//		真实数据填充
 		String basePath = System.getProperty("user.dir");
 		String targetPath = basePath + File.separator + "demo.docx";
 		ExportWordUtil.createWord(dataMap, targetPath);
@@ -179,87 +177,4 @@ public class TestPaperController {
 				file.delete(); // 删除临时文件
 		}
 	}
-	
-	private static void getFillData(Map<String, Object> dataMap) {
-		// 根据模板中的参数填充内容，可以不按顺序，参数名称要对上
-		// 试卷基本信息
-		dataMap.put("schoolName", "中原工学院");
-		dataMap.put("startYear", "2016");
-		dataMap.put("endYear", "2017");
-		dataMap.put("semester", "1");
-		dataMap.put("class", "卓越161");
-		// 拼接添加是期中考试还是期末考试
-		dataMap.put("testPaperName", "计算机网络 期末试卷");
-		dataMap.put("major", "软件工程");
-		dataMap.put("marker", "another");
-		// 单选题
-		SingleChoice singleChoice = new SingleChoice();
-		singleChoice.setContent("你喜欢哪一行()");
-		singleChoice.setOptionA("第一行");
-		singleChoice.setOptionB("第二行");
-		singleChoice.setOptionC("第三行");
-		singleChoice.setOptionD("第四行");
-		List<SingleChoice> singleChoiceList = new ArrayList<SingleChoice>();
-		singleChoiceList.add(singleChoice);
-		dataMap.put("singleChoiceList", singleChoiceList);
-		
-		// 多选题
-		MultipleChoice multipleChoice = new MultipleChoice();
-		multipleChoice.setContent("你喜欢吃什么()");
-		multipleChoice.setOptionA("香蕉");
-		multipleChoice.setOptionB("柚子");
-		multipleChoice.setOptionC("麻油");
-		multipleChoice.setOptionD("鸡蛋");
-		List<MultipleChoice> multipleChoiceList = new ArrayList<MultipleChoice>();
-		multipleChoiceList.add(multipleChoice);
-		MultipleChoice multipleChoice1 = new MultipleChoice();
-		multipleChoice1.setContent("你喜欢喝什么()");
-		multipleChoice1.setOptionA("可乐");
-		multipleChoice1.setOptionB("雪碧");
-		multipleChoice1.setOptionC("牛奶");
-		multipleChoice1.setOptionD("奶茶");
-		multipleChoiceList.add(multipleChoice1);
-		dataMap.put("multipleChoiceList", multipleChoiceList);
-		
-		// 填空题
-		FillInTheBlank fillInTheBlank = new FillInTheBlank();
-		fillInTheBlank.setContent("最好的编程语言是____.");
-		FillInTheBlank fillInTheBlank1 = new FillInTheBlank();
-		fillInTheBlank1.setContent("最好的操作系统是____.");
-		FillInTheBlank fillInTheBlank2 = new FillInTheBlank();
-		fillInTheBlank2.setContent("最好的手机品牌是____.");
-		List<FillInTheBlank> fillInTheBlankList = new ArrayList<FillInTheBlank>();
-		fillInTheBlankList.add(fillInTheBlank);
-		fillInTheBlankList.add(fillInTheBlank1);
-		fillInTheBlankList.add(fillInTheBlank2);
-		dataMap.put("fillInTheBlankList", fillInTheBlankList);
-		
-		// 判断题
-		TrueOrFalse trueOrFalse = new TrueOrFalse();
-		trueOrFalse.setContent("PHP是世界上最好的编程语言");
-		TrueOrFalse trueOrFalse1 = new TrueOrFalse();
-		trueOrFalse1.setContent("Java是世界上最好的编程语言");
-		TrueOrFalse trueOrFalse2 = new TrueOrFalse();
-		trueOrFalse2.setContent("Python是世界上最好的编程语言");
-		List<TrueOrFalse> trueOrFalseList = new ArrayList<TrueOrFalse>();
-		trueOrFalseList.add(trueOrFalse);
-		trueOrFalseList.add(trueOrFalse1);
-		trueOrFalseList.add(trueOrFalse2);
-		dataMap.put("trueOrFalseList", trueOrFalseList);
-		
-		// 问答题
-		QuestionAndAnswer questionAndAnswer = new QuestionAndAnswer();
-		questionAndAnswer.setContent("简述HTTP三次握手过程");
-		QuestionAndAnswer questionAndAnswer1 = new QuestionAndAnswer();
-		questionAndAnswer1.setContent("如何求矩阵的逆");
-		QuestionAndAnswer questionAndAnswer2 = new QuestionAndAnswer();
-		questionAndAnswer2.setContent("如何使用百度搜索引擎");
-		List<QuestionAndAnswer> questionAndAnswerList = new ArrayList<QuestionAndAnswer>();
-		questionAndAnswerList.add(questionAndAnswer);
-		questionAndAnswerList.add(questionAndAnswer1);
-		questionAndAnswerList.add(questionAndAnswer2);
-		dataMap.put("questionAndAnswerList", questionAndAnswerList);
-		
-	}
-
 }
