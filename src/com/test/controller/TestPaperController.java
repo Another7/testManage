@@ -1,10 +1,15 @@
 package com.test.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -20,8 +25,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.test.po.Subject;
 import com.test.po.TestPaper;
 import com.test.po.TestPaperView;
+import com.test.pojo.FillInTheBlank;
+import com.test.pojo.MultipleChoice;
+import com.test.pojo.QuestionAndAnswer;
 import com.test.pojo.QuestionLevelNumber;
+import com.test.pojo.SingleChoice;
 import com.test.pojo.TestPaperData;
+import com.test.pojo.TrueOrFalse;
 import com.test.service.ChapterService;
 import com.test.service.CourseService;
 import com.test.service.KnowledgePointService;
@@ -132,12 +142,41 @@ public class TestPaperController {
 	// 根据试卷id导出试卷    
 	@RequestMapping(value = "/exportTestPaper.action", method = RequestMethod.GET)
 	@ResponseBody
-	public void exportTestPaper(HttpServletRequest request, HttpServletResponse response, String tpId) {
+	public void exportTestPaper(HttpServletRequest request, HttpServletResponse response, String tpId)
+			throws Exception {
+		request.setCharacterEncoding("UTF-8");
 		TestPaper testPaper = testPaperService.selectTestPaperById(Integer.parseInt(tpId));
-		Map<String, Object> dataMap = new HashMap<String, Object>();
-
-		String targetPath = "";
+		Map<String, Object> dataMap = testPaperService.dataFill(testPaper);
+		String basePath = System.getProperty("user.dir");
+		String targetPath = basePath + File.separator + "demo.docx";
 		ExportWordUtil.createWord(dataMap, targetPath);
-	}
 
+		File file = null;
+		InputStream fin = null;
+		ServletOutputStream out = null;
+		try {
+			// 调用工具类WordUtils的createDoc方法生成Word文档
+			file = new File(targetPath);
+			fin = new FileInputStream(file);
+			response.setCharacterEncoding("utf-8");
+			response.setContentType("application/msword");
+			// 设置浏览器以下载的方式处理该文件默认名为demo.doc
+			response.setHeader("content-disposition",
+					"attachment;filename=" + URLEncoder.encode("demo" + ".doc", "UTF-8"));
+			out = response.getOutputStream();
+			byte[] buffer = new byte[512]; // 缓冲区
+			int bytesToRead = -1;
+			// 通过循环将读入的Word文件的内容输出到浏览器中
+			while ((bytesToRead = fin.read(buffer)) != -1) {
+				out.write(buffer, 0, bytesToRead);
+			}
+		} finally {
+			if (fin != null)
+				fin.close();
+			if (out != null)
+				out.close();
+			if (file != null)
+				file.delete(); // 删除临时文件
+		}
+	}
 }

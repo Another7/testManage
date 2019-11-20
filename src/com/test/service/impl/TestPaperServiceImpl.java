@@ -1,7 +1,9 @@
 package com.test.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,10 +22,15 @@ import com.test.po.SCQuestion;
 import com.test.po.TFQuestion;
 import com.test.po.TestPaper;
 import com.test.po.TestPaperView;
+import com.test.pojo.FillInTheBlank;
 import com.test.pojo.MCQuestionView;
+import com.test.pojo.MultipleChoice;
+import com.test.pojo.QuestionAndAnswer;
 import com.test.pojo.QuestionLevelNumber;
 import com.test.pojo.SCQuestionView;
+import com.test.pojo.SingleChoice;
 import com.test.pojo.TestPaperData;
+import com.test.pojo.TrueOrFalse;
 import com.test.service.TestPaperService;
 
 /**
@@ -160,6 +167,7 @@ public class TestPaperServiceImpl implements TestPaperService {
 		List<TFQuestion> tfQuestionList = new ArrayList<TFQuestion>();
 		for (String id : tfIds) {
 			if(tfIds.length>1) {
+		
 				tfQuestionList.add(tfQuestionDao.selectTFQuestionById(Integer.parseInt(id)));
 			}
 		}
@@ -191,6 +199,107 @@ public class TestPaperServiceImpl implements TestPaperService {
 		testPaperView.setFbQuestions(fbQuestionList);
 		testPaperView.setQaQuestion(qaQuestionList);
 		return testPaperView;
+	}
+
+	@Override
+	public Map<String, Object> dataFill(TestPaper testPaper) {
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		dataMap.put("schoolName", "中原工学院");
+		dataMap.put("startYear", "2016");
+		dataMap.put("endYear", "2017");
+		dataMap.put("semester", testPaper.getTp_term());
+		dataMap.put("class", testPaper.getTp_class());
+		// 拼接添加是期中考试还是期末考试
+		dataMap.put("testPaperName", "计算机网络 期末试卷");
+		dataMap.put("major", testPaper.getTp_major());
+		dataMap.put("marker", testPaper.getTp_t_name());
+		String[] scIds = testPaper.getTp_sc_id().split("@@");
+		String[] mcIds = testPaper.getTp_mc_id().split("@@");
+		String[] tfIds = testPaper.getTp_tf_id().split("@@");
+		String[] fbIds = testPaper.getTp_fb_id().split("@@");
+		String[] qaIds = testPaper.getTp_qa_id().split("@@");
+		// 将数据库对应的POJO转化为freemarker模板中的对象
+		// 单选题转化
+		List<SingleChoice> singleChoiceList = new ArrayList<SingleChoice>();
+		List<SCQuestion> scQuestionList = new ArrayList<SCQuestion>();
+		for (String id : scIds) {
+			if (scIds.length > 0) {
+				scQuestionList.add(scQuestionDao.selectById(Integer.parseInt(id)));
+			}
+		}
+		for (SCQuestion scQuestion : scQuestionList) {
+			SingleChoice singleChoice = new SingleChoice();
+			singleChoice.setContent(scQuestion.getSc_stem());
+			String[] options = scQuestion.getSc_option().split("@@");
+			singleChoice.setOptionA(options[0].substring(options[0].indexOf(".") + 1, options[0].length()));
+			singleChoice.setOptionB(options[1].substring(options[1].indexOf(".") + 1, options[1].length()));
+			singleChoice.setOptionC(options[2].substring(options[2].indexOf(".") + 1, options[2].length()));
+			singleChoice.setOptionD(options[3].substring(options[3].indexOf(".") + 1, options[3].length()));
+			singleChoiceList.add(singleChoice);
+		}
+		// 多选题转化
+		List<MultipleChoice> multipleChoiceList = new ArrayList<MultipleChoice>();
+		List<MCQuestion> mcQuestionList = new ArrayList<MCQuestion>();
+		for (String id : mcIds) {
+			if (mcIds.length > 0) {
+				mcQuestionList.add(mcQuestionDao.selectById(Integer.parseInt(id)));
+			}
+		}
+		for (MCQuestion mcQuestion : mcQuestionList) {
+			MultipleChoice multipleChoice = new MultipleChoice();
+			multipleChoice.setContent(mcQuestion.getMc_stem());
+			String[] options = mcQuestion.getMc_option().split("@@");
+			multipleChoice.setOptionA(options[0].substring(options[0].indexOf(".") + 1, options[0].length()));
+			multipleChoice.setOptionB(options[1].substring(options[1].indexOf(".") + 1, options[1].length()));
+			multipleChoice.setOptionC(options[2].substring(options[2].indexOf(".") + 1, options[2].length()));
+			multipleChoice.setOptionD(options[3].substring(options[3].indexOf(".") + 1, options[3].length()));
+			multipleChoiceList.add(multipleChoice);
+		}
+		// 判断题
+		List<TrueOrFalse> trueOrFalseList = new ArrayList<TrueOrFalse>();
+		List<TFQuestion> tfQuestionList = new ArrayList<TFQuestion>();
+		for (String id : tfIds) {
+			if (tfIds.length > 0) {
+				tfQuestionList.add(tfQuestionDao.selectTFQuestionById(Integer.parseInt(id)));
+			}
+		}
+		for (TFQuestion tfQuestion : tfQuestionList) {
+			TrueOrFalse trueOrFalse = new TrueOrFalse();
+			trueOrFalse.setContent(tfQuestion.getTf_stem());
+			trueOrFalseList.add(trueOrFalse);
+		}
+		// 填空题
+		List<FillInTheBlank> fillInTheBlankList = new ArrayList<FillInTheBlank>();
+		List<FBQuestion> fbQuestionList = new ArrayList<FBQuestion>();
+		for (String id : fbIds) {
+			if (fbIds.length > 0) {
+				fbQuestionList.add(fbQuestionDao.selectFBQuestionById(Integer.parseInt(id)));
+			}
+		}
+		for (FBQuestion fbQuestion : fbQuestionList) {
+			FillInTheBlank fillInTheBlank = new FillInTheBlank();
+			fillInTheBlank.setContent(fbQuestion.getFb_stem());
+			fillInTheBlankList.add(fillInTheBlank);
+		}
+		// 问答题
+		List<QuestionAndAnswer> questionAndAnswerList = new ArrayList<QuestionAndAnswer>();
+		List<QAQuestion> qaQuestionList = new ArrayList<QAQuestion>();
+		for (String id : qaIds) {
+			if (qaIds.length > 0) {
+				qaQuestionList.add(qaQuestionDao.selectQAQuestionById(Integer.parseInt(id)));
+			}
+		}
+		for (QAQuestion qaQuestion : qaQuestionList) {
+			QuestionAndAnswer questionAndAnswer = new QuestionAndAnswer();
+			questionAndAnswer.setContent(qaQuestion.getQa_stem());
+			questionAndAnswerList.add(questionAndAnswer);
+		}
+		dataMap.put("singleChoiceList", singleChoiceList);
+		dataMap.put("multipleChoiceList", multipleChoiceList);
+		dataMap.put("fillInTheBlankList", fillInTheBlankList);
+		dataMap.put("trueOrFalseList", trueOrFalseList);
+		dataMap.put("questionAndAnswerList", questionAndAnswerList);
+		return dataMap;
 	}
 
 }

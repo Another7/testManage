@@ -1,5 +1,7 @@
 package com.test.service;
 
+import java.util.Map;
+
 import com.test.po.TestPaper;
 import com.test.po.TestPaperView;
 import com.test.pojo.TestPaperData;
@@ -33,4 +35,11 @@ public interface TestPaperService {
 	 * @return 试卷视图
 	 */
 	public TestPaperView convertTestPaper(TestPaper testPaper);
+	
+	/**
+	 * 	将TestPaper转化为freemarker可以解析的数据源
+	 * @param testPaper 试卷
+	 * @return 数据源
+	 */
+	public Map<String, Object> dataFill(TestPaper testPaper);
 }
