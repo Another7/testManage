@@ -139,23 +139,33 @@ public class TestPaperServiceImpl implements TestPaperService {
 		String[] qaIds = testPaper.getTp_qa_id().split("@@");
 		List<SCQuestion> scQuestionList = new ArrayList<SCQuestion>();
 		for (String id : scIds) {
-			scQuestionList.add(scQuestionDao.selectById(Integer.parseInt(id)));
+			if(scIds.length>0) {
+				scQuestionList.add(scQuestionDao.selectById(Integer.parseInt(id)));
+			}
 		}
 		List<MCQuestion> mcQuestionList = new ArrayList<MCQuestion>();
 		for (String id : mcIds) {
-			mcQuestionList.add(mcQuestionDao.selectById(Integer.parseInt(id)));
+			if(mcIds.length>0) {
+				mcQuestionList.add(mcQuestionDao.selectById(Integer.parseInt(id)));
+			}
 		}
 		List<TFQuestion> tfQuestionList = new ArrayList<TFQuestion>();
 		for (String id : tfIds) {
-			tfQuestionList.add(tfQuestionDao.selectTFQuestionById(Integer.parseInt(id)));
+			if(tfIds.length>0) {
+				tfQuestionList.add(tfQuestionDao.selectTFQuestionById(Integer.parseInt(id)));
+			}
 		}
 		List<FBQuestion> fbQuestionList = new ArrayList<FBQuestion>();
 		for (String id : fbIds) {
-			fbQuestionList.add(fbQuestionDao.selectFBQuestionById(Integer.parseInt(id)));
+			if(fbIds.length>0) {
+				fbQuestionList.add(fbQuestionDao.selectFBQuestionById(Integer.parseInt(id)));
+			}
 		}
 		List<QAQuestion> qaQuestionList = new ArrayList<QAQuestion>();
 		for (String id : qaIds) {
-			qaQuestionList.add(qaQuestionDao.selectQAQuestionById(Integer.parseInt(id)));
+			if(qaIds.length>0) {
+				qaQuestionList.add(qaQuestionDao.selectQAQuestionById(Integer.parseInt(id)));
+			}
 		}
 		// 将单选题列表转化单选题视图
 		List<SCQuestionView> scQuestionViewList = new ArrayList<SCQuestionView>();

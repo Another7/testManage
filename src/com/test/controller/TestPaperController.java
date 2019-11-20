@@ -96,11 +96,17 @@ public class TestPaperController {
 
 		// map存放试卷是否创建成功，如果成功，将试卷插入数据库，返回试卷id，如果失败只返回失败消息
 		Map<String, String> map = new HashMap<String, String>();
+		
+		System.out.println("testPaperData:"+testPaperData.toString());
+		
 		// System.out.println("111:"+c_id);
 		// System.out.println("addChapters222:"+ct_name);
 		TestPaper testPaper = testPaperService.randomCreateTestPaper(testPaperData);
 		boolean result = testPaperService.insertTestPaper(testPaper) > 0;
-		map.put("tpId", testPaper.getTp_id().toString());
+		
+		String tpId=testPaper.getTp_id().toString();
+		System.out.println("1111:"+tpId);
+		map.put("tpId", tpId);
 		// 试卷是否插入成功
 		if (result) {
 			map.put("result", "yes");
@@ -114,6 +120,7 @@ public class TestPaperController {
 	@RequestMapping(value = "/getTestPaperByTpid.action", method = RequestMethod.GET)
 	@ResponseBody
 	public String createTestPaper(String tpId, Model model) {
+		System.out.println("tpId:"+tpId);
 		TestPaper testPaper = testPaperService.selectTestPaperById(Integer.parseInt(tpId));
 		TestPaperView testPaperView = testPaperService.convertTestPaper(testPaper);
 		model.addAttribute("testPaperView", testPaperView);

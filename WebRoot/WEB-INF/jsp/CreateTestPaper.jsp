@@ -60,7 +60,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			 	dataType:'json',
 	       	   	success:function (res) {
 	       	   	//$('#addChapter').selectpicker('val', res);
-	       	   	alert(res.length);
+	       	   //	alert(res.length);
 	       	   		if(res.length == 0){
                         //如果一级没有对应的二级 则清空二级并 不往下执行
                        // $("#addChapter").empty();
@@ -89,9 +89,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		      selectedValues=$("#addChapter").val();
 		      console.log(selectedValues);
 		      
-		      alert($("#addChapter").val().length);
+		    //  alert($("#addChapter").val().length);
 		      
-		      alert(selectedValues.length);
+		   //   alert(selectedValues.length);
 		      
     	$.ajax({
 	       	   method:"post",
@@ -373,13 +373,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		var term=$("#tpTerm").val();
     		var major=$("#tpMajor").val();
     		var clazz=$("#tpClazz").val();
+    		
+    		
+    		
+    		
     		var scNumber={level1:$("#SCLevel1").val(),level2:$("#SCLevel2").val(),level3:$("#SCLevel3").val(),level4:$("#SCLevel4").val()};
     		var mcNumber={level1:$("#MCLevel1").val(),level2:$("#MCLevel2").val(),level3:$("#MCLevel3").val(),level4:$("#MCLevel4").val()};
     		var fbNumber={level1:$("#FBLevel1").val(),level2:$("#FBLevel1").val(),level3:$("#FBLevel1").val(),level4:$("#FBLevel1").val()};
     		var tfNumber={level1:$("#TFLevel1").val(),level2:$("#TFLevel1").val(),level3:$("#TFLevel1").val(),level4:$("#TFLevel1").val()};
     		var qaNumber={level1:$("#QALevel1").val(),level2:$("#QALevel1").val(),level3:$("#QALevel1").val(),level4:$("#QALevel1").val()};
     		var score=$("#totalScore").val();
-    		var data={tpName:name,tpIllustrate:illustrate,tpTerm:term,tpClass:clazz,scNumber:scNumber,mcNumber:mcNumber,fbNumber:fbNumber,tfNumber:tfNumber,qaNumber:qaNumber,chapterIds:chapterIds};
+    		var data={tpName:name,tpIllustrate:illustrate,tpTerm:term,tpClass:clazz,scNumber:scNumber,mcNumber:mcNumber,fbNumber:fbNumber,tfNumber:tfNumber,qaNumber:qaNumber,chapterIds:chapterIds,tpScore:score,tpMajor:major};
     		
     		
 			if(res==true){
@@ -400,9 +404,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         	//隐藏进度条
                         	$("#loadingModal").modal('hide');
                         	//获取model中的试卷id
-                        	var tpid='${tp_id}';
+                        	var tpid=data.tpId;
                         	alert(tpid);
-                        	window.location.href ="/testManage/getTestPaperByTpid.action?tp_id="+tpid;//跳转到展示页面
+                        	window.location.href ="/testManage/getTestPaperByTpid.action?tpId="+tpid;//跳转到展示页面
                         }
                         
                                              
@@ -650,27 +654,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<!-- 一级下拉框 -->
 						 简单题&nbsp;<select id="SCLevel1" class=" form-control " style="width: 60px"
 											onchange="changeBook(this.id)">
-											<option value="">0</option>
+											<option value="0">0</option>
 										</select>&nbsp;道
 						</div>
 						<div class="col-xs-2">
 						<!-- 一级下拉框 -->
 						 一般题&nbsp;<select id="SCLevel2" class=" form-control " style="width: 60px"
 											onchange="changeBook(this.id)">
-											<option value="">0</option>
+											<option value="0">0</option>
 										</select>&nbsp;道
 						</div>
 						<div class="col-xs-2">
 						<!-- 一级下拉框 -->
 						 较难题&nbsp;<select id="SCLevel3" class=" form-control " style="width: 60px">
-											<option value="">0</option>
+											<option value="0">0</option>
 										</select>&nbsp;道
 						</div>
 						<div class="col-xs-2">
 						<!-- 一级下拉框 -->
 						 困难题&nbsp;<select id="SCLevel4" class=" form-control " style="width: 60px"
 											onchange="changeBook(this.id)">
-											<option value="">0</option>
+											<option value="0">0</option>
 										</select>&nbsp;道
 						</div>
 						 <div class="col-xs-2">
@@ -684,25 +688,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="col-md-2">
 						<!-- 一级下拉框 -->
 						 简单题&nbsp;<select id="MCLevel1" class=" form-control " style="width: 60px">
-											<option value="">0</option>
+											<option value="0">0</option>
 										</select>&nbsp;道
 						</div>
 						<div class="col-xs-2">
 						<!-- 一级下拉框 -->
 						 一般题&nbsp;<select id="MCLevel2" class=" form-control " style="width: 60px">
-											<option value="">0</option>
+											<option value="0">0</option>
 										</select>&nbsp;道
 						</div>
 						<div class="col-xs-2">
 						<!-- 一级下拉框 -->
 						 较难题&nbsp;<select id="MCLevel3" class=" form-control " style="width: 60px">
-											<option value="">0</option>
+											<option value="0">0</option>
 										</select>&nbsp;道
 						</div>
 						<div class="col-xs-2">
 						<!-- 一级下拉框 -->
 						 困难题&nbsp;<select id="MCLevel4" class=" form-control " style="width: 60px">
-											<option value="">0</option>
+											<option value="0">0</option>
 										</select>&nbsp;道
 						</div>
 						 <div class="col-xs-2">
@@ -716,26 +720,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="col-md-2">
 						<!-- 一级下拉框 -->
 						 简单题&nbsp;<select id="FBLevel1" class=" form-control " style="width: 60px">
-											<option value="">0</option>
+											<option value="0">0</option>
 										</select>&nbsp;道
 						</div>
 						<div class="col-xs-2">
 						<!-- 一级下拉框 -->
 						 一般题&nbsp;<select id="FBLevel2" class=" form-control " style="width: 60px">
 											
-											<option value="">0</option>
+											<option value="0">0</option>
 										</select>&nbsp;道
 						</div>
 						<div class="col-xs-2">
 						<!-- 一级下拉框 -->
 						 较难题&nbsp;<select id="FBLevel3" class=" form-control " style="width: 60px">
-											<option value="">0</option>
+											<option value="0">0</option>
 										</select>&nbsp;道
 						</div>
 						<div class="col-xs-2">
 						<!-- 一级下拉框 -->
 						 困难题&nbsp;<select id="FBLevel4" class=" form-control " style="width: 60px">
-											<option value="">0</option>
+											<option value="0">0</option>
 										</select>&nbsp;道
 						</div>
 						 <div class="col-xs-2">
@@ -749,25 +753,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="col-md-2">
 						<!-- 一级下拉框 -->
 						 简单题&nbsp;<select id="TFLevel1" class=" form-control " style="width: 60px">
-											<option value="">0</option>
+											<option value="0">0</option>
 										</select>&nbsp;道
 						</div>
 						<div class="col-xs-2">
 						<!-- 一级下拉框 -->
 						 一般题&nbsp;<select id="TFLevel2" class=" form-control " style="width: 60px">
-											<option value="">0</option>
+											<option value="0">0</option>
 										</select>&nbsp;道
 						</div>
 						<div class="col-xs-2">
 						<!-- 一级下拉框 -->
 						 较难题&nbsp;<select id="TFLevel3" class=" form-control " style="width: 60px">
-											<option value="">0</option>
+											<option value="0">0</option>
 										</select>&nbsp;道
 						</div>
 						<div class="col-xs-2">
 						<!-- 一级下拉框 -->
 						 困难题&nbsp;<select id="TFLevel4" class=" form-control " style="width: 60px">
-											<option value="">0</option>
+											<option value="0">0</option>
 										</select>&nbsp;道
 						</div>
 						 <div class="col-xs-2">
@@ -781,25 +785,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<div class="col-md-2">
 						<!-- 一级下拉框 -->
 						 简单题&nbsp;<select id="QALevel1" class=" form-control " style="width: 60px">
-											<option value="">0</option>
+											<option value="0">0</option>
 										</select>&nbsp;道
 						</div>
 						<div class="col-xs-2">
 						<!-- 一级下拉框 -->
 						 一般题&nbsp;<select id="QALevel2" class=" form-control " style="width: 60px">
-											<option value="">0</option>
+											<option value="0">0</option>
 										</select>&nbsp;道
 						</div>
 						<div class="col-xs-2">
 						<!-- 一级下拉框 -->
 						 较难题&nbsp;<select id="QALevel3" class=" form-control " style="width: 60px">
-											<option value="">0</option>
+											<option value="0">0</option>
 										</select>&nbsp;道
 						</div>
 						<div class="col-xs-2">
 						<!-- 一级下拉框 -->
 						 困难题&nbsp;<select id="QALevel4" class=" form-control " style="width: 60px">
-											<option value="">0</option>
+											<option value="0">0</option>
 										</select>&nbsp;道
 						</div>
 						 <div class="col-xs-2">
