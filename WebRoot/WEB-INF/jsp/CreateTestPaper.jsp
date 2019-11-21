@@ -89,9 +89,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		      selectedValues=$("#addChapter").val();
 		      console.log(selectedValues);
 		      
-		    //  alert($("#addChapter").val().length);
-		      
-		   //   alert(selectedValues.length);
 		      
     	$.ajax({
 	       	   method:"post",
@@ -361,7 +358,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                       
 	                    
     	}
-    	
+    	//用户点击生成试卷方法
     	function CreateTestPaper(){
     		res=confirm("确定生成试卷?"); //在页面上弹出对话框
     		var chapterIds =[];    
@@ -405,11 +402,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         	$("#loadingModal").modal('hide');
                         	//获取model中的试卷id
                         	var tpid=data.tpId;
-                        	alert(tpid);
+                        	//alert(tpid);
                         	window.location.href ="/testManage/getTestPaperByTpid.action?tpId="+tpid;//跳转到展示页面
                         }
-                        
-                                             
                    },
                    error: function(data) {
                      //隐藏
@@ -419,89 +414,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 });
 			
 			}
-				
 			else{
-			
-			
 			}
     	}
-    	/* 当章节改变时，获取该章节下的知识点列表，给对应的下拉框赋值 */
-    	function changeChapter(id){
-    		var chapterId=$("#addChapter").val();
-    		//alert(kemu);
-    		$.ajax({
-	       	   method:"post",
-	         	url:"/testManage/getKnowledgePointByCt_id.action",
-	         	data:{"ct_id":chapterId},
-			 	dataType:'json',
-	       	   	success:function (res) {
-	       	   			//alert(res.length);    
-	       	   		if(res.length == 0){
-                        //如果一级没有对应的二级 则清空二级并 不往下执行
-                        $("#addChapter").empty();
-                        return ;
-                   	 }
-                   	 
-	          		 var str="";
-	           	  	for (var i = 0; i < res.length; i++) {
-	            	 	   str+="<option value='"+res[i].kp_id+"'>"+res[i].kp_name+"</option>";
-	         	 	 } 
-	           	  $("#point").append(str);
-	           	//  alert($("#point")==null);
-	          	  $("#point").find("option[text='--请选择--']").attr("selected",true);
-	          }
-	   	 });
-    	}
-    		
-    	/*用户点击添加选项*/
-    	function addXuanXiang(){
-    		//alert($("#choices").children().length);
-    		var choiceNum=$("#choices").children().length;
-    		var str="";
-    		str+=" <div class='form-group'>"+
-    			"<label for='text' class='col-md-2 control-label'>选项"+(choiceNum+1)+"</label>"+
-    			"<div class='col-md-8'>"+
-    			"<input type='text' class='form-control'>"+
-    			"</div>"+
-    			"<div class='col-md-2'></div>";
-    		$("#choices").append(str);
-    		
-		}	
-		/*单选试题的提交*/
-		function submitAll(){
-    		var stem=$("#SCStem").val();	
-    		var str="";
-   			$("#choices").find("input").each(function(){
-    			str+=this.value+"@@";
-    		});
-    		var option=str;
-    		var answer=$("#answer").val();
-    		var analysis=$("#analysis").val();	
-    		var subject=$("#addSubject").val();
-    		var c_id=$("#addCourse").val();
-    		var ct_id=$("#addChapter").val();
-    		var point=$("#point").val();
-    		var level=$("#level").val();
-		   var data={sc_subject:subject,sc_point:point,sc_stem:stem,sc_option:option,sc_answer:answer,sc_analysis:analysis,sc_c_id:c_id,sc_ct_id:ct_id,sc_level:level};
-		   	$.ajax({
-		       	   method:"post",
-		         	url:"/testManage/addSCQuestion.action",
-		         	contentType: 'application/json; charset=UTF-8',
-		         	data:JSON.stringify(data),
-				 	dataType:'json',
-		       	   	success:function (data) {
-		       	   		if(data.result=="yes"){
-							alert("添加成功");
-							self.location.reload();
-						}else{
-							alert("保存失败");
-					    }
-		         	 }
-		   	 });
-		   	 
-    		
-		   	
-    	}	  
+    	
     	
  </script>	
 </head>
@@ -513,7 +429,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<ul class="breadcrumb">
 	 <li><a href="#">我要组卷</a></li>
     <li><a href="#">随机组卷</a></li>
-   
 	</ul>
 	<div class="panel panel-default">
 			<div class="panel-heading">选择章节</div>
@@ -534,7 +449,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										</select>
 									</div>
 									<div class="col-md-2"></div>
-	
 								</div>
 								<div class="form-group">
 									<label class=" col-md-2 control-label">课程</label>
@@ -546,9 +460,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										</select>
 									</div>
 									<div class="col-md-2"></div>
-	
 								</div>
-					
 		
 							<div class="form-group">
 								<label for="text" class=" col-md-2 control-label">选择章节</label>
@@ -564,14 +476,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								</div>
 								<div class="col-md-2"></div>
 							</div>
-
-
 					</form>
-					
 				</div>
-				
 			</div>
-		
 		</div>
 	</div>
 	<div class="panel panel-default">
@@ -579,7 +486,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="panel-body">
 				
 				<form class="form-horizontal" id="totalForm">
-				
 					 <div class="form-group">
 						<label class=" col-md-2 control-label">试卷名称</label> 
 						<div class="col-md-8">
@@ -587,18 +493,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						 <input type="text" id="tpName" class="form-control" onclick="getChapterId()"  placeholder="如：数据结构测试题">
 						</div>
 						 <div class="col-md-2">
-						 	
 				   		 </div>
-						
 					</div>
 					<div class="form-group">
 						<label class=" col-md-2 control-label">填写试卷用途说明</label> 
 						<div class="col-md-8">
-						 <input type="text" id="tpIllustrate" class="form-control"  placeholder="如：期末试题">
+						 <input type="text" id="tpIllustrate" class="form-control"  placeholder="如：期中测试">
 						</div>
 						<div class="col-md-2">
-						
-				   		
 				   		</div>
 					</div>
 					 
@@ -606,20 +508,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<label   for="text" class=" col-md-2 control-label">填写学期</label> 
 						<div class="col-md-8">
 						 <input type="text" id="tpTerm" class="form-control"  placeholder="格式：2018-2019学年上学期">
-							
 						</div>
 						<div class="col-md-2">
-							 
 				    	</div>
 				    </div>
 			<div class="form-group">
 						<label   for="text" class=" col-md-2 control-label">填写所在专业</label> 
 						<div class="col-md-8">
 						 <input type="text" id="tpMajor" class="form-control"  placeholder="如：软件工程专业">
-							
 						</div>
 						<div class="col-md-2">
-							 
 				    	</div>
 				    </div>
 				
@@ -627,8 +525,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="form-group">
 						<label   for="text" class=" col-md-2 control-label">填写所在班级</label> 
 						<div class="col-md-8">
-						 <input type="text" id="tpClazz" class="form-control"  placeholder="如：RB软工卓越161班">
-							
+						 <input type="text" id="tpClazz" class="form-control"  placeholder="如：RB软工**班">
 						</div>
 						<div class="col-md-2">
 							 

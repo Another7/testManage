@@ -25,6 +25,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/i18n/defaults-zh_CN.min.js"></script>
+	
+	<script type="text/javascript">
+	
+		function CreateTestPaper(){
+			var tpId='${tpId}';
+			window.location.href ="/testManage/exportTestPaper.action?tpId="+tpId;//跳转到展示页面
+		
+		}
+	</script>
 <style type="text/css">
 .bg {
 	background-color: #b0c4de;
@@ -33,6 +42,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 .top-buffer {
 	margin-top: 10px;
+	font-family:SimSun;
 }
 </style>
 </head>
@@ -65,12 +75,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<!-- 试卷标题 -->
 					<div class="col-md-12 column">
 						<h2 align="center">中&nbsp;原&nbsp;工&nbsp;学&nbsp;院</h2>
-						<h3 align="center">${testPaperView.tpTerm }&nbsp;第&nbsp;1&nbsp;学期</h3>
+						<h3 align="center">${testPaperView.tpTerm }&nbsp;</h3>
 						<h3 align="center">
-							<ins>计算机、网络 </ins>
+							<ins>${testPaperView.tpClass } </ins>
 							专业
-							<ins>软件工程</ins>
-							课程 期末试卷
+							<ins>${testPaperView.tpMajor }</ins>
+							课程 ${testPaperView.tpIllustrate }
 						</h3>
 					</div>
 
@@ -86,24 +96,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<c:if test="${!empty  testPaperView.scQuestions}">
 							<p class="sc">
 								<!-- 试题标号 -->
-								<strong>一、单项选择</strong>
+								<strong>一、单项选择	</strong>
+								
 								<c:forEach var="scQuestion"
 									items="${ testPaperView.scQuestions}" varStatus="status">
 									<div class="row top-buffer">
 										<div class="col-md-12">
-											<!-- 题干 -->
+											<!-- 题干 -->${status.index+1 }.
 											<c:out value="${scQuestion.sc_stem}"></c:out>
 										</div>
 										<c:forEach var="option" items="${scQuestion.sc_option }"
 											varStatus="status">
-
 											<div class="col-md-3">
 												<c:out value="${option}"></c:out>
 											</div>
-
 										</c:forEach>
 									</div>
-								</c:forEach>
+								</c:forEach>							
 							</p>
 						</c:if>
 						<!-- 加载多选试题 -->
@@ -111,11 +120,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<p class="mc">
 								<!-- 试题标号 -->
 								<strong>二、多项选择</strong>
-								<c:forEach var="scQuestion"
+								<c:forEach var="mcQuestion"
 									items="${ testPaperView.mcQuestions}" varStatus="status">
 									<div class="row top-buffer">
 										<div class="col-md-12">
-											<!-- 题干 -->
+											<!-- 题干 -->${status.index+1 }.
 											<c:out value="${mcQuestion.mc_stem}"></c:out>
 										</div>
 										<c:forEach var="option" items="${mcQuestion.mc_option }"
@@ -135,11 +144,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<p class="fb">
 								<!-- 试题标号 -->
 								<strong>三、填空题</strong>
-								<c:forEach var="scQuestion"
+								<c:forEach var="fbQuestion"
 									items="${ testPaperView.fbQuestions}" varStatus="status">
 									<div class="row top-buffer">
 										<div class="col-md-12">
-											<!-- 题干 -->
+											<!-- 题干 -->${status.index+1 }.
 											<c:out value="${fbQuestion.fb_term}"></c:out>
 										</div>
 
@@ -153,11 +162,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<p class="tf">
 								<!-- 试题标号 -->
 								<strong>四、判断题</strong>
-								<c:forEach var="scQuestion"
+								<c:forEach var="tfQuestion"
 									items="${ testPaperView.tfQuestions}" varStatus="status">
 									<div class="row top-buffer">
 										<div class="col-md-12">
-											<!-- 题干 -->
+											<!-- 题干 -->${status.index+1 }.
 											<c:out value="${tfQuestion.tf_term}"></c:out>
 										</div>
 
@@ -171,10 +180,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<p class="qa">
 								<!-- 试题标号 -->
 								<strong>五、简答</strong>
-								<c:forEach var="scQuestion"
+								<c:forEach var="qaQuestion"
 									items="${ testPaperView.qaQuestion}" varStatus="status">
 									<div class="row top-buffer">
-										<div class="col-md-12">
+										<div class="col-md-12">${status.index+1 }.
 											<c:out value="${qaQuestion.qa_term}"></c:out>
 										</div>
 										<p></p>
@@ -196,9 +205,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</div>
 	<div class="row">
 		<div class="col-md-12">
+		<h1></h1>
 			<div style="text-align:center">
 			<button class="btn btn-primary" onclick="CreateTestPaper()" >导出试卷</button>	
 			</div>
+			<h1></h1>
 		</div>
 	</div>
 

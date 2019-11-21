@@ -142,6 +142,7 @@ public class TestPaperServiceImpl implements TestPaperService {
 		testPaperView.setTpClass(testPaper.getTp_class());
 		testPaperView.setTpIllustrate(testPaper.getTp_illustrate());
 		testPaperView.setTpTerm(testPaper.getTp_term());
+		testPaperView.setTpMajor(testPaper.getTp_major());
 
 		String[] scIds = testPaper.getTp_sc_id().split("@@");
 		String[] mcIds = testPaper.getTp_mc_id().split("@@");
@@ -223,7 +224,7 @@ public class TestPaperServiceImpl implements TestPaperService {
 		List<SingleChoice> singleChoiceList = new ArrayList<SingleChoice>();
 		List<SCQuestion> scQuestionList = new ArrayList<SCQuestion>();
 		for (String id : scIds) {
-			if (scIds.length > 0) {
+			if (scIds.length > 1) {
 				scQuestionList.add(scQuestionDao.selectById(Integer.parseInt(id)));
 			}
 		}
@@ -241,7 +242,7 @@ public class TestPaperServiceImpl implements TestPaperService {
 		List<MultipleChoice> multipleChoiceList = new ArrayList<MultipleChoice>();
 		List<MCQuestion> mcQuestionList = new ArrayList<MCQuestion>();
 		for (String id : mcIds) {
-			if (mcIds.length > 0) {
+			if (mcIds.length > 1) {
 				mcQuestionList.add(mcQuestionDao.selectById(Integer.parseInt(id)));
 			}
 		}
@@ -259,7 +260,7 @@ public class TestPaperServiceImpl implements TestPaperService {
 		List<TrueOrFalse> trueOrFalseList = new ArrayList<TrueOrFalse>();
 		List<TFQuestion> tfQuestionList = new ArrayList<TFQuestion>();
 		for (String id : tfIds) {
-			if (tfIds.length > 0) {
+			if (tfIds.length > 1) {
 				tfQuestionList.add(tfQuestionDao.selectTFQuestionById(Integer.parseInt(id)));
 			}
 		}
@@ -272,7 +273,7 @@ public class TestPaperServiceImpl implements TestPaperService {
 		List<FillInTheBlank> fillInTheBlankList = new ArrayList<FillInTheBlank>();
 		List<FBQuestion> fbQuestionList = new ArrayList<FBQuestion>();
 		for (String id : fbIds) {
-			if (fbIds.length > 0) {
+			if (fbIds.length > 1) {
 				fbQuestionList.add(fbQuestionDao.selectFBQuestionById(Integer.parseInt(id)));
 			}
 		}
@@ -285,7 +286,7 @@ public class TestPaperServiceImpl implements TestPaperService {
 		List<QuestionAndAnswer> questionAndAnswerList = new ArrayList<QuestionAndAnswer>();
 		List<QAQuestion> qaQuestionList = new ArrayList<QAQuestion>();
 		for (String id : qaIds) {
-			if (qaIds.length > 0) {
+			if (qaIds.length > 1) {
 				qaQuestionList.add(qaQuestionDao.selectQAQuestionById(Integer.parseInt(id)));
 			}
 		}

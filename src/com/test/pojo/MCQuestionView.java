@@ -18,24 +18,26 @@ public class MCQuestionView {
 			this.mc_option.add(options[i]);
 		}
 	}
-	
+	public MCQuestionView(String mc_stem, List<String> mc_option) {
+		super();
+		this.mc_stem = mc_stem;
+		this.mc_option = mc_option;
+	}
 	public String getMc_stem() {
 		return mc_stem;
 	}
 	public void setMc_stem(String mc_stem) {
 		this.mc_stem = mc_stem;
 	}
-	
-	
-	public MCQuestionView() {
-		super();
-		// TODO Auto-generated constructor stub
+	public List<String> getMc_option() {
+		return mc_option;
 	}
-
-	public MCQuestionView(String mc_stem, List<String> mc_option) {
-		super();
-		this.mc_stem = mc_stem;
+	public void setMc_option(List<String> mc_option) {
 		this.mc_option = mc_option;
 	}
+	
+	
+	
+	
 
 }

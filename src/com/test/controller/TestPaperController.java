@@ -134,7 +134,7 @@ public class TestPaperController {
 		TestPaperView testPaperView = testPaperService.convertTestPaper(testPaper);
 		
 		System.out.println(testPaperView.toString());
-		
+		model.addAttribute("tpId",tpId);
 		model.addAttribute("testPaperView", testPaperView);
 		return "TestPaperView";// ×ª·¢µ½TestPaperView
 	}

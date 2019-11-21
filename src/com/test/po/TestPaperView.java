@@ -16,6 +16,13 @@ public class TestPaperView {
 	private String tpName;
 	private String tpIllustrate;
 	private String tpTerm;
+	private String tpMajor;
+	public String getTpMajor() {
+		return tpMajor;
+	}
+	public void setTpMajor(String tpMajor) {
+		this.tpMajor = tpMajor;
+	}
 	private String tpClass;
 	private String tpCreateName;//创建者姓名
 	private List<SCQuestionView> scQuestions;
@@ -85,14 +92,8 @@ public class TestPaperView {
 		this.qaQuestion = qaQuestion;
 	}
 
-	@Override
-	public String toString() {
-		return "TestPaperView [tpId=" + tpId + ", tpName=" + tpName + ", tpIllustrate=" + tpIllustrate + ", tpTerm="
-				+ tpTerm + ", tpClass=" + tpClass + ", tpCreateName=" + tpCreateName + ", scQuestions=" + scQuestions
-				+ ", mcQuestions=" + mcQuestions + ", fbQuestions=" + fbQuestions + ", tfQuestions=" + tfQuestions
-				+ ", qaQuestion=" + qaQuestion + "]";
-	}
-	public TestPaperView(Integer tpId,String tpName, String tpIllustrate, String tpTerm, String tpClass, String tpCreateName,
+	
+	public TestPaperView(Integer tpId,String tpName, String tpIllustrate, String tpTerm,String tpMajor, String tpClass, String tpCreateName,
 			List<SCQuestionView> scQuestions, List<MCQuestionView> mcQuestions, List<FBQuestion> fbQuestions,
 			List<TFQuestion> tfQuestions, List<QAQuestion> qaQuestion) {
 		super();
@@ -100,6 +101,7 @@ public class TestPaperView {
 		this.tpName = tpName;
 		this.tpIllustrate = tpIllustrate;
 		this.tpTerm = tpTerm;
+		this.tpMajor=tpMajor;
 		this.tpClass = tpClass;
 		this.tpCreateName = tpCreateName;
 		this.scQuestions = scQuestions;
@@ -107,6 +109,13 @@ public class TestPaperView {
 		this.fbQuestions = fbQuestions;
 		this.tfQuestions = tfQuestions;
 		this.qaQuestion = qaQuestion;
+	}
+	@Override
+	public String toString() {
+		return "TestPaperView [tpId=" + tpId + ", tpName=" + tpName + ", tpIllustrate=" + tpIllustrate + ", tpTerm="
+				+ tpTerm + ", tpMajor=" + tpMajor + ", tpClass=" + tpClass + ", tpCreateName=" + tpCreateName
+				+ ", scQuestions=" + scQuestions + ", mcQuestions=" + mcQuestions + ", fbQuestions=" + fbQuestions
+				+ ", tfQuestions=" + tfQuestions + ", qaQuestion=" + qaQuestion + "]";
 	}
 	public TestPaperView() {
 		super();
