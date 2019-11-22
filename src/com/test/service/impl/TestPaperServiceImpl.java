@@ -206,12 +206,11 @@ public class TestPaperServiceImpl implements TestPaperService {
 	public Map<String, Object> dataFill(TestPaper testPaper) {
 		Map<String, Object> dataMap = new HashMap<String, Object>();
 		dataMap.put("schoolName", "中原工学院");
-		dataMap.put("startYear", "2016");
-		dataMap.put("endYear", "2017");
 		dataMap.put("semester", testPaper.getTp_term());
 		dataMap.put("class", testPaper.getTp_class());
+		dataMap.put("illustrate", testPaper.getTp_illustrate());
 		// 拼接添加是期中考试还是期末考试
-		dataMap.put("testPaperName", "计算机网络 期末试卷");
+		dataMap.put("testPaperName", testPaper.getTp_name());
 		dataMap.put("major", testPaper.getTp_major());
 		dataMap.put("marker", testPaper.getTp_t_name());
 		String[] scIds = testPaper.getTp_sc_id().split("@@");

@@ -763,7 +763,7 @@
                         <w:rFonts w:hint="fareast"/>
                         <wx:font wx:val="宋体"/>
                     </w:rPr>
-                    <w:t>${startYear}~${endYear}学年 第${semester}学期</w:t>
+                    <w:t>第${semester}学期</w:t>
                 </w:r>
             </w:p>
             <w:p wsp:rsidR="00C60D82" wsp:rsidRDefault="00C60D82" wsp:rsidP="00727383">
@@ -792,7 +792,7 @@
                         <w:rFonts w:hint="fareast"/>
                         <wx:font wx:val="宋体"/>
                     </w:rPr>
-                    <w:t>${testPaperName}</w:t>
+                    <w:t>${testPaperName}   ${illustrate}</w:t>
                 </w:r>
             </w:p>
             <w:p wsp:rsidR="00C60D82" wsp:rsidRDefault="00C60D82" wsp:rsidP="00727383">
@@ -808,296 +808,256 @@
                     <w:t>出卷人：${marker}</w:t>
                 </w:r>
             </w:p>
-            <w:p wsp:rsidR="00CF1CA6" wsp:rsidRDefault="006E79CE" wsp:rsidP="00A01CD7">
-                <w:pPr>
-                    <w:pStyle w:val="a3"/>
-                    <w:listPr>
-                        <w:ilvl w:val="0"/>
-                        <w:ilfo w:val="2"/>
-                        <wx:t wx:val="一、"/>
-                        <wx:font wx:val="Times New Roman"/>
-                    </w:listPr>
-                    <w:ind w:first-line-chars="0"/>
-                </w:pPr>
-                <w:r>
-                    <w:rPr>
-                        <w:rFonts w:hint="fareast"/>
-                        <wx:font wx:val="宋体"/>
-                    </w:rPr>
-                    <w:t>单选题</w:t>
-                </w:r>
-            </w:p>
-            <#list singleChoiceList as singleChoice>
-                <w:p wsp:rsidR="00FF236A" wsp:rsidRDefault="00FF236A" wsp:rsidP="00FF236A">
-                    <w:pPr>
-                        <w:ind w:first-line-chars="0" w:first-line="0"/>
-                    </w:pPr>
+            <#if singleChoiceList?size gt 0 >
+                <w:p wsp:rsidR="00CF1CA6" wsp:rsidRDefault="006E79CE" wsp:rsidP="00A01CD7">
                     <w:r>
                         <w:rPr>
                             <w:rFonts w:hint="fareast"/>
+                            <wx:font wx:val="宋体"/>
                         </w:rPr>
-                        <w:t>${singleChoice_index+1}</w:t>
-                    </w:r>
-                    <w:r>
-                        <w:t>.${singleChoice.content}</w:t>
+                        <w:t>单选题</w:t>
                     </w:r>
                 </w:p>
+                <#list singleChoiceList as singleChoice>
+                    <w:p wsp:rsidR="00FF236A" wsp:rsidRDefault="00FF236A" wsp:rsidP="00FF236A">
+                        <w:pPr>
+                            <w:ind w:first-line-chars="0" w:first-line="0"/>
+                        </w:pPr>
+                        <w:r>
+                            <w:rPr>
+                                <w:rFonts w:hint="fareast"/>
+                            </w:rPr>
+                            <w:t>${singleChoice_index+1}</w:t>
+                        </w:r>
+                        <w:r>
+                            <w:t>.${singleChoice.content}</w:t>
+                        </w:r>
+                    </w:p>
+                    <w:p wsp:rsidR="00FF236A" wsp:rsidRDefault="00FF236A" wsp:rsidP="00FF236A">
+                        <w:pPr>
+                            <w:ind w:first-line-chars="0" w:first-line="0"/>
+                        </w:pPr>
+                        <w:r>
+                            <w:t>A.${singleChoice.optionA}</w:t>
+                        </w:r>
+                    </w:p>
+                    <w:p wsp:rsidR="00FF236A" wsp:rsidRDefault="00FF236A" wsp:rsidP="00FF236A">
+                        <w:pPr>
+                            <w:ind w:first-line-chars="0" w:first-line="0"/>
+                        </w:pPr>
+                        <w:r>
+                            <w:t>B.${singleChoice.optionB}</w:t>
+                        </w:r>
+                    </w:p>
+                    <w:p wsp:rsidR="00FF236A" wsp:rsidRDefault="00FF236A" wsp:rsidP="00FF236A">
+                        <w:pPr>
+                            <w:ind w:first-line-chars="0" w:first-line="0"/>
+                        </w:pPr>
+                        <w:r>
+                            <w:t>C.${singleChoice.optionC}</w:t>
+                        </w:r>
+                    </w:p>
+                    <w:p wsp:rsidR="00FF236A" wsp:rsidRDefault="00FF236A" wsp:rsidP="00FF236A">
+                        <w:pPr>
+                            <w:ind w:first-line-chars="0" w:first-line="0"/>
+                        </w:pPr>
+                        <w:r>
+                            <w:t>D.${singleChoice.optionD}</w:t>
+                        </w:r>
+                    </w:p>
+                </#list>
                 <w:p wsp:rsidR="00FF236A" wsp:rsidRDefault="00FF236A" wsp:rsidP="00FF236A">
                     <w:pPr>
                         <w:ind w:first-line-chars="0" w:first-line="0"/>
                     </w:pPr>
-                    <w:r>
-                        <w:t>A.${singleChoice.optionA}</w:t>
-                    </w:r>
                 </w:p>
-                <w:p wsp:rsidR="00FF236A" wsp:rsidRDefault="00FF236A" wsp:rsidP="00FF236A">
-                    <w:pPr>
-                        <w:ind w:first-line-chars="0" w:first-line="0"/>
-                    </w:pPr>
-                    <w:r>
-                        <w:t>B.${singleChoice.optionB}</w:t>
-                    </w:r>
-                </w:p>
-                <w:p wsp:rsidR="00FF236A" wsp:rsidRDefault="00FF236A" wsp:rsidP="00FF236A">
-                    <w:pPr>
-                        <w:ind w:first-line-chars="0" w:first-line="0"/>
-                    </w:pPr>
-                    <w:r>
-                        <w:t>C.${singleChoice.optionC}</w:t>
-                    </w:r>
-                </w:p>
-                <w:p wsp:rsidR="00FF236A" wsp:rsidRDefault="00FF236A" wsp:rsidP="00FF236A">
-                    <w:pPr>
-                        <w:ind w:first-line-chars="0" w:first-line="0"/>
-                    </w:pPr>
-                    <w:r>
-                        <w:t>D.${singleChoice.optionD}</w:t>
-                    </w:r>
-                </w:p>
-            </#list>
-            <w:p wsp:rsidR="00FF236A" wsp:rsidRDefault="00FF236A" wsp:rsidP="00FF236A">
-                <w:pPr>
-                    <w:ind w:first-line-chars="0" w:first-line="0"/>
-                </w:pPr>
-            </w:p>
-            <w:p wsp:rsidR="00382A4B" wsp:rsidRDefault="006E79CE" wsp:rsidP="00382A4B">
-                <w:pPr>
-                    <w:pStyle w:val="a3"/>
-                    <w:listPr>
-                        <w:ilvl w:val="0"/>
-                        <w:ilfo w:val="2"/>
-                        <wx:t wx:val="二、"/>
-                        <wx:font wx:val="Times New Roman"/>
-                    </w:listPr>
-                    <w:ind w:first-line-chars="0"/>
-                </w:pPr>
-                <w:r>
-                    <w:rPr>
-                        <w:rFonts w:hint="fareast"/>
-                        <wx:font wx:val="宋体"/>
-                    </w:rPr>
-                    <w:t>多选题</w:t>
-                </w:r>
-            </w:p>
-            <#list multipleChoiceList as multipleChoice>
-                <w:p wsp:rsidR="00FF236A" wsp:rsidRDefault="00FF236A" wsp:rsidP="00FF236A">
-                    <w:pPr>
-                        <w:ind w:first-line-chars="0" w:first-line="0"/>
-                    </w:pPr>
+            </#if>
+            <#if multipleChoiceList?size gt 0>
+                <w:p wsp:rsidR="00382A4B" wsp:rsidRDefault="006E79CE" wsp:rsidP="00382A4B">
                     <w:r>
                         <w:rPr>
                             <w:rFonts w:hint="fareast"/>
+                            <wx:font wx:val="宋体"/>
                         </w:rPr>
-                        <w:t>${multipleChoice_index+1}</w:t>
-                    </w:r>
-                    <w:r>
-                        <w:t>.${multipleChoice.content}</w:t>
+                        <w:t>多选题</w:t>
                     </w:r>
                 </w:p>
-                <w:p wsp:rsidR="00FF236A" wsp:rsidRDefault="00FF236A" wsp:rsidP="00FF236A">
-                    <w:pPr>
-                        <w:ind w:first-line-chars="0" w:first-line="0"/>
-                    </w:pPr>
-                    <w:r>
-                        <w:t>A.${multipleChoice.optionA}</w:t>
-                    </w:r>
-                </w:p>
-                <w:p wsp:rsidR="00FF236A" wsp:rsidRDefault="00FF236A" wsp:rsidP="00FF236A">
-                    <w:pPr>
-                        <w:ind w:first-line-chars="0" w:first-line="0"/>
-                    </w:pPr>
-                    <w:r>
-                        <w:t>B.${multipleChoice.optionB}</w:t>
-                    </w:r>
-                </w:p>
-                <w:p wsp:rsidR="00FF236A" wsp:rsidRDefault="00FF236A" wsp:rsidP="00FF236A">
-                    <w:pPr>
-                        <w:ind w:first-line-chars="0" w:first-line="0"/>
-                    </w:pPr>
-                    <w:r>
-                        <w:t>C.${multipleChoice.optionC}</w:t>
-                    </w:r>
-                </w:p>
-                <w:p wsp:rsidR="00FF236A" wsp:rsidRDefault="00FF236A" wsp:rsidP="00FF236A">
-                    <w:pPr>
-                        <w:ind w:first-line-chars="0" w:first-line="0"/>
-                    </w:pPr>
-                    <w:r>
-                        <w:t>D.${multipleChoice.optionD}</w:t>
-                    </w:r>
-                </w:p>
-            </#list>
-            <w:p wsp:rsidR="00D65919" wsp:rsidRDefault="00D65919" wsp:rsidP="00382A4B">
-                <w:pPr>
-                    <w:ind w:first-line-chars="0" w:first-line="0"/>
-                </w:pPr>
-            </w:p>
-            <w:p wsp:rsidR="006E79CE" wsp:rsidRDefault="006E79CE" wsp:rsidP="006E79CE">
-                <w:pPr>
-                    <w:pStyle w:val="a3"/>
-                    <w:listPr>
-                        <w:ilvl w:val="0"/>
-                        <w:ilfo w:val="2"/>
-                        <wx:t wx:val="三、"/>
-                        <wx:font wx:val="Times New Roman"/>
-                    </w:listPr>
-                    <w:ind w:first-line-chars="0"/>
-                </w:pPr>
-                <w:r>
-                    <w:rPr>
-                        <w:rFonts w:hint="fareast"/>
-                        <wx:font wx:val="宋体"/>
-                    </w:rPr>
-                    <w:t>填空题</w:t>
-                </w:r>
-            </w:p>
-            <#list fillInTheBlankList as fillInTheBlank>
-                <w:p wsp:rsidR="00D65919" wsp:rsidRDefault="00D65919" wsp:rsidP="00D65919">
-                    <w:pPr>
-                        <w:ind w:first-line-chars="0" w:first-line="0"/>
-                    </w:pPr>
-                    <w:r>
-                        <w:rPr>
-                            <w:rFonts w:hint="fareast"/>
-                        </w:rPr>
-                        <w:t>${fillInTheBlank_index+1}</w:t>
-                    </w:r>
-                    <w:r>
-                        <w:t>.${fillInTheBlank.content}</w:t>
-                    </w:r>
-                </w:p>
-            </#list>
-            <w:p wsp:rsidR="00382A4B" wsp:rsidRDefault="00382A4B" wsp:rsidP="00382A4B">
-                <w:pPr>
-                    <w:ind w:first-line-chars="0" w:first-line="0"/>
-                </w:pPr>
-            </w:p>
-            <w:p wsp:rsidR="006E79CE" wsp:rsidRDefault="006E79CE" wsp:rsidP="006E79CE">
-                <w:pPr>
-                    <w:pStyle w:val="a3"/>
-                    <w:listPr>
-                        <w:ilvl w:val="0"/>
-                        <w:ilfo w:val="2"/>
-                        <wx:t wx:val="四、"/>
-                        <wx:font wx:val="Times New Roman"/>
-                    </w:listPr>
-                    <w:ind w:first-line-chars="0"/>
-                </w:pPr>
-                <w:r>
-                    <w:rPr>
-                        <w:rFonts w:hint="fareast"/>
-                        <wx:font wx:val="宋体"/>
-                    </w:rPr>
-                    <w:t>判断题</w:t>
-                </w:r>
-            </w:p>
-            <#list trueOrFalseList as trueOrFalse>
+                <#list multipleChoiceList as multipleChoice>
+                    <w:p wsp:rsidR="00FF236A" wsp:rsidRDefault="00FF236A" wsp:rsidP="00FF236A">
+                        <w:pPr>
+                            <w:ind w:first-line-chars="0" w:first-line="0"/>
+                        </w:pPr>
+                        <w:r>
+                            <w:rPr>
+                                <w:rFonts w:hint="fareast"/>
+                            </w:rPr>
+                            <w:t>${multipleChoice_index+1}</w:t>
+                        </w:r>
+                        <w:r>
+                            <w:t>.${multipleChoice.content}</w:t>
+                        </w:r>
+                    </w:p>
+                    <w:p wsp:rsidR="00FF236A" wsp:rsidRDefault="00FF236A" wsp:rsidP="00FF236A">
+                        <w:pPr>
+                            <w:ind w:first-line-chars="0" w:first-line="0"/>
+                        </w:pPr>
+                        <w:r>
+                            <w:t>A.${multipleChoice.optionA}</w:t>
+                        </w:r>
+                    </w:p>
+                    <w:p wsp:rsidR="00FF236A" wsp:rsidRDefault="00FF236A" wsp:rsidP="00FF236A">
+                        <w:pPr>
+                            <w:ind w:first-line-chars="0" w:first-line="0"/>
+                        </w:pPr>
+                        <w:r>
+                            <w:t>B.${multipleChoice.optionB}</w:t>
+                        </w:r>
+                    </w:p>
+                    <w:p wsp:rsidR="00FF236A" wsp:rsidRDefault="00FF236A" wsp:rsidP="00FF236A">
+                        <w:pPr>
+                            <w:ind w:first-line-chars="0" w:first-line="0"/>
+                        </w:pPr>
+                        <w:r>
+                            <w:t>C.${multipleChoice.optionC}</w:t>
+                        </w:r>
+                    </w:p>
+                    <w:p wsp:rsidR="00FF236A" wsp:rsidRDefault="00FF236A" wsp:rsidP="00FF236A">
+                        <w:pPr>
+                            <w:ind w:first-line-chars="0" w:first-line="0"/>
+                        </w:pPr>
+                        <w:r>
+                            <w:t>D.${multipleChoice.optionD}</w:t>
+                        </w:r>
+                    </w:p>
+                </#list>
                 <w:p wsp:rsidR="00D65919" wsp:rsidRDefault="00D65919" wsp:rsidP="00382A4B">
                     <w:pPr>
                         <w:ind w:first-line-chars="0" w:first-line="0"/>
                     </w:pPr>
+                </w:p>
+            </#if>
+            <#if fillInTheBlankList?size gt 0>
+                <w:p wsp:rsidR="006E79CE" wsp:rsidRDefault="006E79CE" wsp:rsidP="006E79CE">
                     <w:r>
                         <w:rPr>
                             <w:rFonts w:hint="fareast"/>
+                            <wx:font wx:val="宋体"/>
                         </w:rPr>
-                        <w:t>${trueOrFalse_index+1}</w:t>
-                    </w:r>
-                    <w:r>
-                        <w:t>.${trueOrFalse.content}</w:t>
+                        <w:t>填空题</w:t>
                     </w:r>
                 </w:p>
-            </#list>
-            <w:p wsp:rsidR="00D65919" wsp:rsidRDefault="00D65919" wsp:rsidP="00382A4B">
-                <w:pPr>
-                    <w:ind w:first-line-chars="0" w:first-line="0"/>
-                </w:pPr>
-            </w:p>
-            <w:p wsp:rsidR="006E79CE" wsp:rsidRDefault="006E79CE" wsp:rsidP="006E79CE">
-                <w:pPr>
-                    <w:pStyle w:val="a3"/>
-                    <w:listPr>
-                        <w:ilvl w:val="0"/>
-                        <w:ilfo w:val="2"/>
-                        <wx:t wx:val="五、"/>
-                        <wx:font wx:val="Times New Roman"/>
-                    </w:listPr>
-                    <w:ind w:first-line-chars="0"/>
-                </w:pPr>
-                <w:r>
-                    <w:rPr>
-                        <w:rFonts w:hint="fareast"/>
-                        <wx:font wx:val="宋体"/>
-                    </w:rPr>
-                    <w:t>问答题</w:t>
-                </w:r>
-            </w:p>
-            <#list questionAndAnswerList as questionAndAnswer>
-                <w:p wsp:rsidR="00D65919" wsp:rsidRDefault="00D65919" wsp:rsidP="00D65919">
+                <#list fillInTheBlankList as fillInTheBlank>
+                    <w:p wsp:rsidR="00D65919" wsp:rsidRDefault="00D65919" wsp:rsidP="00D65919">
+                        <w:pPr>
+                            <w:ind w:first-line-chars="0" w:first-line="0"/>
+                        </w:pPr>
+                        <w:r>
+                            <w:rPr>
+                                <w:rFonts w:hint="fareast"/>
+                            </w:rPr>
+                            <w:t>${fillInTheBlank_index+1}</w:t>
+                        </w:r>
+                        <w:r>
+                            <w:t>.${fillInTheBlank.content}</w:t>
+                        </w:r>
+                    </w:p>
+                </#list>
+                <w:p wsp:rsidR="00382A4B" wsp:rsidRDefault="00382A4B" wsp:rsidP="00382A4B">
                     <w:pPr>
                         <w:ind w:first-line-chars="0" w:first-line="0"/>
                     </w:pPr>
+                </w:p>
+            </#if>
+            <#if trueOrFalseList?size gt 0>
+                <w:p wsp:rsidR="006E79CE" wsp:rsidRDefault="006E79CE" wsp:rsidP="006E79CE">
                     <w:r>
                         <w:rPr>
                             <w:rFonts w:hint="fareast"/>
+                            <wx:font wx:val="宋体"/>
                         </w:rPr>
-                        <w:t>${questionAndAnswer_index+1}</w:t>
+                        <w:t>判断题</w:t>
                     </w:r>
+                </w:p>
+                <#list trueOrFalseList as trueOrFalse>
+                    <w:p wsp:rsidR="00D65919" wsp:rsidRDefault="00D65919" wsp:rsidP="00382A4B">
+                        <w:pPr>
+                            <w:ind w:first-line-chars="0" w:first-line="0"/>
+                        </w:pPr>
+                        <w:r>
+                            <w:rPr>
+                                <w:rFonts w:hint="fareast"/>
+                            </w:rPr>
+                            <w:t>${trueOrFalse_index+1}</w:t>
+                        </w:r>
+                        <w:r>
+                            <w:t>.${trueOrFalse.content}</w:t>
+                        </w:r>
+                    </w:p>
+                </#list>
+                <w:p wsp:rsidR="00D65919" wsp:rsidRDefault="00D65919" wsp:rsidP="00382A4B">
+                    <w:pPr>
+                        <w:ind w:first-line-chars="0" w:first-line="0"/>
+                    </w:pPr>
+                </w:p>
+            </#if>
+            <#if questionAndAnswerList?size gt 0>
+                <w:p wsp:rsidR="006E79CE" wsp:rsidRDefault="006E79CE" wsp:rsidP="006E79CE">
                     <w:r>
-                        <w:t>.${questionAndAnswer.content}</w:t>
+                        <w:rPr>
+                            <w:rFonts w:hint="fareast"/>
+                            <wx:font wx:val="宋体"/>
+                        </w:rPr>
+                        <w:t>问答题</w:t>
                     </w:r>
                 </w:p>
+                <#list questionAndAnswerList as questionAndAnswer>
+                    <w:p wsp:rsidR="00D65919" wsp:rsidRDefault="00D65919" wsp:rsidP="00D65919">
+                        <w:pPr>
+                            <w:ind w:first-line-chars="0" w:first-line="0"/>
+                        </w:pPr>
+                        <w:r>
+                            <w:rPr>
+                                <w:rFonts w:hint="fareast"/>
+                            </w:rPr>
+                            <w:t>${questionAndAnswer_index+1}</w:t>
+                        </w:r>
+                        <w:r>
+                            <w:t>.${questionAndAnswer.content}</w:t>
+                        </w:r>
+                    </w:p>
+                    <w:p wsp:rsidR="00D65919" wsp:rsidRDefault="00D65919" wsp:rsidP="00D65919">
+                        <w:pPr>
+                            <w:ind w:first-line-chars="0" w:first-line="0"/>
+                        </w:pPr>
+                    </w:p>
+                    <w:p wsp:rsidR="00D65919" wsp:rsidRDefault="00D65919" wsp:rsidP="00D65919">
+                        <w:pPr>
+                            <w:ind w:first-line-chars="0" w:first-line="0"/>
+                        </w:pPr>
+                    </w:p>
+                    <w:p wsp:rsidR="00D65919" wsp:rsidRDefault="00D65919" wsp:rsidP="00D65919">
+                        <w:pPr>
+                            <w:ind w:first-line-chars="0" w:first-line="0"/>
+                        </w:pPr>
+                    </w:p>
+                    <w:p wsp:rsidR="00D65919" wsp:rsidRDefault="00D65919" wsp:rsidP="00D65919">
+                        <w:pPr>
+                            <w:ind w:first-line-chars="0" w:first-line="0"/>
+                        </w:pPr>
+                    </w:p>
+                </#list>
                 <w:p wsp:rsidR="00D65919" wsp:rsidRDefault="00D65919" wsp:rsidP="00D65919">
                     <w:pPr>
                         <w:ind w:first-line-chars="0" w:first-line="0"/>
                     </w:pPr>
                 </w:p>
-                <w:p wsp:rsidR="00D65919" wsp:rsidRDefault="00D65919" wsp:rsidP="00D65919">
-                    <w:pPr>
-                        <w:ind w:first-line-chars="0" w:first-line="0"/>
-                    </w:pPr>
-                </w:p>
-                <w:p wsp:rsidR="00D65919" wsp:rsidRDefault="00D65919" wsp:rsidP="00D65919">
-                    <w:pPr>
-                        <w:ind w:first-line-chars="0" w:first-line="0"/>
-                    </w:pPr>
-                </w:p>
-                <w:p wsp:rsidR="00D65919" wsp:rsidRDefault="00D65919" wsp:rsidP="00D65919">
-                    <w:pPr>
-                        <w:ind w:first-line-chars="0" w:first-line="0"/>
-                    </w:pPr>
-                </w:p>
-            </#list>
-            <w:p wsp:rsidR="00D65919" wsp:rsidRDefault="00D65919" wsp:rsidP="00D65919">
-                <w:pPr>
-                    <w:ind w:first-line-chars="0" w:first-line="0"/>
-                </w:pPr>
-            </w:p>
-            <w:sectPr wsp:rsidR="00D65919">
-                <w:pgSz w:w="11906" w:h="16838"/>
-                <w:pgMar w:top="1440" w:right="1800" w:bottom="1440" w:left="1800" w:header="851" w:footer="992" w:gutter="0"/>
-                <w:cols w:space="425"/>
-                <w:docGrid w:type="lines" w:line-pitch="312"/>
-            </w:sectPr>
+                <w:sectPr wsp:rsidR="00D65919">
+                    <w:pgSz w:w="11906" w:h="16838"/>
+                    <w:pgMar w:top="1440" w:right="1800" w:bottom="1440" w:left="1800" w:header="851" w:footer="992" w:gutter="0"/>
+                    <w:cols w:space="425"/>
+                    <w:docGrid w:type="lines" w:line-pitch="312"/>
+                </w:sectPr>
+            </#if>
         </wx:sect>
     </w:body>
 </w:wordDocument>
