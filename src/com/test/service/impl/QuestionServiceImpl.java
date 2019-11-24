@@ -13,6 +13,8 @@ import com.test.dao.MCQuestionDao;
 import com.test.dao.QAQuestionDao;
 import com.test.dao.SCQuestionDao;
 import com.test.dao.TFQuestionDao;
+import com.test.dao.TeacherDao;
+import com.test.dao.TestPaperDao;
 import com.test.po.FBQuestion;
 import com.test.po.MCQuestion;
 import com.test.po.QAQuestion;
@@ -28,7 +30,7 @@ public class QuestionServiceImpl implements QuestionService {
 
 	@Autowired
 	SCQuestionDao scQuestionDao;
-
+					
 	@Autowired
 	MCQuestionDao mcQuestionDao;
 
@@ -40,6 +42,12 @@ public class QuestionServiceImpl implements QuestionService {
 
 	@Autowired
 	QAQuestionDao qaQuestionDao;
+	
+	@Autowired
+	private TestPaperDao testPaperDao;
+	
+	@Autowired
+	TeacherDao teacherDao;
 
 	/* 添加单选题 */
 	@Override
@@ -400,5 +408,29 @@ public class QuestionServiceImpl implements QuestionService {
 		qaNumber.setLevel4(level4);
 		questionLevelNumber.put("qaQuestionNumber", qaNumber);
 		return questionLevelNumber;
+	}
+
+	@Override
+	public int getQuestionsNum() {
+		
+		int scNum=scQuestionDao.getScQuestionsNum();
+		int mcNum=mcQuestionDao.getMcQuestionsNum();
+		int qaNum=qaQuestionDao.getQaQuestionsNum();
+		int tfNum=tfQuestionDao.getTFQuestionsNum();
+		int fbNum=fbQuestionDao.getFbQuestionsNum();
+		int total=scNum+mcNum+qaNum+tfNum+fbNum;
+		return total;
+	}
+
+	@Override
+	public int getTestPaperNum() {
+		
+		return testPaperDao.getTestPaperNum();
+	}
+
+	@Override
+	public int getUserNum() {
+		
+		return teacherDao.getTeachersNum();
 	}
 }

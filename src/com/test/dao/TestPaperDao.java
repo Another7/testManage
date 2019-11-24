@@ -18,4 +18,6 @@ public interface TestPaperDao {
 	 * @return ÊÔ¾í¶ÔÏó
 	 */
 	public TestPaper selectTestPaperById(Integer testPaperId);
+
+	public int getTestPaperNum();
 }

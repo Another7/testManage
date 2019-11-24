@@ -46,4 +46,6 @@ public interface MCQuestionDao {
 	 */
 	public List<MCQuestion> getMCQuestionByChapterIdAndLevelRandom(@Param("chapterIdList") List<Integer> chapterIdList,
 			@	Param("levelNumber") QuestionLevelNumber levelNumber);
+
+	public int getMcQuestionsNum();
 }

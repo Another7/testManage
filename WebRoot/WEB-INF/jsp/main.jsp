@@ -21,18 +21,27 @@
 	   <script src="layui/layui.js"></script>
 	   <script type="text/javascript" src="js/xadmin.js"></script>
 	   <script>
-	   
-		   $(".panel a").on("click",function(){
-				window.parent.addTab($(this));
-			});
-	
-	
+   $(".panel a").on("click",function(){
+		window.parent.addTab($(this));
+	});
 	    </script>
-	    
-	    
+	    <script type="text/javascript">
+	    		function loadInfo() 　　{ 　
+	    			/* var a='${questionNum}';　 //获取试题数
+	    			var b='${testPaperNum}'//获取试卷数
+	    			var c='${userNum}'//获取用户数
+	    			
+	    			$(window.frames["welcome"].document).find("#questionNum").val(a);
+	    			$(window.frames["welcome"].document).find("#testPaperNum").val(a);
+	    			$(window.frames["welcome"].document).find("#userNum").val(a); */
+        				　　
+			    } 　　
+			   
+   			window.onload = loadInfo;//页面自动加载
+	    </script>
 </head>
 
-<body >
+<body>
  <!-- 顶部开始 -->
     <div class="container ">
         <div class="logo"><a href="main.jsp">题库管理系统</a></div>
@@ -327,7 +336,7 @@
           </ul>
           <div class="layui-tab-content">
             <div class="layui-tab-item layui-show">
-                <iframe  src='welcome.jsp' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
+                <iframe  src='welcome.jsp' frameborder="0" scrolling="yes" class="x-iframe" id="welcome"></iframe>
             </div>
           </div>
         </div>

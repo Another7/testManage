@@ -29,6 +29,8 @@ import com.test.pojo.CourseData;
 import com.test.service.ChapterService;
 import com.test.service.QuestionService;
 import com.test.service.SubjectService;
+import com.test.service.TeacherService;
+import com.test.service.TestPaperService;
 import com.test.service.CourseService;
 
 
@@ -235,7 +237,7 @@ public class QuestionController {
 		
 		List<TFQuestion> list=questionService.getAllTFQuestions(subjectId);
 		/*model.addAttribute("SCQuestionList", list);*/
-		System.out.println("list:"+list.toString());
+		//System.out.println("list:"+list.toString());
 		return list;
 	}
 	
@@ -331,13 +333,20 @@ public class QuestionController {
 		
 		System.out.println("addMCQuestion:"+mcQuestion.toString());
 		Map<String, String> map=new HashMap<String, String>();
-		int rt=questionService.saveMCQuestion(mcQuestion);
-		System.out.println(rt);
-		 if(rt>0){
-			map.put("result", "yes");
-		}else{
+		try {
+			int rt=questionService.saveMCQuestion(mcQuestion);
+			System.out.println(rt);
+			 if(rt>0){
+					map.put("result", "yes");
+				}else{
+					map.put("result", "no");
+				}
+		} catch (Exception e) {
 			map.put("result", "no");
 		}
+		
+		
+		
 		return map;
 	}
 	/*添加判断题*/
@@ -620,7 +629,29 @@ public class QuestionController {
 		return "KnowledgePointManage";
 		
 	}
+	@Autowired
+	private TestPaperService testPaperService;
 	
+	@Autowired
+	private TeacherService teacherService;
+	
+	//转发到主页面
+	@RequestMapping("/toMain.action")
+	public String toMain(HttpServletRequest request,Model model){
+		
+		int questionNum=questionService.getQuestionsNum();
+		int testPaperNum=testPaperService.getTestPaperNum();
+		int userNum=teacherService.getUserNum();
+		
+		/*model.addAttribute("questionNum",questionNum);
+		model.addAttribute("testPaperNum",testPaperNum);
+		model.addAttribute("userNum",userNum);*/
+		request.getSession().setAttribute("QUESTIONUM_SESSION", questionNum);
+		request.getSession().setAttribute("TESTPAPERNUM_SESSION", testPaperNum);
+		request.getSession().setAttribute("USERNUM_SESSION", userNum);
+		return "main";
+		
+	}
 	
 	
 }

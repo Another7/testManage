@@ -48,5 +48,9 @@ public interface SCQuestionDao {
 	public List<SCQuestion> getSCQuestionByChapterIdAndLevelRandom(@	Param("chapterIdList") List<Integer> chapterIdList,
 			
 			@	Param("levelNumber") QuestionLevelNumber levelNumber);
+	
+	
+	
+	public int getScQuestionsNum();
 
 }

@@ -50,4 +50,6 @@ public interface FBQuestionDao {
 	 */
 	public List<FBQuestion> getFBQuestionByChapterIdAndLevelRandom(@Param("chapterIdList") List<Integer> chapterIdList,
 			@	Param("levelNumber") QuestionLevelNumber levelNumber);
+
+	public int getFbQuestionsNum();
 }

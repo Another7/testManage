@@ -41,4 +41,6 @@ public interface QAQuestionDao {
 	 */
 	public List<QAQuestion> getQAQuestionByChapterIdAndLevelRandom(@	Param("chapterIdList") List<Integer> chapterIdList,
 			@	Param("levelNumber") QuestionLevelNumber levelNumber);
+
+	public int getQaQuestionsNum();
 }

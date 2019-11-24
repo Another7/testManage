@@ -98,4 +98,10 @@
 		</foreach>
 	</select>
 
+	<select id="getQaQuestionsNum" resultType="Integer">
+		select count(*) from question_and_answer;
+	</select>
+	
+
+
 </mapper>

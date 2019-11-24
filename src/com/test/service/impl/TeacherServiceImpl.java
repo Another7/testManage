@@ -59,4 +59,10 @@ public class TeacherServiceImpl implements TeacherService {
 			
 	}
 
+	@Override
+	public int getUserNum() {
+		
+		return teacherDao.getTeachersNum();
+	}
+
 }

@@ -302,4 +302,10 @@ public class TestPaperServiceImpl implements TestPaperService {
 		return dataMap;
 	}
 
+	@Override
+	public int getTestPaperNum() {
+		
+		return testPaperDao.getTestPaperNum();
+	}
+
 }

@@ -25,29 +25,23 @@
  //清空新建课程窗口中的数据
 	function reset() {
 	    $("#chapterName").val("");
-	  /*   $("#new_customerFrom").val("")
-	    $("#new_custIndustry").val("")
-	    $("#new_custLevel").val("")
-	    $("#new_linkMan").val("");
-	    $("#new_phone").val("");
-	    $("#new_mobile").val("");
-	    $("#new_zipcode").val("");
-	    $("#new_address").val(""); */
+	
 	} 
 	//用户点击修改知识点按钮，把知识点内容呈现
 	function editKnowledgePoint(id) {
-	alert(id);
+	//alert(id);
 	    $.ajax({
        	   method:"get",
          	url:"/testManage/getKnowledgePointByKpId.action?kp_id="+id,
          	contentType: 'application/json; charset=UTF-8',
 		 	dataType:'json',
        	   	success:function (data) {
-       	   	
+       	   		
        	   		$("#updateKpName").val(data.kp_name);
        	   		$("#kp_c_id").val(data.kp_c_id);
-       	   		$("#kp_ct_id").val(data.ct_num);
+       	   		$("#kp_ct_id").val(data.kp_ct_id);
        	   		$("#kp_id").val(data.kp_id);
+       	   	//	alert(data.kp_name+","+data.kp_c_id+","+data.kp_ct_id+","+data.kp_id);
        	   		
          	 }
    	 });
@@ -273,7 +267,7 @@
 				   			<!-- --------------结束---------------添加章节的模态框---------------------------------------------- -->
 				   			
 <!-- -----------------------------修改的模态框开始---------------------------------------------- -->
-				   			<div class="modal fade" id="#myModal"  tabindex="-1" role="diaog" aria-labelledby="myModalLabel" aria-hidden="true">
+				   			<div class="modal fade" id="myModal"  tabindex="-1" role="diaog" aria-labelledby="myModalLabel" aria-hidden="true">
 				   				
 				   				<div class="modal-dialog">
 				   					<div class="modal-content">
@@ -303,8 +297,10 @@
 												var id=$("#kp_id").val();
 												var ctid=$("#kp_ct_id").val();
 												var cid=$("#kp_c_id").val();
+												
 												var kpname= $("#updateKpName").val();
 												var data={kp_id:id,kp_c_id:cid,kp_ct_id:ctid,kp_name:kpname};
+												//alert(cid);
 												$.ajax({
 											       	   method:"post",
 											         	url:"/testManage/updateKnowledgePoint.action",
@@ -316,6 +312,7 @@
 																alert("知识点更新成功！");
 																$("#myModal").modal('hide');  //手动关闭
 																window.location.href ="/testManage/getKnowledgePointByCt2_id.action?ct_id="+ctid+"&ct_c_id="+cid;//更新添加成功后的数据
+																//window.location.href ="/testManage/getKnowledgePointByCt2_id.action?ct_id="+ctid+"&ct_c_id="+id;//更新数据
 															}else{
 																alert("保存失败");
 														    }

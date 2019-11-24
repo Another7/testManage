@@ -15,7 +15,7 @@
 			mc_analysis,
 			mc_t_name,
 			mc_c_id,
-			mc_ct_id，
+			mc_ct_id,
 			mc_level)
 		values(
 		
@@ -96,6 +96,10 @@
 			close=")">
 				#{item}
 			</foreach>
+	</select>
+	
+	<select id="getMcQuestionsNum" resultType="Integer">
+		select count(*) from multiple_choice;
 	</select>
 	
 	

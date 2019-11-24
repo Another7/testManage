@@ -42,4 +42,6 @@ public interface TestPaperService {
 	 * @return สýพÝิด
 	 */
 	public Map<String, Object> dataFill(TestPaper testPaper);
+	
+	public int getTestPaperNum();
 }

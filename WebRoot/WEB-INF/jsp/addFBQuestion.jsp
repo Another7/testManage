@@ -18,7 +18,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   		/* 根据所选择的科目，查找该科目下的课程列表，并显示在select里*/
 		function change(id){	    	
     		var code = $("#addSubject").val();
-    		//alert(code);
     		$.ajax({
 	       	   method:"post",
 	         	url:"/testManage/getCourses.action",
@@ -27,12 +26,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	       	   	success:function (res) {
 	       	   		if(res.length == 0){
                         //如果一级没有对应的二级 则清空二级并 不往下执行
-                       
                         $("#addCourse").empty();
                         $("#addCourse").selectpicker("refresh");
                         return ;
                    	 }
-                   	// alert(res.length);
 	          		 var str="";
 	           	  	for (var i = 0; i < res.length; i++) {
 	            	 	  str+="<option value='"+res[i].c_id+"'>"+res[i].c_name+"</option>";
@@ -45,7 +42,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	/* 当科目改变时，获取该科目下的章节列表，给对应的下拉框赋值 */
     	function changeBook(id){
     		var kemu=$("#addCourse").val();
-    		//alert(kemu);
     		$.ajax({
 	       	   method:"post",
 	         	url:"/testManage/getChapters.action",
@@ -57,7 +53,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         $("#addChapter").empty();
                         return ;
                    	 }
-                  // 	 alert(res.length);
 	          		 var str="";
 	           	  	for (var i = 0; i < res.length; i++) {
 	            	 	  str+="<option value='"+res[i].ct_id+"'>"+res[i].ct_name+"</option>";
@@ -70,7 +65,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	 /* 当章节改变时，获取该章节下的知识点列表，给对应的下拉框赋值 */
     	function changeChapter(id){
     		var chapterId=$("#addChapter").val();
-    		//alert(kemu);
     		$.ajax({
 	       	   method:"post",
 	         	url:"/testManage/getKnowledgePointByCt_id.action",
@@ -79,18 +73,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	       	   	success:function (res) {
 	       	   		if(res.length == 0){
                         //如果一级没有对应的二级 则清空二级并 不往下执行
-                        $("#addChapter").empty();
+                       // $("#addChapter").empty();
                         return ;
                    	 }
-                 //  	 alert(res.length);
 	          		 var str="";
 	           	  	for (var i = 0; i < res.length; i++) {
 	            	 	   str+="<option value='"+res[i].kp_id+"'>"+res[i].kp_name+"</option>";
 	         	 	 } 
-	         	 	// alert(str);
-	         	 	// alert(res[i].kp_name);
 	           	  $("#point").append(str);
-	           	 // alert($("#point")==null);
 	          	  $("#point").find("option[text='--请选择--']").attr("selected",true);
 	          }
 	   	 });
@@ -105,8 +95,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		var c_id=$("#addCourse").val();
     		var ct_id=$("#addChapter").val();
     		var point=$("#point").val();
-		  
-		   var data={fb_subject:subject,fb_point:point,fb_stem:stem,fb_answer:answer,fb_analysis:analysis,fb_c_id:c_id,fb_ct_id:ct_id};
+		  var level=$("#level").val();
+		   var data={fb_subject:subject,fb_point:point,fb_stem:stem,fb_answer:answer,fb_analysis:analysis,fb_c_id:c_id,fb_ct_id:ct_id,fb_level:level};
 		   	$.ajax({
 		       	   method:"post",
 		         	url:"/testManage/addFBQuestion.action",
@@ -211,7 +201,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				    </div>
 				    <div class="col-md-2"></div>
 				  </div>
-				 
+				 <div class="form-group">
+									<label for="stem" class="col-md-2 control-label">试题难度：</label>
+
+									<div class="col-md-8">
+										<!--  <textarea id="point" class="form-control" rows="2"></textarea> -->
+										<!-- 一级下拉框 -->
+										<select id="level" class=" form-control" name="level">
+											<option value="">--请选择--</option>
+											<option value="1">容易</option>
+											<option value="2">普通</option>
+											<option value="3">较难</option>
+											<option value="4">困难</option>
+										</select>
+									</div>
+									<div class="col-md-2"></div>
+								</div>
 				
 				  <div class="form-group">
 				    <label for="text" class="col-md-2 control-label">正确答案：</label>

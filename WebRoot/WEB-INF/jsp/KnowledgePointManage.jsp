@@ -76,7 +76,7 @@
 			   	 });
 			 
 		 }else{ 
-		 	alert();
+		 	//alert();
 		  	return false;
 		 } 
    	 		   	 
@@ -132,7 +132,7 @@
 							<tr>
 								<th>编号</th>
 								<th>课程名称</th>
-								<th>所属科目</th>
+								
 								<th>章节个数</th>
 								<th>章节</th>
 								<th>操作</th>
@@ -144,8 +144,8 @@
 								<tr>
 									<td>${status.index+1 }</td>
 									<td>${course.c_name}</td>
+									
 									<td>${course.c_chapter_num}</td>
-									<td>${course.c_s_id}</td>
 									<td>
 										<a href="getChapterByCid.action?c_id=${course.c_id}" class="btn btn-primary btn-xs"  >查看章节</a>
 										

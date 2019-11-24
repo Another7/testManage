@@ -16,19 +16,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  <script type="text/javascript">
  	function search(){
  		var subjectId=$("#choseSubject").val();
- 		alert(subjectId);
+ 		
  		$.ajax({
 	       	   method:"post",
 	         	url:"/testManage/getTFQuestionAll.action",
 	         	data:{"data":subjectId},
 			 	dataType:'json',
 	       	   	success:function (res) {
-	       	   		alert();
+	       	   		$("#sclist").empty();
 	          		var str="";
 	          		var str2 = new Array(); //定义字符串数组
 					var answer="对";
 	           	  	for (var i = 0; i < res.length; i++) {
-	           	  		if(res[i].fb_answer==0){
+	           	  		if(res[i].tf_answer==0){
 	           	  			answer="错";
 	           	  		}
 	           	  		str+="<div class='panel panel-default'>"+

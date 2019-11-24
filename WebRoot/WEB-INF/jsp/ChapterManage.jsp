@@ -36,7 +36,7 @@
 	} 
 	//用户点击修改章节按钮
 	function editChapter(id) {
-	alert(id);
+	//alert(id);
 	    $.ajax({
        	   method:"get",
          	url:"/testManage/getChapterById.action?ct_id="+id,
@@ -47,15 +47,16 @@
        	   		$("#updateChapterName").val(data.ct_name);
        	   		$("#ct_id").val(data.ct_id);
        	   		$("#ct_num").val(data.ct_num);
-       	   		$("#c_c_id").val(data.c_c_id);
+       	   		$("#ct_c_id").val(data.ct_c_id);
+       	   		
        	   		
          	 }
    	 });
 	}
 	// 删除章节
 	function deleteChapter(id,cid) {
-	alert(id);
-	alert(cid);
+//	alert(id);
+//	alert(cid);
 		if (confirm("确定删除该章节？")==true){ 
 			 	$.ajax({
 	       	   method:"GET",
@@ -311,6 +312,7 @@
 												var cid=$("#ct_c_id").val();
 												var name= $("#updateChapterName").val();
 												var data={ct_id:id,ct_name:name,ct_c_id:cid,ct_num:num};
+												//alert(cid);
 												$.ajax({
 											       	   method:"post",
 											         	url:"/testManage/updateChapter.action",
@@ -321,7 +323,8 @@
 											       	   		if(data.status_code=="1"){
 																alert("章节更新成功！");
 																$("#updateChapterModal").modal('hide');  //手动关闭
-															//	window.location.href ="/testManage/getAllCourses.action";//更新添加成功后的数据
+																//window.location.href ="/testManage/getAllCourses.action";//更新添加成功后的数据
+																window.location.href ="/testManage/getChapterByCid.action?c_id="+cid;
 															}else{
 																alert("保存失败");
 														    }

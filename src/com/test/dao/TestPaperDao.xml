@@ -45,5 +45,8 @@
 		select * from test_paper where tp_id=#{testPaperId}
 	</select>
 	
+	<select id="getTestPaperNum" resultType="Integer">
+		select count(*) from  test_paper;
+	</select>
 	
 </mapper>

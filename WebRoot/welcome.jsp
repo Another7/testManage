@@ -43,21 +43,21 @@
                                 <a href="javascript:;" class="x-admin-backlog-body">
                                     <h3>试题数</h3>
                                     <p>
-                                        <cite>66</cite></p>
+                                        <cite id="questionNum">${QUESTIONUM_SESSION }</cite></p>
                                 </a>
                             </li>
                             <li class="layui-col-xs4">
                                 <a href="javascript:;" class="x-admin-backlog-body">
-                                    <h3>试卷数</h3>
+                                    <h3 >试卷数</h3>
                                     <p>
-                                        <cite>12</cite></p>
+                                        <cite id="testPaperNum">${TESTPAPERNUM_SESSION }</cite></p>
                                 </a>
                             </li>
                             <li class="layui-col-xs4">
                                 <a href="javascript:;" class="x-admin-backlog-body">
                                     <h3>用户数</h3>
                                     <p>
-                                        <cite>99</cite></p>
+                                        <cite id="userNum">${USERNUM_SESSION }</cite></p>
                                 </a>
                             </li>
                             

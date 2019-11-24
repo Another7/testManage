@@ -50,4 +50,6 @@ public interface TFQuestionDao {
 	 */
 	public List<TFQuestion> getTFQuestionByChapterIdAndLevelRandom(@Param("chapterIdList") List<Integer> chapterIdList,
 			@	Param("levelNumber") QuestionLevelNumber levelNumber);
+
+	public int getTFQuestionsNum();
 }

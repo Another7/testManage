@@ -64,6 +64,15 @@ public interface QuestionService {
 
 	public QAQuestion selectQAQuestionById(String qa_id);
 	
+	
+	public int getQuestionsNum();//统计试题数目
+	
+	public int getTestPaperNum();//统计试卷数
+	
+	public int getUserNum();//统计用户数
+	
+	
+	
 	/**
 	 * 根据章节id查询对应的问题的不同等级的数量
 	 * @param chapterIdList 章节id列表

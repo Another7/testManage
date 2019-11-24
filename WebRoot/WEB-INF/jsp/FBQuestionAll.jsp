@@ -16,14 +16,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  <script type="text/javascript">
  	function search(){
  		var subjectId=$("#choseSubject").val();
- 		alert(subjectId);
+ 		//alert(subjectId);
  		$.ajax({
 	       	   method:"post",
 	         	url:"/testManage/getFBQuestionAll.action",
 	         	data:{"data":subjectId},
 			 	dataType:'json',
 	       	   	success:function (res) {
-	       	   		alert();
+	       	   		$("#sclist").empty();
 	          		var str="";
 	          		var str2 = new Array(); //定义字符串数组
 					

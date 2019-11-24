@@ -18,7 +18,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   		/* 根据所选择的科目，查找该科目下的课程列表，并显示在select里*/
 		function change(id){	    	
     		var code = $("#addSubject").val();
-    		//alert(code);
     		$.ajax({
 	       	   method:"post",
 	         	url:"/testManage/getCourses.action",
@@ -32,7 +31,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         $("#addCourse").selectpicker("refresh");
                         return ;
                    	 }
-                   	// alert(res.length);
 	          		 var str="";
 	           	  	for (var i = 0; i < res.length; i++) {
 	            	 	  str+="<option value='"+res[i].c_id+"'>"+res[i].c_name+"</option>";
@@ -45,7 +43,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	/* 当科目改变时，获取该科目下的章节列表，给对应的下拉框赋值 */
     	function changeBook(id){
     		var kemu=$("#addCourse").val();
-    		//alert(kemu);
     		$.ajax({
 	       	   method:"post",
 	         	url:"/testManage/getChapters.action",
@@ -57,7 +54,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         $("#addChapter").empty();
                         return ;
                    	 }
-                  // 	 alert(res.length);
 	          		 var str="";
 	           	  	for (var i = 0; i < res.length; i++) {
 	            	 	  str+="<option value='"+res[i].ct_id+"'>"+res[i].ct_name+"</option>";
@@ -71,7 +67,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		 /* 当章节改变时，获取该章节下的知识点列表，给对应的下拉框赋值 */
     	function changeChapter(id){
     		var chapterId=$("#addChapter").val();
-    		//alert(kemu);
     		$.ajax({
 	       	   method:"post",
 	         	url:"/testManage/getKnowledgePointByCt_id.action",
@@ -80,18 +75,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	       	   	success:function (res) {
 	       	   		if(res.length == 0){
                         //如果一级没有对应的二级 则清空二级并 不往下执行
-                        $("#addChapter").empty();
+                       // $("#addChapter").empty();
                         return ;
                    	 }
-                 //  	 alert(res.length);
 	          		 var str="";
 	           	  	for (var i = 0; i < res.length; i++) {
 	            	 	   str+="<option value='"+res[i].kp_id+"'>"+res[i].kp_name+"</option>";
 	         	 	 } 
-	         	 	// alert(str);
-	         	 	// alert(res[i].kp_name);
 	           	  $("#point").append(str);
-	           	 // alert($("#point")==null);
 	          	  $("#point").find("option[text='--请选择--']").attr("selected",true);
 	          }
 	   	 });

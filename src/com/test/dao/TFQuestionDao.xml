@@ -97,6 +97,9 @@
 			#{item}
 		</foreach>
 	</select>
-
+		
+	<select id="getTFQuestionsNum" resultType="Integer">
+		select count(*)from true_or_false;
+	</select>
 
 </mapper>

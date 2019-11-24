@@ -15,4 +15,5 @@ public interface TeacherDao {
 //	public int deleteTeacher(int t_id,String t_name);
 	//检查用户名或邮箱是否已经存在
 	public Integer checkUNameOrEmail(Teacher teacher);
+	public int getTeachersNum();
 }

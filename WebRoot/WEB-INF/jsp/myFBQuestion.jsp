@@ -16,14 +16,36 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  <script type="text/javascript">
  	function search(){
  		var subjectId=$("#choseSubject").val();
- 	//	alert(subjectId);
+ 		
  		$.ajax({
 	       	   method:"post",
-	         	url:"/testManage/getQAQuestionAll.action",
+	         	url:"/testManage/getFBQuestionAll.action",
 	         	data:{"data":subjectId},
 			 	dataType:'json',
 	       	   	success:function (res) {
-	       	   		$("#sclist").empty();
+	       	   		
+	          		/* var str="";
+	          		var str2 = new Array(); //定义字符串数组
+					
+	           	  	for (var i = 0; i < res.length; i++) {
+	           	  		
+	           	  		str+="<div class='panel panel-default'>"+
+	          					" <div class='panel-heading'>"+
+	          					"<p>"+(i+1)+"."+res[i].mc_stem+"</p>"+
+	          					" </div>"+
+	          					"<div class='panel-body'>"+
+	          					" <ul class='list-group'>";
+	          					
+		          					str2 = res[i].mc_option.split("@@"); //字符分割
+		          					for(var j=0;j<str2.length;j++){
+		          						str+="<li class='list-group-item'>"+str2[j]+"</li>";
+		          					}
+	          					str+="</ul>"+
+	          					"</div></div>";
+	          					
+	            	 	  		
+	         	 	 }  */
+		           $("#sclist").empty();
 	          		var str="";
 	          		var str2 = new Array(); //定义字符串数组
 					
@@ -31,12 +53,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	           	  	
 	           	  		str+="<div class='panel panel-default'>"+
 	          					" <div class='panel-heading'>"+
-	          					"<p><blockquote class='blockquote'>"+(i+1)+". "+res[i].qa_stem+"</blockquote></p>"+
+	          					"<p>"+(i+1)+"."+res[i].fb_stem+"</p>"+
 	          					" </div>"+
-	          					"<div class='panel-body'>"+"</div></div>"+
-	          					"<blockquote class='blockquote'><strong>正确答案：</strong>"+res[i].qa_answer+
-	          					"</blockquote></div></div>";
-	          					
+	          					"<div class='panel-body'>"+
+	          					/* " <ul class='list-group'>";
+		          					str2 = res[i].mc_option.split("@@"); //字符分割
+		          					for(var j=0;j<str2.length;j++){
+		          						str+="<li class='list-group-item'>"+str2[j]+"</li>";
+		          					}
+	          					str+="</ul>"+ */
+	          					"</div></div>";
 	          					
 	            	 	  		
 	         	 	 } 
@@ -57,7 +83,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<hr>
 	<ul class="breadcrumb">
     <li><a href="#">所有试题</a></li>
-    <li class="active">简答题</li>
+    <li class="active">填空题</li>
 	</ul>
 	<%-- <jsp:include page="../jsp/selectTop.jsp" /> --%>
 	<%@ include file="../jsp/selectTop.jsp" %>

@@ -23,7 +23,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	         	data:{"data":subjectId},
 			 	dataType:'json',
 	       	   	success:function (res) {
-	       	   		
+	       	   		$("#sclist").empty();
 	          		var str="";
 	          		var str2 = new Array(); //定义字符串数组
 					

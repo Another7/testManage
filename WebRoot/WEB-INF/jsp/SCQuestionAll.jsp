@@ -18,14 +18,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  <script type="text/javascript">
  	function search(){
  		var subjectId=$("#choseSubject").val();
- 		
+ 		 
  		$.ajax({
 	       	   method:"post",
 	         	url:"/testManage/getSCQuestionAll.action",
 	         	data:{"data":subjectId},
 			 	dataType:'json',
 	       	   	success:function (res) {
-	       	   		
+	       	   		$("#sclist").empty();
 	          		var str="";
 	          		var str2 = new Array(); //定义字符串数组
 					

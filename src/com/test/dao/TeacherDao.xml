@@ -48,4 +48,8 @@
 		</otherwise>
 	</choose>
 	</select>
+	
+	<select id="getTeachersNum"  resultType="Integer">
+		select count(*) from teacher;
+	</select>
 </mapper>

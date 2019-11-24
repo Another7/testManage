@@ -147,7 +147,7 @@ public class ManageController {
 		//String c_id=request.getParameter("c_id");
 		//System.out.println(c_id);
 		
-		//System.out.println("getChapter:"+c_id);
+		System.out.println("getChapter000000000000000:"+c_id);
 		
 		List<ChapterTitle> list=chapterService.getChapterByCid(String.valueOf(c_id));
 		model.addAttribute("Chapter",list);
@@ -197,6 +197,7 @@ public class ManageController {
 		String ct_id=(String) request.getParameter("ct_id");
 		//System.out.println("ct_id:"+ct_id);
 		ChapterTitle chapter=chapterService.getChapterById(Integer.valueOf(ct_id));
+		System.out.println("2019-11-22"+chapter);
 		return chapter;
 		
 	}

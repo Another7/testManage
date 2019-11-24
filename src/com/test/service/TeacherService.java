@@ -11,4 +11,5 @@ public interface TeacherService {
 	public int updatePwd(String t_name,String t_pass,String t_email);
 	//注册校验用户名和邮箱
 	public int checkUNameOrEmail(Teacher teacher);
+	public int getUserNum();
 }

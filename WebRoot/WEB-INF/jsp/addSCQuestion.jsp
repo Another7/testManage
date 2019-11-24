@@ -15,10 +15,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <script src="js/bootstrap-select.js"></script>
  <link href="css/bootstrap.min.css" rel="stylesheet">
   <script type="text/javascript">
-  		/* 根据所选择的科目，查找该科目下的课程列表，并显示在select里*/
+  		/* 用户选中科目后，给课程下拉框赋值*/
 		function change(id){	    	
     		var code = $("#addSubject").val();
-    		//alert(code);
     		$.ajax({
 	       	   method:"post",
 	         	url:"/testManage/getCourses.action",
@@ -32,7 +31,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         $("#addCourse").selectpicker("refresh");
                         return ;
                    	 }
-                   	// alert(res.length);
 	          		 var str="";
 	           	  	for (var i = 0; i < res.length; i++) {
 	            	 	  str+="<option value='"+res[i].c_id+"'>"+res[i].c_name+"</option>";
@@ -42,10 +40,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	          }
 	   	 });
     	}
-    	/* 当科目改变时，获取该科目下的章节列表，给对应的下拉框赋值 */
+    	/* 当课程改变后给章节下拉框赋值 */
     	function changeBook(id){
     		var kemu=$("#addCourse").val();
-    		//alert(kemu);
     		$.ajax({
 	       	   method:"post",
 	         	url:"/testManage/getChapters.action",
@@ -57,8 +54,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         $("#addChapter").empty();
                         return ;
                    	 }
-                  // 	 alert(res.length);
-	          		 var str="";
+	          		var str="";
 	           	  	for (var i = 0; i < res.length; i++) {
 	            	 	  str+="<option value='"+res[i].ct_id+"'>"+res[i].ct_name+"</option>";
 	         	 	 } 
@@ -68,20 +64,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	   	 });
     	}
     	
-    	/* 当章节改变时，获取该章节下的知识点列表，给对应的下拉框赋值 */
+    	/* 当章节改变时，获取该章节下的知识点列表，给对应的知识点下拉框赋值 */
     	function changeChapter(id){
-    		var chapterId=$("#addChapter").val();
-    		//alert(kemu);
+    		var chapterId=$("#addChapter").val();//获取选中的章节id
     		$.ajax({
 	       	   method:"post",
 	         	url:"/testManage/getKnowledgePointByCt_id.action",
 	         	data:{"ct_id":chapterId},
 			 	dataType:'json',
 	       	   	success:function (res) {
-	       	   			alert(res.length);    
+	       	   			//alert(res.length);    
 	       	   		if(res.length == 0){
                         //如果一级没有对应的二级 则清空二级并 不往下执行
-                        $("#addChapter").empty();
+                       // $("#addChapter").empty();
                         return ;
                    	 }
                    	 
