@@ -199,7 +199,7 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a _href="html/admin-list.html">
+                        <a _href="myInfo.jsp">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>个人信息</cite>
                         </a>
@@ -211,7 +211,7 @@
                         </a>
                     </li >--%>
                     <li> 
-                        <a _href="html/admin-cate.html">
+                        <a _href="updatePass.jsp">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>修改密码</cite>
                         </a>
