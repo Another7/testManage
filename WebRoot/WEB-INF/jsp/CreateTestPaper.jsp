@@ -169,30 +169,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	       	   			alert(res.qaQuestionNumber.level1+","+res.qaQuestionNumber.level2+","+res.qaQuestionNumber.level3+","+res.qaQuestionNumber.level4); */
 	       	   			 
 	                   	// alert(res.length);
-	                   	 $("#SCLevel1").empty();
-	                         $("#SCLevel2").empty();
-	                          $("#SCLevel3").empty();
-	                           $("#SCLevel4").empty();
+	                   	  $("#SCLevel1").empty(); $("#SCLevel1").append("<option value='0'>0</option>");
+	                         $("#SCLevel2").empty();$("#SCLevel2").append("<option value='0'>0</option>");
+	                          $("#SCLevel3").empty();$("#SCLevel3").append("<option value='0'>0</option>");
+	                           $("#SCLevel4").empty();$("#SCLevel4").append("<option value='0'>0</option>");
 	                           
-	                         $("#MCLevel1").empty();
-	                          $("#MCLevel2").empty();
-	                           $("#MCLevel3").empty();
-	                            $("#MCLevel4").empty();
+	                         $("#MCLevel1").empty();$("#MCLevel1").append("<option value='0'>0</option>");
+	                          $("#MCLevel2").empty();$("#MCLevel2").append("<option value='0'>0</option>");
+	                           $("#MCLevel3").empty();$("#MCLevel3").append("<option value='0'>0</option>");
+	                            $("#MCLevel4").empty();$("#MCLevel4").append("<option value='0'>0</option>");
 	                            
-	                         $("#FBLevel4").empty();
-	                          $("#FBLevel4").empty();
-	                           $("#FBLevel4").empty();
-	                            $("#FBLevel4").empty();
+	                         $("#FBLevel1").empty();$("#FBLevel1").append("<option value='0'>0</option>");
+	                          $("#FBLevel2").empty();$("#FBLevel2").append("<option value='0'>0</option>");
+	                           $("#FBLevel3").empty();$("#FBLevel3").append("<option value='0'>0</option>");
+	                            $("#FBLevel4").empty();$("#FBLevel4").append("<option value='0'>0</option>");
 	                         
-	                         $("#TFLevel1").empty();
-	                          $("#TFLevel2").empty();
-	                           $("#TFLevel3").empty();
-	                            $("#TFLevel4").empty();
+	                         $("#TFLevel1").empty();$("#TFLevel1").append("<option value='0'>0</option>");
+	                          $("#TFLevel2").empty();$("#TFLevel2").append("<option value='0'>0</option>");
+	                           $("#TFLevel3").empty();$("#TFLevel3").append("<option value='0'>0</option>");
+	                            $("#TFLevel4").empty();$("#TFLevel4").append("<option value='0'>0</option>");
 	                               
-	                          $("#QALevel1").empty();
-	                          $("#QALevel2").empty();
-	                           $("#QALevel3").empty();
-	                            $("#QALevel4").empty();
+	                          $("#QALevel1").empty();$("#QALevel1").append("<option value='0'>0</option>");
+	                          $("#QALevel2").empty();$("#QALevel2").append("<option value='0'>0</option>");
+	                           $("#QALevel3").empty();$("#QALevel3").append("<option value='0'>0</option>");
+	                            $("#QALevel4").empty(); $("#QALevel4").append("<option value='0'>0</option>");
+	                            
 	                            
 		          		 var str1="";
 		           	  	for (var i = 1; i <= res.scQuestionNumber.level1; i++) {
@@ -506,7 +507,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<option value="">--请选择--</option>
 								</select> -->
 									<select id="addChapter"
-										class="selectpicker show-tick form-control" multiple onchange="getQuestionNum(this.id)">
+										class="selectpicker show-tick form-control" multiple  onchange="getQuestionNum()">
 										<option value="">--请选择--</option>
 									</select>
 								</div>
@@ -526,7 +527,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<label class=" col-md-2 control-label">试卷名称</label> 
 						<div class="col-md-8">
 						<!-- 一级下拉框 -->
-						 <input type="text" id="tpName" class="form-control" onclick="getChapterId()"  placeholder="如：数据结构测试题">
+						 <input type="text" id="tpName" class="form-control"   placeholder="如：数据结构测试题">
 						</div>
 						 <div class="col-md-2">
 				   		 </div>
