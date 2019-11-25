@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -21,6 +21,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.12/dist/js/bootstrap-select.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/i18n/defaults-zh_CN.min.js"></script>
+
+
+<style type="text/css">
+.abc{ color:#999} 
+</style>
   <script type="text/javascript">
   		/* 根据所选择的科目，查找该科目下的课程列表，并显示在select里*/
 		function change(id){	    	
@@ -79,9 +84,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	   	 });
     	}
     	
-    	//点击输入试卷名称时，ajax发送章节id获取试题数量
-    	function getChapterId(){
-    			var selectedValues =[];    
+    	
+    	function getQuestionNum(){//当用户选择完章节时，ajax发送章节id获取试题数量
+    		var selectedValues =[];    
 			 $("#addChapter:selected").each(function(){
 			     selectedValues.push($(this).val()); 
 			     
@@ -164,6 +169,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	       	   			alert(res.qaQuestionNumber.level1+","+res.qaQuestionNumber.level2+","+res.qaQuestionNumber.level3+","+res.qaQuestionNumber.level4); */
 	       	   			 
 	                   	// alert(res.length);
+	                   	 $("#SCLevel1").empty();
+	                         $("#SCLevel2").empty();
+	                          $("#SCLevel3").empty();
+	                           $("#SCLevel4").empty();
+	                           
+	                         $("#MCLevel1").empty();
+	                          $("#MCLevel2").empty();
+	                           $("#MCLevel3").empty();
+	                            $("#MCLevel4").empty();
+	                            
+	                         $("#FBLevel4").empty();
+	                          $("#FBLevel4").empty();
+	                           $("#FBLevel4").empty();
+	                            $("#FBLevel4").empty();
+	                         
+	                         $("#TFLevel1").empty();
+	                          $("#TFLevel2").empty();
+	                           $("#TFLevel3").empty();
+	                            $("#TFLevel4").empty();
+	                               
+	                          $("#QALevel1").empty();
+	                          $("#QALevel2").empty();
+	                           $("#QALevel3").empty();
+	                            $("#QALevel4").empty();
+	                            
 		          		 var str1="";
 		           	  	for (var i = 1; i <= res.scQuestionNumber.level1; i++) {
 		            	 	  str1+="<option value='"+i+"'>"+i+"</option>";
@@ -194,56 +224,56 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		         	 	 
 		         	 	//2////////////////////////////////////////////////////////// 
 		         	 	 var str2="";
-		         	 	 for (var i = 0; i < res.mcQuestionNumber.level1; i++) {
+		         	 	 for (var i = 1; i <= res.mcQuestionNumber.level1; i++) {
 		            	 	  str2+="<option value='"+i+"'>"+i+"</option>";
 		         	 	 }
 		         	 	 $("#MCLevel1").append(str2);
 		         	 	 $("#MCLevel1").find("0").attr("selected",true); $("#mclevel1").text(res.mcQuestionNumber.level1);
 		         	 	
 		         	 	 var str2="";
-		         	 	 for (var i = 0; i < res.mcQuestionNumber.level2; i++) {
+		         	 	 for (var i = 1; i <=res.mcQuestionNumber.level2; i++) {
 		            	 	  str2+="<option value='"+i+"'>"+i+"</option>";
 		         	 	 }
 		         	 	 $("#MCLevel2").append(str2);
 		         	 	 $("#MCLevel2").find("0").attr("selected",true); $("#mclevel2").text(res.mcQuestionNumber.level2);
 		         	 	 
 		         	 	  var str2="";
-		         	 	 for (var i = 0; i < res.mcQuestionNumber.level3; i++) {
+		         	 	 for (var i = 1; i <= res.mcQuestionNumber.level3; i++) {
 		            	 	 str2+="<option value='"+i+"'>"+i+"</option>";
 		         	 	 }
 		         	 	 $("#MCLevel3").append(str2);
 		         	 	 $("#MCLevel3").find("0").attr("selected",true); $("#mclevel3").text(res.mcQuestionNumber.level3);
 		         	 	 
 		         	 	  var str2="";
-		         	 	 for (var i = 0; i < res.mcQuestionNumber.level4; i++) {
+		         	 	 for (var i = 1; i <= res.mcQuestionNumber.level4; i++) {
 		            	 	 str2+="<option value='"+i+"'>"+i+"</option>";
 		         	 	 }
 		         	 	 $("#MCLevel4").append(str2);
 		         	 	 $("#MCLevel4").find("0").attr("selected",true); $("#mclevel4").text(res.mcQuestionNumber.level4);
 		         	 	//3//////////////////////////////////////////////////////////////// 
 		         	 	var str3="";
-		         	 	  for (var i = 0; i < res.fbQuestionNumber.level1; i++) {
+		         	 	  for (var i = 1; i <=res.fbQuestionNumber.level1; i++) {
 		            	 	 str3+="<option value='"+i+"'>"+i+"</option>";
 		         	 	 }
 		         	 	 $("#FBLevel1").append(str3);
 		         	 	 $("#FBLevel1").find("0").attr("selected",true); $("#fblevel1").text(res.fbQuestionNumber.level1);
 		         	 	 
 		         	 	 var str3="";
-		         	 	  for (var i = 0; i < res.fbQuestionNumber.level2; i++) {
+		         	 	  for (var i = 1; i <= res.fbQuestionNumber.level2; i++) {
 		            	 	 str3+="<option value='"+i+"'>"+i+"</option>";
 		         	 	 }
 		         	 	 $("#FBLevel2").append(str3);
 		         	 	 $("#FBLevel2").find("0").attr("selected",true); $("#fblevel2").text(res.fbQuestionNumber.level2);
 		         	 	 
 		         	 	 var str3="";
-		         	 	  for (var i = 0; i < res.fbQuestionNumber.level3; i++) {
+		         	 	  for (var i = 1; i <= res.fbQuestionNumber.level3; i++) {
 		            	 	 str3+="<option value='"+i+"'>"+i+"</option>";
 		         	 	 }
 		         	 	 $("#FBLevel3").append(str3);
 		         	 	 $("#FBLevel3").find("0").attr("selected",true); $("#fblevel3").text(res.fbQuestionNumber.level3);
 		         	 	 
 		         	 	 var str3="";
-		         	 	  for (var i = 0; i < res.fbQuestionNumber.level4; i++) {
+		         	 	  for (var i = 1; i <= res.fbQuestionNumber.level4; i++) {
 		            	 	 str3+="<option value='"+i+"'>"+i+"</option>";
 		         	 	 }
 		         	 	 $("#FBLevel4").append(str3);
@@ -253,28 +283,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		         	 	 
 		         	 	 
 		         	 	var str4="";
-		         	 	  for (var i = 0; i < res.tfQuestionNumber.level1; i++) {
+		         	 	  for (var i = 1; i <= res.tfQuestionNumber.level1; i++) {
 		            	 	 str4+="<option value='"+i+"'>"+i+"</option>";
 		         	 	 }
 		         	 	 $("#TFLevel1").append(str4);
 		         	 	 $("#TFLevel1").find("0").attr("selected",true); $("#tflevel1").text(res.tfQuestionNumber.level1);
 		         	 	 
 		         	 	 var str4="";
-		         	 	  for (var i = 0; i < res.tfQuestionNumber.level2; i++) {
+		         	 	  for (var i = 1; i <= res.tfQuestionNumber.level2; i++) {
 		            	 	 str4+="<option value='"+i+"'>"+i+"</option>";
 		         	 	 }
 		         	 	 $("#TFLevel2").append(str4);
 		         	 	 $("#TFLevel2").find("0").attr("selected",true); $("#tflevel2").text(res.tfQuestionNumber.level2);
 		         	 	 
 		         	 	 var str4="";
-		         	 	  for (var i = 0; i < res.tfQuestionNumber.level3; i++) {
+		         	 	  for (var i = 1; i <= res.tfQuestionNumber.level3; i++) {
 		            	 	 str4+="<option value='"+i+"'>"+i+"</option>";
 		         	 	 }
 		         	 	 $("#TFLevel3").append(str4);
 		         	 	 $("#TFLevel3").find("0").attr("selected",true); $("#tflevel3").text(res.tfQuestionNumber.level3);
 		         	 	 
 		         	 	 var str4="";
-		         	 	  for (var i = 0; i < res.tfQuestionNumber.level4; i++) {
+		         	 	  for (var i = 1; i <= res.tfQuestionNumber.level4; i++) {
 		            	 	 str4+="<option value='"+i+"'>"+i+"</option>";
 		         	 	 }
 		         	 	 $("#TFLevel4").append(str4);
@@ -282,32 +312,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		         	 	 
 		         	 	 
 		         	 	 var str5="";
-		         	 	  for (var i = 0; i < res.qaQuestionNumber.level1; i++) {
-		            	 	 str4+="<option value='"+i+"'>"+i+"</option>";
+		         	 	  for (var i = 1; i <= res.qaQuestionNumber.level1; i++) {
+		            	 	 str5+="<option value='"+i+"'>"+i+"</option>";
 		         	 	 }
-		         	 	 $("#TFLevel1").append(str5);
-		         	 	 $("#TFLevel1").find("0").attr("selected",true);$("#qalevel1").text(res.qaQuestionNumber.level1); 
+		         	 	 $("#QALevel1").append(str5);
+		         	 	 $("#QALevel1").find("0").attr("selected",true);$("#qalevel1").text(res.qaQuestionNumber.level1); 
 		         	 	 
 		         	 	  var str5="";
-		         	 	  for (var i = 0; i < res.qaQuestionNumber.level2; i++) {
-		            	 	 str4+="<option value='"+i+"'>"+i+"</option>";
+		         	 	  for (var i = 1; i <= res.qaQuestionNumber.level2; i++) {
+		            	 	 str5+="<option value='"+i+"'>"+i+"</option>";
 		         	 	 }
-		         	 	 $("#TFLevel2").append(str5);
-		         	 	 $("#TFLevel2").find("0").attr("selected",true); $("#qalevel2").text(res.qaQuestionNumber.level2); 
+		         	 	 $("#QALevel2").append(str5);
+		         	 	 $("#QALevel2").find("0").attr("selected",true); $("#qalevel2").text(res.qaQuestionNumber.level2); 
 		         	 	 
 		         	 	  var str5="";
-		         	 	  for (var i = 0; i < res.qaQuestionNumber.level3; i++) {
-		            	 	 str4+="<option value='"+i+"'>"+i+"</option>";
+		         	 	  for (var i = 1; i <= res.qaQuestionNumber.level3; i++) {
+		            	 	 str5+="<option value='"+i+"'>"+i+"</option>";
 		         	 	 }
-		         	 	 $("#TFLevel3").append(str5);
-		         	 	 $("#TFLevel3").find("0").attr("selected",true);$("#qalevel3").text(res.qaQuestionNumber.level3);  
+		         	 	 $("#QALevel3").append(str5);
+		         	 	 $("#QALevel3").find("0").attr("selected",true);$("#qalevel3").text(res.qaQuestionNumber.level3);  
 		         	 	 
 		         	 	  var str5="";
-		         	 	  for (var i = 0; i < res.qaQuestionNumber.level4; i++) {
-		            	 	 str4+="<option value='"+i+"'>"+i+"</option>";
+		         	 	  for (var i = 1; i <= res.qaQuestionNumber.level4; i++) {
+		            	 	 str5+="<option value='"+i+"'>"+i+"</option>";
 		         	 	 }
-		         	 	 $("#TFLevel4").append(str5);
-		         	 	 $("#TFLevel4").find("0").attr("selected",true); $("#qalevel4").text(res.qaQuestionNumber.level4); 
+		         	 	 $("#QALevel4").append(str5);
+		         	 	 $("#QALevel4").find("0").attr("selected",true); $("#qalevel4").text(res.qaQuestionNumber.level4); 
 		         	 	 
 		         	 	 
 		         	 	
@@ -317,6 +347,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	          }
 	   	 });
     	
+    	
+    	}
+    	
+    	//点击输入试卷名称时，
+    	function getChapterId(){
+    			
     	}
     	//计算总分
     	function countScore(){
@@ -470,7 +506,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<option value="">--请选择--</option>
 								</select> -->
 									<select id="addChapter"
-										class="selectpicker show-tick form-control" multiple>
+										class="selectpicker show-tick form-control" multiple onchange="getQuestionNum(this.id)">
 										<option value="">--请选择--</option>
 									</select>
 								</div>
@@ -546,33 +582,38 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					
 					 <div class="form-group">
 					 <div class="form-inline">
-						<label class=" col-sm-2 control-label">单选题</label> 
-						<div class="col-md-2">
+						<label class=" col-xs-2 control-label">单选题</label> 
+						<div class="col-xs-2 " style="overflow: hidden;">
 						<!-- 一级下拉框 -->
-						 简单题&nbsp;<select id="SCLevel1" class=" form-control " style="width: 60px"
-											onchange="changeBook(this.id)">
-											<option value="0">0</option>
-										</select>&nbsp;可选<div id="sclevel1"></div>道
+						
+						 简单题&nbsp;
+						 <select id="SCLevel1" class=" form-control " style="width: 60px">
+									<option value="0">0</option>
+						</select>
+						&nbsp;<div class="abc form-inline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="sclevel1" ></span>道可选</div>
 						</div>
-						<div class="col-xs-2">
+						
+						<div class="col-xs-2" >
 						<!-- 一级下拉框 -->
 						 一般题&nbsp;<select id="SCLevel2" class=" form-control " style="width: 60px"
-											onchange="changeBook(this.id)">
+											>
 											<option value="0">0</option>
-										</select>&nbsp;可选<div id="sclevel2"></div>道
+										</select>&nbsp;<div class="abc form-inline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="sclevel2" ></span>道可选</div>
 						</div>
+						
 						<div class="col-xs-2">
 						<!-- 一级下拉框 -->
 						 较难题&nbsp;<select id="SCLevel3" class=" form-control " style="width: 60px">
 											<option value="0">0</option>
-										</select>&nbsp;可选<div id="sclevel3"></div>道
+										</select>&nbsp;<div class="abc form-inline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="sclevel3" ></span>道可选</div>
 						</div>
+						
 						<div class="col-xs-2">
 						<!-- 一级下拉框 -->
 						 困难题&nbsp;<select id="SCLevel4" class=" form-control " style="width: 60px"
-											onchange="changeBook(this.id)">
+											>
 											<option value="0">0</option>
-										</select>&nbsp;可选<div id="sclevel4"></div>道
+										</select>&nbsp;<div class="abc form-inline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="sclevel4" ></span>道可选</div>
 						</div>
 						 <div class="col-xs-2">
 						 	每题&nbsp;<input type="text" id="scScore" onchange="countScore()" class="form-control"  placeholder="0" style="width: 60px">&nbsp;分
@@ -586,25 +627,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<!-- 一级下拉框 -->
 						 简单题&nbsp;<select id="MCLevel1" class=" form-control " style="width: 60px">
 											<option value="0">0</option>
-										</select>&nbsp;可选<div id="mclevel1"></div>道
+										</select>&nbsp;<div class="abc form-inline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="mclevel1" ></span>道可选</div>
 						</div>
 						<div class="col-xs-2">
 						<!-- 一级下拉框 -->
 						 一般题&nbsp;<select id="MCLevel2" class=" form-control " style="width: 60px">
 											<option value="0">0</option>
-										</select>&nbsp;可选<div id="mclevel2"></div>道
+										</select>&nbsp;<div class="abc form-inline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="mclevel2" ></span>道可选</div>
 						</div>
 						<div class="col-xs-2">
 						<!-- 一级下拉框 -->
 						 较难题&nbsp;<select id="MCLevel3" class=" form-control " style="width: 60px">
 											<option value="0">0</option>
-										</select>&nbsp;可选<div id="mclevel3"></div>道
+										</select>&nbsp;<div class="abc form-inline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="mclevel3" ></span>道可选</div>
 						</div>
 						<div class="col-xs-2">
 						<!-- 一级下拉框 -->
 						 困难题&nbsp;<select id="MCLevel4" class=" form-control " style="width: 60px">
 											<option value="0">0</option>
-										</select>&nbsp;可选<div id="mclevel4"></div>道
+										</select>&nbsp;<div class="abc form-inline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="mclevel4" ></span>道可选</div>
 						</div>
 						 <div class="col-xs-2">
 						 	每题&nbsp;<input type="text" id="mcScore" onchange="countScore()" class="form-control"  placeholder="0" style="width: 60px">&nbsp;分
@@ -618,26 +659,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<!-- 一级下拉框 -->
 						 简单题&nbsp;<select id="FBLevel1" class=" form-control " style="width: 60px">
 											<option value="0">0</option>
-										</select>&nbsp;可选<div id="fblevel1"></div>道
+										</select>&nbsp;<div class="abc form-inline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="fblevel1" ></span>道可选</div>
 						</div>
 						<div class="col-xs-2">
 						<!-- 一级下拉框 -->
 						 一般题&nbsp;<select id="FBLevel2" class=" form-control " style="width: 60px">
 											
 											<option value="0">0</option>
-										</select>&nbsp;可选<div id="fblevel2"></div>道
+										</select>&nbsp;<div class="abc form-inline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="fblevel2" ></span>道可选</div>
 						</div>
 						<div class="col-xs-2">
 						<!-- 一级下拉框 -->
 						 较难题&nbsp;<select id="FBLevel3" class=" form-control " style="width: 60px">
 											<option value="0">0</option>
-										</select>&nbsp;可选<div id="fblevel3"></div>道
+										</select>&nbsp;<div class="abc form-inline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="fblevel3" ></span>道可选</div>
 						</div>
 						<div class="col-xs-2">
 						<!-- 一级下拉框 -->
 						 困难题&nbsp;<select id="FBLevel4" class=" form-control " style="width: 60px">
 											<option value="0">0</option>
-										</select>&nbsp;可选<div id="fblevel4"></div>道
+										</select>&nbsp;<div class="abc form-inline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="fblevel4" ></span>道可选</div>
 						</div>
 						 <div class="col-xs-2">
 						 	每题&nbsp;<input type="text" id="fbScore" onchange="countScore()" class="form-control"  placeholder="0" style="width: 60px">&nbsp;分
@@ -651,25 +692,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<!-- 一级下拉框 -->
 						 简单题&nbsp;<select id="TFLevel1" class=" form-control " style="width: 60px">
 											<option value="0">0</option>
-										</select>&nbsp;可选<div id="tflevel1"></div>道
+										</select>&nbsp;<div class="abc form-inline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="tflevel1" ></span>道可选</div>
 						</div>
 						<div class="col-xs-2">
 						<!-- 一级下拉框 -->
 						 一般题&nbsp;<select id="TFLevel2" class=" form-control " style="width: 60px">
 											<option value="0">0</option>
-										</select>&nbsp;可选<div id="tflevel2"></div>道
+										</select>&nbsp;<div class="abc form-inline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="tflevel2" ></span>道可选</div>
 						</div>
 						<div class="col-xs-2">
 						<!-- 一级下拉框 -->
 						 较难题&nbsp;<select id="TFLevel3" class=" form-control " style="width: 60px">
 											<option value="0">0</option>
-										</select>&nbsp;可选<div id="tflevel3"></div>道
+										</select>&nbsp;<div class="abc form-inline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="tflevel3" ></span>道可选</div>
 						</div>
 						<div class="col-xs-2">
 						<!-- 一级下拉框 -->
 						 困难题&nbsp;<select id="TFLevel4" class=" form-control " style="width: 60px">
 											<option value="0">0</option>
-										</select>&nbsp;可选<div id="tflevel4"></div>道
+										</select>&nbsp;<div class="abc form-inline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="tflevel4" ></span>道可选</div>
 						</div>
 						 <div class="col-xs-2">
 						 	每题&nbsp;<input type="text" id="tfScore" onchange="countScore()" class="form-control"  placeholder="0" style="width: 60px">&nbsp;分
@@ -683,25 +724,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<!-- 一级下拉框 -->
 						 简单题&nbsp;<select id="QALevel1" class=" form-control " style="width: 60px">
 											<option value="0">0</option>
-										</select>&nbsp;可选<div id="qalevel1"></div>道
+										</select>&nbsp;<div class="abc form-inline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="qalevel1" ></span>道可选</div>
 						</div>
 						<div class="col-xs-2">
 						<!-- 一级下拉框 -->
 						 一般题&nbsp;<select id="QALevel2" class=" form-control " style="width: 60px">
 											<option value="0">0</option>
-										</select>&nbsp;可选<div id="qalevel2"></div>道
+										</select>&nbsp;<div class="abc form-inline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="qalevel2" ></span>道可选</div>
 						</div>
 						<div class="col-xs-2">
 						<!-- 一级下拉框 -->
 						 较难题&nbsp;<select id="QALevel3" class=" form-control " style="width: 60px">
 											<option value="0">0</option>
-										</select>&nbsp;可选<div id="qalevel3"></div>道
+										</select>&nbsp;<div class="abc form-inline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="qalevel3" ></span>道可选</div>
 						</div>
 						<div class="col-xs-2">
 						<!-- 一级下拉框 -->
 						 困难题&nbsp;<select id="QALevel4" class=" form-control " style="width: 60px">
 											<option value="0">0</option>
-										</select>&nbsp;可选<div id="qalevel4"></div>道
+										</select>&nbsp;<div class="abc form-inline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="qalevel4" ></span>道可选</div>
 						</div>
 						 <div class="col-xs-2">
 						 	每题&nbsp;<input type="text" id="qaScore" onchange="countScore()" class="form-control"  placeholder="0" style="width: 60px">&nbsp;分

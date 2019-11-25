@@ -191,7 +191,7 @@
                 </ul>
             </li> --%>
             
-          <%--   <li>
+            <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe726;</i>
                     <cite>个人中心</cite>
@@ -204,13 +204,13 @@
                             <cite>个人信息</cite>
                         </a>
                     </li >
-                    <li>
+                   <%--  <li>
                         <a _href="html/admin-role.html">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>基本设置</cite>
                         </a>
-                    </li >
-                    <li>
+                    </li >--%>
+                    <li> 
                         <a _href="html/admin-cate.html">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>修改密码</cite>
@@ -218,7 +218,7 @@
                     </li >
                    
                 </ul>
-            </li>           --%>  
+            </li>            
           <%--   <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe6b8;</i>
