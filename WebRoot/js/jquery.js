@@ -2,7 +2,7 @@
 //登录操作
 $(document).ready(function(){
 if(screen.width < 780 && $(window).width() < 780)
-{
+{    
 	$(".content_list").hide();
 
 }else{
@@ -58,12 +58,11 @@ function cliLogin() {//登录按钮点击事件
 	/*1：校验成功
 		0：密码错误
 		-1：用户不存在*/
-
+   
 	$.ajax({
 		type:"POST",
 		url:"/testManage/loginExamine.action",
 		data:JSON.stringify(data),
-		
 		contentType : "application/json;charset=UTF-8",
 		dataType:'json',
 		success:function(data){
@@ -71,7 +70,7 @@ function cliLogin() {//登录按钮点击事件
 			//alert(data);
 			if(data.status_code=="1"){
 				//alert("登录成功");
-				 window.location.href = "main.jsp";
+				 window.location.href = "/testManage/toMain.action";
 			}else if(data.status_code=="0"){
 				//alert("密码错误");
 				Tip('密码输入错误！');
